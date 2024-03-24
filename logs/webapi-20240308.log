@@ -1,0 +1,121 @@
+2024-03-08 14:00:25.109 +05:00  INF  Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-03-08 14:00:25.338 +05:00  INF  Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2024-03-08 14:00:25.389 +05:00  INF  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-03-08 14:00:25.395 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-03-08 14:00:25.519 +05:00  INF  No migrations were applied. The database is already up to date.
+2024-03-08 14:00:25.784 +05:00  INF  Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+REVOKE CONNECT ON DATABASE "RoomService" FROM PUBLIC;
+SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE datname = 'RoomService';
+2024-03-08 14:00:25.880 +05:00  INF  Executed DbCommand (96ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP DATABASE "RoomService";
+2024-03-08 14:00:26.996 +05:00  INF  Executed DbCommand (858ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "RoomService";
+2024-03-08 14:00:27.145 +05:00  INF  Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Location" (
+    "Id" uuid NOT NULL,
+    "Country" text NOT NULL,
+    "City" text NOT NULL,
+    "Street" text NOT NULL,
+    "HouseNumber" text NULL,
+    CONSTRAINT "PK_Location" PRIMARY KEY ("Id")
+);
+2024-03-08 14:00:27.152 +05:00  INF  Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "RoomsTypes" (
+    "Id" uuid NOT NULL,
+    "Title" text NOT NULL,
+    "Description" text NULL,
+    "ImagePath" text NULL,
+    "MaxCapacity" integer NOT NULL,
+    "NightlyRate" numeric NOT NULL,
+    CONSTRAINT "PK_RoomsTypes" PRIMARY KEY ("Id")
+);
+2024-03-08 14:00:27.162 +05:00  INF  Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "HotelBranches" (
+    "Id" uuid NOT NULL,
+    "Name" text NOT NULL,
+    "LocationId" uuid NOT NULL,
+    CONSTRAINT "PK_HotelBranches" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_HotelBranches_Location_LocationId" FOREIGN KEY ("LocationId") REFERENCES "Location" ("Id") ON DELETE CASCADE
+);
+2024-03-08 14:00:27.167 +05:00  INF  Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Amenities" (
+    "Id" uuid NOT NULL,
+    "Title" text NOT NULL,
+    "Description" text NULL,
+    "RoomTypeId" uuid NULL,
+    CONSTRAINT "PK_Amenities" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Amenities_RoomsTypes_RoomTypeId" FOREIGN KEY ("RoomTypeId") REFERENCES "RoomsTypes" ("Id")
+);
+2024-03-08 14:00:27.171 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Reservations" (
+    "Id" uuid NOT NULL,
+    "DateIn" timestamp with time zone NOT NULL,
+    "DateOut" timestamp with time zone NOT NULL,
+    "MadeBy" integer NOT NULL,
+    "Status" integer NOT NULL,
+    "HotelBranchId" uuid NOT NULL,
+    "ReservationCreatorId" uuid NOT NULL,
+    CONSTRAINT "PK_Reservations" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Reservations_HotelBranches_HotelBranchId" FOREIGN KEY ("HotelBranchId") REFERENCES "HotelBranches" ("Id") ON DELETE CASCADE
+);
+2024-03-08 14:00:27.178 +05:00  INF  Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Rooms" (
+    "Id" uuid NOT NULL,
+    "Number" text NOT NULL,
+    "TypeId" uuid NOT NULL,
+    "HotelBranchId" uuid NOT NULL,
+    CONSTRAINT "PK_Rooms" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Rooms_HotelBranches_HotelBranchId" FOREIGN KEY ("HotelBranchId") REFERENCES "HotelBranches" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Rooms_RoomsTypes_TypeId" FOREIGN KEY ("TypeId") REFERENCES "RoomsTypes" ("Id") ON DELETE CASCADE
+);
+2024-03-08 14:00:27.181 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "OccupiedRooms" (
+    "Id" uuid NOT NULL,
+    "CheckIn" timestamp with time zone NULL,
+    "CheckOut" timestamp with time zone NULL,
+    "Status" integer NOT NULL,
+    "RoomId" uuid NULL,
+    "ReservationId" uuid NOT NULL,
+    CONSTRAINT "PK_OccupiedRooms" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_OccupiedRooms_Reservations_ReservationId" FOREIGN KEY ("ReservationId") REFERENCES "Reservations" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_OccupiedRooms_Rooms_RoomId" FOREIGN KEY ("RoomId") REFERENCES "Rooms" ("Id")
+);
+2024-03-08 14:00:27.185 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Amenities_RoomTypeId" ON "Amenities" ("RoomTypeId");
+2024-03-08 14:00:27.187 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_HotelBranches_LocationId" ON "HotelBranches" ("LocationId");
+2024-03-08 14:00:27.190 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_OccupiedRooms_ReservationId" ON "OccupiedRooms" ("ReservationId");
+2024-03-08 14:00:27.192 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_OccupiedRooms_RoomId" ON "OccupiedRooms" ("RoomId");
+2024-03-08 14:00:27.194 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Reservations_HotelBranchId" ON "Reservations" ("HotelBranchId");
+2024-03-08 14:00:27.198 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Rooms_HotelBranchId" ON "Rooms" ("HotelBranchId");
+2024-03-08 14:00:27.201 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Rooms_TypeId" ON "Rooms" ("TypeId");
+2024-03-08 14:00:27.679 +05:00  INF  Now listening on: http://localhost:5056
+2024-03-08 14:00:27.682 +05:00  INF  Application started. Press Ctrl+C to shut down.
+2024-03-08 14:00:27.682 +05:00  INF  Hosting environment: Development
+2024-03-08 14:00:27.683 +05:00  INF  Content root path: C:\Users\Администратор\RiderProjects\Hotel\RoomService
+2024-03-08 14:49:27.777 +05:00  INF  Application is shutting down...

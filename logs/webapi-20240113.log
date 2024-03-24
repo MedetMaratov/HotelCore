@@ -1,0 +1,301 @@
+2024-01-13 21:44:47.349 +06:00  INF  Executed DbCommand (1,386ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "GuestOrderingService";
+2024-01-13 21:44:48.105 +06:00  INF  Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2024-01-13 21:44:48.362 +06:00  INF  Executed DbCommand (137ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-01-13 21:44:48.374 +06:00  INF  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-01-13 21:44:48.479 +06:00  INF  No migrations were applied. The database is already up to date.
+2024-01-13 21:44:48.561 +06:00  INF  Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM pg_class AS cls
+JOIN pg_namespace AS ns ON ns.oid = cls.relnamespace
+WHERE
+        cls.relkind IN ('r', 'v', 'm', 'f', 'p') AND
+        ns.nspname NOT IN ('pg_catalog', 'information_schema') AND
+        -- Exclude tables which are members of PG extensions
+        NOT EXISTS (
+            SELECT 1 FROM pg_depend WHERE
+                classid=(
+                    SELECT cls.oid
+                    FROM pg_class AS cls
+                             JOIN pg_namespace AS ns ON ns.oid = cls.relnamespace
+                    WHERE relname='pg_class' AND ns.nspname='pg_catalog'
+                ) AND
+                objid=cls.oid AND
+                deptype IN ('e', 'x')
+        )
+2024-01-13 21:44:49.108 +06:00  INF  Now listening on: http://localhost:5267
+2024-01-13 21:44:49.112 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2024-01-13 21:44:49.113 +06:00  INF  Hosting environment: Development
+2024-01-13 21:44:49.113 +06:00  INF  Content root path: C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService
+2024-01-13 21:44:49.559 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger - null null
+2024-01-13 21:44:49.921 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger - 301 0 null 365.3566ms
+2024-01-13 21:44:49.929 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/index.html - null null
+2024-01-13 21:44:50.102 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/index.html - 200 null text/html;charset=utf-8 173.0076ms
+2024-01-13 21:44:50.150 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui.css - null null
+2024-01-13 21:44:50.151 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui-bundle.js - null null
+2024-01-13 21:44:50.153 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui-standalone-preset.js - null null
+2024-01-13 21:44:50.222 +06:00  INF  Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2024-01-13 21:44:50.223 +06:00  INF  Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2024-01-13 21:44:50.229 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui-standalone-preset.js - 200 339486 text/javascript 76.6319ms
+2024-01-13 21:44:50.229 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui.css - 200 143943 text/css 78.9944ms
+2024-01-13 21:44:50.233 +06:00  INF  Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2024-01-13 21:44:50.234 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui-bundle.js - 200 1096145 text/javascript 82.7345ms
+2024-01-13 21:44:50.488 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/favicon-32x32.png - null null
+2024-01-13 21:44:50.489 +06:00  INF  Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2024-01-13 21:44:50.489 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/favicon-32x32.png - 200 628 image/png 1.6065ms
+2024-01-13 21:44:50.564 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/v1/swagger.json - null null
+2024-01-13 21:44:50.578 +06:00  INF  No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-01-13 21:44:50.990 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 426.0574ms
+2024-01-13 21:45:11.194 +06:00  INF  Application is shutting down...
+2024-01-13 21:47:38.494 +06:00  INF  Executed DbCommand (110ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-01-13 21:47:38.561 +06:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-01-13 21:47:38.633 +06:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-01-13 21:47:38.721 +06:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-01-13 21:47:38.724 +06:00  INF  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-01-13 21:47:38.748 +06:00  INF  No migrations were applied. The database is already up to date.
+2024-01-13 21:47:38.818 +06:00  INF  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE WHEN COUNT(*) = 0 THEN FALSE ELSE TRUE END
+FROM pg_class AS cls
+JOIN pg_namespace AS ns ON ns.oid = cls.relnamespace
+WHERE
+        cls.relkind IN ('r', 'v', 'm', 'f', 'p') AND
+        ns.nspname NOT IN ('pg_catalog', 'information_schema') AND
+        -- Exclude tables which are members of PG extensions
+        NOT EXISTS (
+            SELECT 1 FROM pg_depend WHERE
+                classid=(
+                    SELECT cls.oid
+                    FROM pg_class AS cls
+                             JOIN pg_namespace AS ns ON ns.oid = cls.relnamespace
+                    WHERE relname='pg_class' AND ns.nspname='pg_catalog'
+                ) AND
+                objid=cls.oid AND
+                deptype IN ('e', 'x')
+        )
+2024-01-13 21:47:38.868 +06:00  INF  Now listening on: http://localhost:5267
+2024-01-13 21:47:38.870 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2024-01-13 21:47:38.870 +06:00  INF  Hosting environment: Development
+2024-01-13 21:47:38.871 +06:00  INF  Content root path: C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService
+2024-01-13 21:47:41.648 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger - null null
+2024-01-13 21:47:41.940 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger - 301 0 null 295.1389ms
+2024-01-13 21:47:41.953 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/index.html - null null
+2024-01-13 21:47:42.119 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/index.html - 200 null text/html;charset=utf-8 166.097ms
+2024-01-13 21:47:42.187 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui.css - null null
+2024-01-13 21:47:42.189 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui-bundle.js - null null
+2024-01-13 21:47:42.189 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui-standalone-preset.js - null null
+2024-01-13 21:47:42.231 +06:00  INF  Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2024-01-13 21:47:42.231 +06:00  INF  Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2024-01-13 21:47:42.231 +06:00  INF  Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2024-01-13 21:47:42.235 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui-standalone-preset.js - 200 339486 text/javascript 45.5697ms
+2024-01-13 21:47:42.235 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui-bundle.js - 200 1096145 text/javascript 46.1315ms
+2024-01-13 21:47:42.235 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/swagger-ui.css - 200 143943 text/css 48.1839ms
+2024-01-13 21:47:42.664 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/favicon-32x32.png - null null
+2024-01-13 21:47:42.666 +06:00  INF  Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2024-01-13 21:47:42.666 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/favicon-32x32.png - 200 628 image/png 2.7207ms
+2024-01-13 21:47:42.718 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/v1/swagger.json - null null
+2024-01-13 21:47:42.726 +06:00  INF  No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-01-13 21:47:43.077 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 358.1665ms
+2024-01-13 21:47:47.399 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/api/v1/services - null null
+2024-01-13 21:47:47.407 +06:00  WRN  Failed to determine the https port for redirect.
+2024-01-13 21:47:47.482 +06:00  INF  Executing endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-01-13 21:47:48.451 +06:00  ERR  Failed executing DbCommand (62ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."Name", s."Description", s."Price", s."WaitingTime"
+FROM "Services" AS s
+2024-01-13 21:47:48.519 +06:00  ERR  An exception occurred while iterating over the results of a query for context type 'GuestOrderingService.DataAccess.AppDbContext'.
+Npgsql.PostgresException (0x80004005): 42P01: отношение "Services" не существует
+
+POSITION: 76
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ОШИБКА
+    SqlState: 42P01
+    MessageText: отношение "Services" не существует
+    Position: 76
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTableNpgsql.PostgresException (0x80004005): 42P01: отношение "Services" не существует
+
+POSITION: 76
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ОШИБКА
+    SqlState: 42P01
+    MessageText: отношение "Services" не существует
+    Position: 76
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+
+2024-01-13 21:47:48.536 +06:00  INF  Executed endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-01-13 21:47:48.539 +06:00  ERR  An unhandled exception has occurred while executing the request.Npgsql.PostgresException (0x80004005): 42P01: отношение "Services" не существует
+
+POSITION: 76
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at GuestOrderingService.Apis.ServiceApi.GetAllServicesAsync(AppDbContext dbContext, CancellationToken ct) in C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService\Apis\ServiceApi.cs:line 32
+   at Microsoft.AspNetCore.Http.RequestDelegateFactory.ExecuteTaskResult[T](Task`1 task, HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+  Exception data:
+    Severity: ОШИБКА
+    SqlState: 42P01
+    MessageText: отношение "Services" не существует
+    Position: 76
+    File: parse_relation.c
+    Line: 1452
+    Routine: parserOpenTable
+
+2024-01-13 21:47:48.609 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/api/v1/services - 500 null text/plain; charset=utf-8 1210.8595ms
+2024-01-13 21:48:44.395 +06:00  INF  Application is shutting down...
+2024-01-13 21:49:09.464 +06:00  INF  Executed DbCommand (97ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-01-13 21:49:09.533 +06:00  INF  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-01-13 21:49:09.598 +06:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-01-13 21:49:09.652 +06:00  INF  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-01-13 21:49:09.653 +06:00  INF  Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-01-13 21:49:09.669 +06:00  INF  No migrations were applied. The database is already up to date.
+2024-01-13 21:49:09.972 +06:00  INF  Executed DbCommand (136ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP DATABASE "GuestOrderingService" WITH (FORCE);
+2024-01-13 21:49:11.068 +06:00  INF  Executed DbCommand (827ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "GuestOrderingService";
+2024-01-13 21:49:11.578 +06:00  INF  Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Services" (
+    "Id" uuid NOT NULL,
+    "Name" text NOT NULL,
+    "Description" text NOT NULL,
+    "WaitingTime" timestamp with time zone NOT NULL,
+    "Price" numeric NOT NULL,
+    CONSTRAINT "PK_Services" PRIMARY KEY ("Id")
+);
+2024-01-13 21:49:11.605 +06:00  INF  Executed DbCommand (27ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Orders" (
+    "Id" uuid NOT NULL,
+    "ServiceId" uuid NOT NULL,
+    "CustomerId" uuid NOT NULL,
+    "RoomId" uuid NOT NULL,
+    "RequestTime" timestamp with time zone NOT NULL,
+    "Status" integer NOT NULL,
+    "CompleteTime" timestamp with time zone,
+    "CancelTime" timestamp with time zone,
+    CONSTRAINT "PK_Orders" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Orders_Services_ServiceId" FOREIGN KEY ("ServiceId") REFERENCES "Services" ("Id") ON DELETE CASCADE
+);
+2024-01-13 21:49:11.623 +06:00  INF  Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Orders_ServiceId" ON "Orders" ("ServiceId");
+2024-01-13 21:49:11.761 +06:00  INF  Now listening on: http://localhost:5267
+2024-01-13 21:49:11.766 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2024-01-13 21:49:11.767 +06:00  INF  Hosting environment: Development
+2024-01-13 21:49:11.767 +06:00  INF  Content root path: C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService
+2024-01-13 21:49:11.988 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/index.html - null null
+2024-01-13 21:49:12.232 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/index.html - 200 null text/html;charset=utf-8 246.1842ms
+2024-01-13 21:49:12.745 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/swagger/v1/swagger.json - null null
+2024-01-13 21:49:12.756 +06:00  INF  No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-01-13 21:49:13.008 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 262.9845ms
+2024-01-13 21:49:17.669 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:5267/api/v1/services - null null
+2024-01-13 21:49:17.677 +06:00  WRN  Failed to determine the https port for redirect.
+2024-01-13 21:49:17.686 +06:00  INF  Executing endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-01-13 21:49:18.539 +06:00  INF  Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."Name", s."Description", s."Price", s."WaitingTime"
+FROM "Services" AS s
+2024-01-13 21:49:18.634 +06:00  INF  Setting HTTP status code 200.
+2024-01-13 21:49:18.639 +06:00  INF  Writing value of type 'List`1' as Json.
+2024-01-13 21:49:18.653 +06:00  INF  Executed endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-01-13 21:49:18.675 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:5267/api/v1/services - 200 null application/json; charset=utf-8 1005.9781ms
+2024-01-13 21:49:33.422 +06:00  INF  Application is shutting down...

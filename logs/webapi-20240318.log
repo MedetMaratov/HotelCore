@@ -1,0 +1,254 @@
+2024-03-18 12:18:34.404 +05:00  INF  Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-03-18 12:18:34.617 +05:00  INF  Executed DbCommand (39ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2024-03-18 12:18:34.668 +05:00  INF  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-03-18 12:18:34.674 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-03-18 12:18:34.725 +05:00  INF  No migrations were applied. The database is already up to date.
+2024-03-18 12:18:34.885 +05:00  INF  Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+REVOKE CONNECT ON DATABASE "GuestOrderingService" FROM PUBLIC;
+SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE datname = 'GuestOrderingService';
+2024-03-18 12:18:34.990 +05:00  INF  Executed DbCommand (105ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP DATABASE "GuestOrderingService";
+2024-03-18 12:18:35.737 +05:00  INF  Executed DbCommand (520ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "GuestOrderingService";
+2024-03-18 12:18:35.879 +05:00  INF  Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Amenities" (
+    "Id" uuid NOT NULL,
+    "Name" text NOT NULL,
+    "Description" text NOT NULL,
+    CONSTRAINT "PK_Amenities" PRIMARY KEY ("Id")
+);
+2024-03-18 12:18:35.885 +05:00  INF  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AmenityReservations" (
+    "Id" uuid NOT NULL,
+    "GuestId" uuid NOT NULL,
+    "AmenityId" uuid NOT NULL,
+    "DateTime" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_AmenityReservations" PRIMARY KEY ("Id")
+);
+2024-03-18 12:18:35.891 +05:00  INF  Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Services" (
+    "Id" uuid NOT NULL,
+    "Name" text NOT NULL,
+    "Description" text NOT NULL,
+    "WaitingTime" timestamp with time zone NOT NULL,
+    "Price" numeric NOT NULL,
+    CONSTRAINT "PK_Services" PRIMARY KEY ("Id")
+);
+2024-03-18 12:18:35.903 +05:00  INF  Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Orders" (
+    "Id" uuid NOT NULL,
+    "ServiceId" uuid NOT NULL,
+    "CustomerId" uuid NOT NULL,
+    "RoomId" uuid NOT NULL,
+    "RequestTime" timestamp with time zone NOT NULL,
+    "Status" integer NOT NULL,
+    "CompleteTime" timestamp with time zone NULL,
+    "CancelTime" timestamp with time zone NULL,
+    CONSTRAINT "PK_Orders" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Orders_Services_ServiceId" FOREIGN KEY ("ServiceId") REFERENCES "Services" ("Id") ON DELETE CASCADE
+);
+2024-03-18 12:18:35.906 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Orders_ServiceId" ON "Orders" ("ServiceId");
+2024-03-18 12:18:36.226 +05:00  INF  Application started. Press Ctrl+C to shut down.
+2024-03-18 12:18:36.226 +05:00  INF  Hosting environment: Development
+2024-03-18 12:18:36.226 +05:00  INF  Content root path: C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService
+2024-03-18 12:18:36.366 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger - -
+2024-03-18 12:18:36.523 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger - - - 301 - - 158.7667ms
+2024-03-18 12:18:36.583 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/index.html - -
+2024-03-18 12:18:36.740 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/index.html - - - 200 - text/html;charset=utf-8 156.4220ms
+2024-03-18 12:18:36.812 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/swagger-ui.css - -
+2024-03-18 12:18:36.814 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/swagger-ui-bundle.js - -
+2024-03-18 12:18:36.815 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/swagger-ui-standalone-preset.js - -
+2024-03-18 12:18:36.835 +05:00  INF  Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2024-03-18 12:18:36.835 +05:00  INF  Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2024-03-18 12:18:36.840 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/swagger-ui.css - - - 200 143943 text/css 28.1630ms
+2024-03-18 12:18:36.842 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/swagger-ui-standalone-preset.js - - - 200 339486 text/javascript 27.4345ms
+2024-03-18 12:18:36.847 +05:00  INF  Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2024-03-18 12:18:36.869 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/swagger-ui-bundle.js - - - 200 1096145 text/javascript 55.3868ms
+2024-03-18 12:18:37.092 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/favicon-32x32.png - -
+2024-03-18 12:18:37.093 +05:00  INF  Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2024-03-18 12:18:37.093 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/favicon-32x32.png - - - 200 628 image/png 0.9334ms
+2024-03-18 12:18:37.160 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/v1/swagger.json - -
+2024-03-18 12:18:37.168 +05:00  INF  No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-03-18 12:18:37.343 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 182.6493ms
+2024-03-18 12:19:37.188 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/api/v1/services - -
+2024-03-18 12:19:37.229 +05:00  INF  Executing endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-03-18 12:19:37.631 +05:00  INF  Executed DbCommand (15ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."Name", s."Description", s."Price", s."WaitingTime"
+FROM "Services" AS s
+2024-03-18 12:19:37.650 +05:00  INF  Setting HTTP status code 200.
+2024-03-18 12:19:37.651 +05:00  INF  Writing value of type 'List`1' as Json.
+2024-03-18 12:19:37.678 +05:00  INF  Executed endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-03-18 12:19:37.690 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/api/v1/services - - - 200 - application/json;+charset=utf-8 501.6560ms
+2024-03-18 12:20:02.662 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/api/v1/orders - -
+2024-03-18 12:20:02.663 +05:00  INF  Executing endpoint 'HTTP: GET /api/v1/orders => GetAllAsync'
+2024-03-18 12:20:02.770 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT o."Id", o."CompleteTime", o."CustomerId", o."RequestTime", o."RoomId", o."ServiceId", 0 AS "Status"
+FROM "Orders" AS o
+2024-03-18 12:20:02.771 +05:00  INF  Setting HTTP status code 200.
+2024-03-18 12:20:02.771 +05:00  INF  Writing value of type 'List`1' as Json.
+2024-03-18 12:20:02.790 +05:00  INF  Executed endpoint 'HTTP: GET /api/v1/orders => GetAllAsync'
+2024-03-18 12:20:02.791 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/api/v1/orders - - - 200 - application/json;+charset=utf-8 129.1220ms
+2024-03-18 12:52:17.431 +05:00  INF  Application is shutting down...
+2024-03-18 16:06:12.389 +05:00  INF  Executed DbCommand (56ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-03-18 16:06:12.777 +05:00  INF  Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2024-03-18 16:06:12.832 +05:00  INF  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-03-18 16:06:12.842 +05:00  INF  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-03-18 16:06:12.902 +05:00  INF  No migrations were applied. The database is already up to date.
+2024-03-18 16:06:13.072 +05:00  INF  Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+REVOKE CONNECT ON DATABASE "GuestOrderingService" FROM PUBLIC;
+SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE datname = 'GuestOrderingService';
+2024-03-18 16:06:13.218 +05:00  INF  Executed DbCommand (145ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP DATABASE "GuestOrderingService";
+2024-03-18 16:06:14.283 +05:00  INF  Executed DbCommand (695ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "GuestOrderingService";
+2024-03-18 16:06:14.427 +05:00  INF  Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Amenities" (
+    "Id" uuid NOT NULL,
+    "Name" text NOT NULL,
+    "Description" text NOT NULL,
+    CONSTRAINT "PK_Amenities" PRIMARY KEY ("Id")
+);
+2024-03-18 16:06:14.433 +05:00  INF  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AmenityReservations" (
+    "Id" uuid NOT NULL,
+    "GuestId" uuid NOT NULL,
+    "AmenityId" uuid NOT NULL,
+    "DateTime" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_AmenityReservations" PRIMARY KEY ("Id")
+);
+2024-03-18 16:06:14.437 +05:00  INF  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Services" (
+    "Id" uuid NOT NULL,
+    "Name" text NOT NULL,
+    "Description" text NOT NULL,
+    "WaitingTime" timestamp with time zone NOT NULL,
+    "Price" numeric NOT NULL,
+    CONSTRAINT "PK_Services" PRIMARY KEY ("Id")
+);
+2024-03-18 16:06:14.444 +05:00  INF  Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Orders" (
+    "Id" uuid NOT NULL,
+    "ServiceId" uuid NOT NULL,
+    "CustomerId" uuid NOT NULL,
+    "RoomId" uuid NOT NULL,
+    "RequestTime" timestamp with time zone NOT NULL,
+    "Status" integer NOT NULL,
+    "CompleteTime" timestamp with time zone NULL,
+    "CancelTime" timestamp with time zone NULL,
+    CONSTRAINT "PK_Orders" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Orders_Services_ServiceId" FOREIGN KEY ("ServiceId") REFERENCES "Services" ("Id") ON DELETE CASCADE
+);
+2024-03-18 16:06:14.447 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Orders_ServiceId" ON "Orders" ("ServiceId");
+2024-03-18 16:06:14.792 +05:00  INF  Application started. Press Ctrl+C to shut down.
+2024-03-18 16:06:14.792 +05:00  INF  Hosting environment: Development
+2024-03-18 16:06:14.793 +05:00  INF  Content root path: C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService
+2024-03-18 16:06:14.946 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger - -
+2024-03-18 16:06:15.117 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger - - - 301 - - 174.9665ms
+2024-03-18 16:06:15.138 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/index.html - -
+2024-03-18 16:06:15.301 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/index.html - - - 200 - text/html;charset=utf-8 163.0539ms
+2024-03-18 16:06:15.354 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/swagger-ui.css - -
+2024-03-18 16:06:15.355 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/swagger-ui-bundle.js - -
+2024-03-18 16:06:15.356 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/swagger-ui-standalone-preset.js - -
+2024-03-18 16:06:15.382 +05:00  INF  Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2024-03-18 16:06:15.382 +05:00  INF  Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2024-03-18 16:06:15.388 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/swagger-ui.css - - - 200 143943 text/css 34.1875ms
+2024-03-18 16:06:15.391 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/swagger-ui-standalone-preset.js - - - 200 339486 text/javascript 34.9329ms
+2024-03-18 16:06:15.400 +05:00  INF  Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2024-03-18 16:06:15.423 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/swagger-ui-bundle.js - - - 200 1096145 text/javascript 67.6849ms
+2024-03-18 16:06:15.647 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/favicon-32x32.png - -
+2024-03-18 16:06:15.648 +05:00  INF  Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2024-03-18 16:06:15.649 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/favicon-32x32.png - - - 200 628 image/png 1.7487ms
+2024-03-18 16:06:15.735 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/swagger/v1/swagger.json - -
+2024-03-18 16:06:15.745 +05:00  INF  No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-03-18 16:06:15.980 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 244.8045ms
+2024-03-18 16:07:27.884 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/api/v1/services - -
+2024-03-18 16:07:27.928 +05:00  INF  Executing endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-03-18 16:07:28.334 +05:00  INF  Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."Name", s."Description", s."Price", s."WaitingTime"
+FROM "Services" AS s
+2024-03-18 16:07:28.357 +05:00  INF  Setting HTTP status code 200.
+2024-03-18 16:07:28.358 +05:00  INF  Writing value of type 'List`1' as Json.
+2024-03-18 16:07:28.384 +05:00  INF  Executed endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-03-18 16:07:28.397 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/api/v1/services - - - 200 - application/json;+charset=utf-8 512.9684ms
+2024-03-18 16:07:40.082 +05:00  INF  Request starting HTTP/2 POST https://localhost:44314/api/v1/services application/json 108
+2024-03-18 16:07:40.084 +05:00  INF  Executing endpoint 'HTTP: POST /api/v1/services => CreateServiceAsync'
+2024-03-18 16:07:40.465 +05:00  INF  Executed DbCommand (34ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?' (DbType = Decimal), @p4='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Services" ("Id", "Description", "Name", "Price", "WaitingTime")
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2024-03-18 16:07:40.486 +05:00  INF  Setting HTTP status code 200.
+2024-03-18 16:07:40.487 +05:00  INF  Executed endpoint 'HTTP: POST /api/v1/services => CreateServiceAsync'
+2024-03-18 16:07:40.488 +05:00  INF  Request finished HTTP/2 POST https://localhost:44314/api/v1/services application/json 108 - 200 - - 405.3496ms
+2024-03-18 16:07:46.949 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/api/v1/services - -
+2024-03-18 16:07:46.950 +05:00  INF  Executing endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-03-18 16:07:46.959 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."Name", s."Description", s."Price", s."WaitingTime"
+FROM "Services" AS s
+2024-03-18 16:07:46.987 +05:00  INF  Setting HTTP status code 200.
+2024-03-18 16:07:46.988 +05:00  INF  Writing value of type 'List`1' as Json.
+2024-03-18 16:07:46.996 +05:00  INF  Executed endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-03-18 16:07:46.997 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/api/v1/services - - - 200 - application/json;+charset=utf-8 47.1154ms
+2024-03-18 16:08:45.659 +05:00  INF  Request starting HTTP/2 DELETE https://localhost:44314/api/v1/services?id=288d7387-140f-4957-8ccf-868bcac9e4bb - -
+2024-03-18 16:08:45.659 +05:00  INF  Executing endpoint 'HTTP: DELETE /api/v1/services => DeleteServiceAsync'
+2024-03-18 16:08:45.754 +05:00  INF  Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."Description", s."Name", s."Price", s."WaitingTime"
+FROM "Services" AS s
+WHERE s."Id" = @__id_0
+LIMIT 2
+2024-03-18 16:08:45.788 +05:00  INF  Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+DELETE FROM "Services"
+WHERE "Id" = @p0;
+2024-03-18 16:08:45.793 +05:00  INF  Setting HTTP status code 204.
+2024-03-18 16:08:45.793 +05:00  INF  Executed endpoint 'HTTP: DELETE /api/v1/services => DeleteServiceAsync'
+2024-03-18 16:08:45.793 +05:00  INF  Request finished HTTP/2 DELETE https://localhost:44314/api/v1/services?id=288d7387-140f-4957-8ccf-868bcac9e4bb - - - 204 - - 134.8692ms
+2024-03-18 16:08:51.190 +05:00  INF  Request starting HTTP/2 GET https://localhost:44314/api/v1/services - -
+2024-03-18 16:08:51.191 +05:00  INF  Executing endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-03-18 16:08:51.194 +05:00  INF  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Id", s."Name", s."Description", s."Price", s."WaitingTime"
+FROM "Services" AS s
+2024-03-18 16:08:51.194 +05:00  INF  Setting HTTP status code 200.
+2024-03-18 16:08:51.194 +05:00  INF  Writing value of type 'List`1' as Json.
+2024-03-18 16:08:51.195 +05:00  INF  Executed endpoint 'HTTP: GET /api/v1/services => GetAllServicesAsync'
+2024-03-18 16:08:51.195 +05:00  INF  Request finished HTTP/2 GET https://localhost:44314/api/v1/services - - - 200 - application/json;+charset=utf-8 4.7550ms
+2024-03-18 16:09:09.746 +05:00  INF  Application is shutting down...

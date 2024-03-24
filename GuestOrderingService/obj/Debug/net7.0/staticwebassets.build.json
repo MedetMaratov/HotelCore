@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Zs1xmyg1s23brCXLwReUinfAKA5h1Mq/TDs52ggYXyM=",
+  "Source": "GuestOrderingService",
+  "BasePath": "_content/GuestOrderingService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
