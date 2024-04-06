@@ -1,5 +1,5 @@
-using GuestOrderingService.Apis;
 using GuestOrderingService.DataAccess;
+using GuestOrderingService.Features;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -11,6 +11,13 @@ var logger = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
+builder.Services.AddScoped<AmenityFeature, AmenityFeature>();
+builder.Services.AddScoped<OrderFeature, OrderFeature>();
+builder.Services.AddScoped<ReservationFeature, ReservationFeature>();
+builder.Services.AddScoped<ScheduleFeature, ScheduleFeature>();
+builder.Services.AddScoped<ServiceFeature, ServiceFeature>();
+
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -31,14 +38,9 @@ using (var scope = app.Services.CreateScope())
     context.Database.Migrate();
     DbInitializer.Initialize(context);
 }
-app.MapGroup("/api/v1")
-    .WithTags("Service Ordering Api")
-    .MapServiceApi()
-    .MapOrderApi()
-    .MapAmenityApi()
-    .MapAmenityReservationApi();
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.Run();
 

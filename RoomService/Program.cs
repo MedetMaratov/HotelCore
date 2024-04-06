@@ -20,8 +20,15 @@ builder.Services.AddScoped<IAmenityService, AmenityService>();
 builder.Services.AddScoped<IOccupiedRoomService, OccupiedRoomService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IHotelBranchService, HotelBranchService>();
+builder.Services.AddScoped<IRoomFinderService, RoomFinderService>();
 builder.Services.AddControllers();
+builder.Services.AddStackExchangeRedisCache(redisOptions =>
+{
+    var connection = builder.Configuration
+        .GetConnectionString("Redis");
+    redisOptions.Configuration = connection;
 
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(option =>

@@ -1,0 +1,37 @@
+@model List<WebApp.Models.RoomType.RoomTypeListItemViewModel>
+
+@{
+    ViewBag.Title = "Виды номеров";
+    Layout = "_Layout";
+}
+
+<div class="container p-5">
+    <h2>Виды номеров</h2>
+    
+    <p>
+        <a asp-action="Create">Создать</a>
+    </p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>
+                    <a href="@Url.Action("Edit", "RoomType", new { id = item.Id })">Редактировать</a> |
+                    <a href="@Url.Action("Details", "RoomType", new { id = item.Id })">Детали</a> |
+                    <a href="@Url.Action("DeleteConfirmation", "RoomType", new { id = item.Id })">Удалить |</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

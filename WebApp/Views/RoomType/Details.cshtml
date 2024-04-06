@@ -1,0 +1,55 @@
+@model WebApp.Models.RoomType.RoomTypeDetailsViewModel
+
+@{
+    ViewBag.Title = "Room Type Details";
+}
+
+<div class="container p-5">
+    <h2>@Model.Title</h2>
+    <div>
+        <p>
+            <strong>Описание:</strong> @Model.Description
+        </p>
+        <p>
+            <strong>Вместимость:</strong> @Model.MaxCapacity человек
+        </p>
+        <p>
+            <strong>Цена за сутки:</strong> @Model.NightlyRate
+        </p>
+    </div>
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            @for (int i = 0; i < Model.ImagePathes.Count(); i++)
+            {
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to=@i class="active" aria-current="true" aria-label="Slide @(i + 1)"></button>
+            }
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/images/roomType/@Model.ImagePathes[0]" class="d-block w-100" alt="...">
+            </div>
+            @for (int i = 1; i < Model.ImagePathes.Count(); i++)
+            {
+                <div class="carousel-item">
+                    <img src="/images/roomType/@Model.ImagePathes[i]" class="d-block w-100" alt="...">
+                </div>
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>  
+</div>
+
+@section Scripts {
+    <script>
+        // Activate the carousel
+        $('.carousel').carousel();
+    </script>
+}

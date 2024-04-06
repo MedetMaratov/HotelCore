@@ -1,4 +1,6 @@
 using GuestOrderingService.Models;
+using GuestOrderingService.Models.Amenity;
+using GuestOrderingService.Models.Service;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuestOrderingService.DataAccess;
@@ -11,7 +13,8 @@ public class AppDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<Service> Services { get; set; }
     public DbSet<Amenity> Amenities { get; set; }
-    public DbSet<AmenityReservation> AmenityReservations { get; set; }
+    public DbSet<Reservation> Reservations { get; set; }
+    public DbSet<Schedule> Schedules { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -1,0 +1,390 @@
+2024-04-07 00:01:24.980 +05:00  INF  Executed DbCommand (134ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-04-07 00:01:25.474 +05:00  INF  Executed DbCommand (45ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2024-04-07 00:01:25.565 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-04-07 00:01:25.576 +05:00  INF  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-04-07 00:01:25.635 +05:00  INF  No migrations were applied. The database is already up to date.
+2024-04-07 00:01:26.044 +05:00  INF  Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+REVOKE CONNECT ON DATABASE "RoomService" FROM PUBLIC;
+SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE datname = 'RoomService';
+2024-04-07 00:01:26.362 +05:00  INF  Executed DbCommand (318ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP DATABASE "RoomService";
+2024-04-07 00:01:27.789 +05:00  INF  Executed DbCommand (1,169ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "RoomService";
+2024-04-07 00:01:28.027 +05:00  INF  Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Amenities" (
+    "Id" uuid NOT NULL,
+    "Title" text NOT NULL,
+    "Description" text NULL,
+    CONSTRAINT "PK_Amenities" PRIMARY KEY ("Id")
+);
+2024-04-07 00:01:28.038 +05:00  INF  Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Location" (
+    "Id" uuid NOT NULL,
+    "Country" text NOT NULL,
+    "City" text NOT NULL,
+    "Street" text NOT NULL,
+    "HouseNumber" text NULL,
+    CONSTRAINT "PK_Location" PRIMARY KEY ("Id")
+);
+2024-04-07 00:01:28.050 +05:00  INF  Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "RoomsTypes" (
+    "Id" uuid NOT NULL,
+    "Title" text NOT NULL,
+    "Description" text NULL,
+    "MaxCapacity" integer NOT NULL,
+    "NightlyRate" numeric NOT NULL,
+    CONSTRAINT "PK_RoomsTypes" PRIMARY KEY ("Id")
+);
+2024-04-07 00:01:28.067 +05:00  INF  Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "HotelBranches" (
+    "Id" uuid NOT NULL,
+    "Name" text NOT NULL,
+    "LocationId" uuid NOT NULL,
+    CONSTRAINT "PK_HotelBranches" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_HotelBranches_Location_LocationId" FOREIGN KEY ("LocationId") REFERENCES "Location" ("Id") ON DELETE CASCADE
+);
+2024-04-07 00:01:28.074 +05:00  INF  Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AmenityRoomType" (
+    "AmenitiesId" uuid NOT NULL,
+    "RoomTypesId" uuid NOT NULL,
+    CONSTRAINT "PK_AmenityRoomType" PRIMARY KEY ("AmenitiesId", "RoomTypesId"),
+    CONSTRAINT "FK_AmenityRoomType_Amenities_AmenitiesId" FOREIGN KEY ("AmenitiesId") REFERENCES "Amenities" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_AmenityRoomType_RoomsTypes_RoomTypesId" FOREIGN KEY ("RoomTypesId") REFERENCES "RoomsTypes" ("Id") ON DELETE CASCADE
+);
+2024-04-07 00:01:28.086 +05:00  INF  Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "ImageForRoomType" (
+    "Path" text NOT NULL,
+    "RoomTypeId" uuid NOT NULL,
+    CONSTRAINT "PK_ImageForRoomType" PRIMARY KEY ("Path"),
+    CONSTRAINT "FK_ImageForRoomType_RoomsTypes_RoomTypeId" FOREIGN KEY ("RoomTypeId") REFERENCES "RoomsTypes" ("Id") ON DELETE CASCADE
+);
+2024-04-07 00:01:28.097 +05:00  INF  Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "PhoneNumbers" (
+    "Number" text NOT NULL,
+    "HotelBranchId" uuid NOT NULL,
+    "Department" text NOT NULL,
+    CONSTRAINT "PK_PhoneNumbers" PRIMARY KEY ("Number"),
+    CONSTRAINT "FK_PhoneNumbers_HotelBranches_HotelBranchId" FOREIGN KEY ("HotelBranchId") REFERENCES "HotelBranches" ("Id") ON DELETE CASCADE
+);
+2024-04-07 00:01:28.104 +05:00  INF  Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Reservations" (
+    "Id" uuid NOT NULL,
+    "DateIn" timestamp with time zone NOT NULL,
+    "DateOut" timestamp with time zone NOT NULL,
+    "MadeBy" integer NOT NULL,
+    "Status" integer NOT NULL,
+    "HotelBranchId" uuid NOT NULL,
+    "ReservationCreatorId" uuid NOT NULL,
+    CONSTRAINT "PK_Reservations" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Reservations_HotelBranches_HotelBranchId" FOREIGN KEY ("HotelBranchId") REFERENCES "HotelBranches" ("Id") ON DELETE CASCADE
+);
+2024-04-07 00:01:28.114 +05:00  INF  Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Rooms" (
+    "Id" uuid NOT NULL,
+    "Number" text NOT NULL,
+    "TypeId" uuid NOT NULL,
+    "IsDisabled" boolean NOT NULL,
+    "HotelBranchId" uuid NOT NULL,
+    CONSTRAINT "PK_Rooms" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Rooms_HotelBranches_HotelBranchId" FOREIGN KEY ("HotelBranchId") REFERENCES "HotelBranches" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Rooms_RoomsTypes_TypeId" FOREIGN KEY ("TypeId") REFERENCES "RoomsTypes" ("Id") ON DELETE CASCADE
+);
+2024-04-07 00:01:28.121 +05:00  INF  Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "OccupiedRooms" (
+    "Id" uuid NOT NULL,
+    "CheckIn" timestamp with time zone NULL,
+    "CheckOut" timestamp with time zone NULL,
+    "Status" integer NOT NULL,
+    "RoomId" uuid NULL,
+    "ReservationId" uuid NOT NULL,
+    CONSTRAINT "PK_OccupiedRooms" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_OccupiedRooms_Reservations_ReservationId" FOREIGN KEY ("ReservationId") REFERENCES "Reservations" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_OccupiedRooms_Rooms_RoomId" FOREIGN KEY ("RoomId") REFERENCES "Rooms" ("Id")
+);
+2024-04-07 00:01:28.128 +05:00  INF  Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AmenityRoomType_RoomTypesId" ON "AmenityRoomType" ("RoomTypesId");
+2024-04-07 00:01:28.132 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_HotelBranches_LocationId" ON "HotelBranches" ("LocationId");
+2024-04-07 00:01:28.136 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_ImageForRoomType_RoomTypeId" ON "ImageForRoomType" ("RoomTypeId");
+2024-04-07 00:01:28.140 +05:00  INF  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_OccupiedRooms_ReservationId" ON "OccupiedRooms" ("ReservationId");
+2024-04-07 00:01:28.144 +05:00  INF  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_OccupiedRooms_RoomId" ON "OccupiedRooms" ("RoomId");
+2024-04-07 00:01:28.150 +05:00  INF  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_PhoneNumbers_HotelBranchId" ON "PhoneNumbers" ("HotelBranchId");
+2024-04-07 00:01:28.155 +05:00  INF  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Reservations_HotelBranchId" ON "Reservations" ("HotelBranchId");
+2024-04-07 00:01:28.158 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Rooms_HotelBranchId" ON "Rooms" ("HotelBranchId");
+2024-04-07 00:01:28.164 +05:00  INF  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Rooms_TypeId" ON "Rooms" ("TypeId");
+2024-04-07 00:01:29.744 +05:00  INF  Executed DbCommand (109ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?' (DbType = Guid), @p4='?', @p5='?', @p6='?' (DbType = Guid), @p7='?', @p8='?', @p9='?' (DbType = Guid), @p10='?', @p11='?', @p12='?' (DbType = Guid), @p13='?', @p14='?', @p15='?' (DbType = Guid), @p16='?', @p17='?', @p18='?' (DbType = Guid), @p19='?', @p20='?', @p21='?' (DbType = Guid), @p22='?', @p23='?', @p24='?' (DbType = Guid), @p25='?', @p26='?', @p27='?' (DbType = Guid), @p28='?', @p29='?', @p30='?' (DbType = Guid), @p31='?', @p32='?', @p33='?' (DbType = Guid), @p34='?', @p35='?', @p36='?' (DbType = Guid), @p37='?', @p38='?', @p39='?' (DbType = Guid), @p40='?', @p41='?', @p42='?' (DbType = Guid), @p43='?', @p44='?', @p45='?' (DbType = Guid), @p46='?', @p47='?', @p48='?' (DbType = Guid), @p49='?', @p50='?', @p51='?' (DbType = Guid), @p52='?', @p53='?', @p54='?' (DbType = Guid), @p55='?', @p56='?', @p57='?' (DbType = Guid), @p58='?', @p59='?', @p60='?', @p61='?', @p62='?' (DbType = Guid), @p63='?', @p64='?', @p65='?', @p66='?', @p67='?' (DbType = Guid), @p68='?', @p69='?', @p70='?', @p71='?', @p72='?' (DbType = Guid), @p73='?', @p74='?' (DbType = Int32), @p75='?' (DbType = Decimal), @p76='?', @p77='?' (DbType = Guid), @p78='?', @p79='?' (DbType = Int32), @p80='?' (DbType = Decimal), @p81='?', @p82='?' (DbType = Guid), @p83='?', @p84='?' (DbType = Int32), @p85='?' (DbType = Decimal), @p86='?', @p87='?' (DbType = Guid), @p88='?', @p89='?' (DbType = Int32), @p90='?' (DbType = Decimal), @p91='?', @p92='?' (DbType = Guid), @p93='?', @p94='?' (DbType = Int32), @p95='?' (DbType = Decimal), @p96='?', @p97='?' (DbType = Guid), @p98='?', @p99='?' (DbType = Int32), @p100='?' (DbType = Decimal), @p101='?', @p102='?' (DbType = Guid), @p103='?' (DbType = Guid), @p104='?', @p105='?' (DbType = Guid), @p106='?' (DbType = Guid), @p107='?', @p108='?' (DbType = Guid), @p109='?' (DbType = Guid), @p110='?', @p111='?', @p112='?' (DbType = Guid), @p113='?', @p114='?' (DbType = Guid), @p115='?' (DbType = Guid), @p116='?' (DbType = Guid), @p117='?' (DbType = Boolean), @p118='?', @p119='?' (DbType = Guid), @p120='?' (DbType = Guid), @p121='?' (DbType = Guid), @p122='?' (DbType = Boolean), @p123='?', @p124='?' (DbType = Guid), @p125='?' (DbType = Guid), @p126='?' (DbType = Guid), @p127='?' (DbType = Boolean), @p128='?', @p129='?' (DbType = Guid), @p130='?' (DbType = Guid), @p131='?' (DbType = Guid), @p132='?' (DbType = Boolean), @p133='?', @p134='?' (DbType = Guid), @p135='?' (DbType = Guid), @p136='?' (DbType = Guid), @p137='?' (DbType = Boolean), @p138='?', @p139='?' (DbType = Guid), @p140='?' (DbType = Guid), @p141='?' (DbType = Guid), @p142='?' (DbType = Boolean), @p143='?', @p144='?' (DbType = Guid), @p145='?' (DbType = Guid), @p146='?' (DbType = Guid), @p147='?' (DbType = Boolean), @p148='?', @p149='?' (DbType = Guid), @p150='?' (DbType = Guid), @p151='?' (DbType = Guid), @p152='?' (DbType = Boolean), @p153='?', @p154='?' (DbType = Guid), @p155='?' (DbType = Guid), @p156='?' (DbType = Guid), @p157='?' (DbType = Boolean), @p158='?', @p159='?' (DbType = Guid), @p160='?' (DbType = Guid), @p161='?' (DbType = Guid), @p162='?' (DbType = Boolean), @p163='?', @p164='?' (DbType = Guid), @p165='?' (DbType = Guid), @p166='?' (DbType = Guid), @p167='?' (DbType = Boolean), @p168='?', @p169='?' (DbType = Guid), @p170='?' (DbType = Guid), @p171='?' (DbType = Guid), @p172='?' (DbType = Boolean), @p173='?', @p174='?' (DbType = Guid), @p175='?' (DbType = Guid), @p176='?' (DbType = Guid), @p177='?' (DbType = Boolean), @p178='?', @p179='?' (DbType = Guid), @p180='?' (DbType = Guid), @p181='?' (DbType = Guid), @p182='?' (DbType = Boolean), @p183='?', @p184='?' (DbType = Guid), @p185='?' (DbType = Guid), @p186='?' (DbType = Guid), @p187='?' (DbType = Boolean), @p188='?', @p189='?' (DbType = Guid), @p190='?' (DbType = Guid), @p191='?' (DbType = Guid), @p192='?' (DbType = Boolean), @p193='?', @p194='?' (DbType = Guid), @p195='?' (DbType = Guid), @p196='?' (DbType = Guid), @p197='?' (DbType = Boolean), @p198='?', @p199='?' (DbType = Guid), @p200='?' (DbType = Guid), @p201='?' (DbType = Guid), @p202='?' (DbType = Boolean), @p203='?', @p204='?' (DbType = Guid), @p205='?' (DbType = Guid), @p206='?' (DbType = Guid), @p207='?' (DbType = Boolean), @p208='?', @p209='?' (DbType = Guid), @p210='?' (DbType = Guid), @p211='?' (DbType = Guid), @p212='?' (DbType = Boolean), @p213='?', @p214='?' (DbType = Guid), @p215='?' (DbType = Guid), @p216='?' (DbType = Guid), @p217='?' (DbType = Boolean), @p218='?', @p219='?' (DbType = Guid), @p220='?' (DbType = Guid), @p221='?' (DbType = Guid), @p222='?' (DbType = Boolean), @p223='?', @p224='?' (DbType = Guid), @p225='?' (DbType = Guid), @p226='?' (DbType = Guid), @p227='?' (DbType = Boolean), @p228='?', @p229='?' (DbType = Guid), @p230='?' (DbType = Guid), @p231='?' (DbType = Guid), @p232='?' (DbType = Boolean), @p233='?', @p234='?' (DbType = Guid), @p235='?' (DbType = Guid), @p236='?' (DbType = Guid), @p237='?' (DbType = Boolean), @p238='?', @p239='?' (DbType = Guid), @p240='?' (DbType = Guid), @p241='?' (DbType = Guid), @p242='?' (DbType = Boolean), @p243='?', @p244='?' (DbType = Guid), @p245='?' (DbType = Guid), @p246='?' (DbType = Guid), @p247='?' (DbType = Boolean), @p248='?', @p249='?' (DbType = Guid), @p250='?' (DbType = Guid), @p251='?' (DbType = Guid), @p252='?' (DbType = Boolean), @p253='?', @p254='?' (DbType = Guid), @p255='?' (DbType = Guid), @p256='?' (DbType = Guid), @p257='?' (DbType = Boolean), @p258='?', @p259='?' (DbType = Guid), @p260='?' (DbType = Guid), @p261='?' (DbType = Guid), @p262='?' (DbType = Boolean), @p263='?', @p264='?' (DbType = Guid), @p265='?' (DbType = Guid), @p266='?' (DbType = Guid), @p267='?' (DbType = Boolean), @p268='?', @p269='?' (DbType = Guid), @p270='?' (DbType = Guid), @p271='?' (DbType = Guid), @p272='?' (DbType = Boolean), @p273='?', @p274='?' (DbType = Guid), @p275='?' (DbType = Guid), @p276='?' (DbType = Guid), @p277='?' (DbType = Boolean), @p278='?', @p279='?' (DbType = Guid), @p280='?' (DbType = Guid), @p281='?' (DbType = Guid), @p282='?' (DbType = Boolean), @p283='?', @p284='?' (DbType = Guid), @p285='?' (DbType = Guid), @p286='?' (DbType = Guid), @p287='?' (DbType = Boolean), @p288='?', @p289='?' (DbType = Guid), @p290='?' (DbType = Guid), @p291='?' (DbType = Guid), @p292='?' (DbType = Boolean), @p293='?', @p294='?' (DbType = Guid), @p295='?' (DbType = Guid), @p296='?' (DbType = Guid), @p297='?' (DbType = Boolean), @p298='?', @p299='?' (DbType = Guid), @p300='?' (DbType = Guid), @p301='?' (DbType = Guid), @p302='?' (DbType = Boolean), @p303='?', @p304='?' (DbType = Guid), @p305='?' (DbType = Guid), @p306='?' (DbType = Guid), @p307='?' (DbType = Boolean), @p308='?', @p309='?' (DbType = Guid), @p310='?' (DbType = Guid), @p311='?' (DbType = Guid), @p312='?' (DbType = Boolean), @p313='?', @p314='?' (DbType = Guid), @p315='?' (DbType = Guid), @p316='?' (DbType = Guid), @p317='?' (DbType = Boolean), @p318='?', @p319='?' (DbType = Guid), @p320='?' (DbType = Guid), @p321='?' (DbType = Guid), @p322='?' (DbType = Boolean), @p323='?', @p324='?' (DbType = Guid), @p325='?' (DbType = Guid), @p326='?' (DbType = Guid), @p327='?' (DbType = Boolean), @p328='?', @p329='?' (DbType = Guid), @p330='?' (DbType = Guid), @p331='?' (DbType = Guid), @p332='?' (DbType = Boolean), @p333='?', @p334='?' (DbType = Guid), @p335='?' (DbType = Guid), @p336='?' (DbType = Guid), @p337='?' (DbType = Boolean), @p338='?', @p339='?' (DbType = Guid), @p340='?' (DbType = Guid), @p341='?' (DbType = Guid), @p342='?' (DbType = Boolean), @p343='?', @p344='?' (DbType = Guid), @p345='?' (DbType = Guid), @p346='?' (DbType = Guid), @p347='?' (DbType = Boolean), @p348='?', @p349='?' (DbType = Guid), @p350='?' (DbType = Guid), @p351='?' (DbType = Guid), @p352='?' (DbType = Boolean), @p353='?', @p354='?' (DbType = Guid), @p355='?' (DbType = Guid), @p356='?' (DbType = Guid), @p357='?' (DbType = Boolean), @p358='?', @p359='?' (DbType = Guid), @p360='?' (DbType = Guid), @p361='?' (DbType = Guid), @p362='?' (DbType = Boolean), @p363='?', @p364='?' (DbType = Guid), @p365='?' (DbType = Guid), @p366='?' (DbType = Guid), @p367='?' (DbType = Boolean), @p368='?', @p369='?' (DbType = Guid), @p370='?' (DbType = Guid), @p371='?' (DbType = Guid), @p372='?' (DbType = Boolean), @p373='?', @p374='?' (DbType = Guid), @p375='?' (DbType = Guid), @p376='?' (DbType = Guid), @p377='?' (DbType = Boolean), @p378='?', @p379='?' (DbType = Guid), @p380='?' (DbType = Guid), @p381='?' (DbType = Guid), @p382='?' (DbType = Boolean), @p383='?', @p384='?' (DbType = Guid), @p385='?' (DbType = Guid), @p386='?' (DbType = Guid), @p387='?' (DbType = Boolean), @p388='?', @p389='?' (DbType = Guid), @p390='?' (DbType = Guid), @p391='?' (DbType = Guid), @p392='?' (DbType = Boolean), @p393='?', @p394='?' (DbType = Guid), @p395='?' (DbType = Guid), @p396='?' (DbType = Guid), @p397='?' (DbType = Boolean), @p398='?', @p399='?' (DbType = Guid), @p400='?' (DbType = Guid), @p401='?' (DbType = Guid), @p402='?' (DbType = Boolean), @p403='?', @p404='?' (DbType = Guid), @p405='?' (DbType = Guid), @p406='?' (DbType = Guid), @p407='?' (DbType = Boolean), @p408='?', @p409='?' (DbType = Guid), @p410='?' (DbType = Guid), @p411='?' (DbType = Guid), @p412='?' (DbType = Boolean), @p413='?', @p414='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p0, @p1, @p2);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p3, @p4, @p5);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p6, @p7, @p8);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p9, @p10, @p11);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p12, @p13, @p14);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p15, @p16, @p17);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p18, @p19, @p20);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p21, @p22, @p23);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p24, @p25, @p26);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p27, @p28, @p29);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p30, @p31, @p32);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p33, @p34, @p35);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p36, @p37, @p38);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p39, @p40, @p41);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p42, @p43, @p44);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p45, @p46, @p47);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p48, @p49, @p50);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p51, @p52, @p53);
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p54, @p55, @p56);
+INSERT INTO "Location" ("Id", "City", "Country", "HouseNumber", "Street")
+VALUES (@p57, @p58, @p59, @p60, @p61);
+INSERT INTO "Location" ("Id", "City", "Country", "HouseNumber", "Street")
+VALUES (@p62, @p63, @p64, @p65, @p66);
+INSERT INTO "Location" ("Id", "City", "Country", "HouseNumber", "Street")
+VALUES (@p67, @p68, @p69, @p70, @p71);
+INSERT INTO "RoomsTypes" ("Id", "Description", "MaxCapacity", "NightlyRate", "Title")
+VALUES (@p72, @p73, @p74, @p75, @p76);
+INSERT INTO "RoomsTypes" ("Id", "Description", "MaxCapacity", "NightlyRate", "Title")
+VALUES (@p77, @p78, @p79, @p80, @p81);
+INSERT INTO "RoomsTypes" ("Id", "Description", "MaxCapacity", "NightlyRate", "Title")
+VALUES (@p82, @p83, @p84, @p85, @p86);
+INSERT INTO "RoomsTypes" ("Id", "Description", "MaxCapacity", "NightlyRate", "Title")
+VALUES (@p87, @p88, @p89, @p90, @p91);
+INSERT INTO "RoomsTypes" ("Id", "Description", "MaxCapacity", "NightlyRate", "Title")
+VALUES (@p92, @p93, @p94, @p95, @p96);
+INSERT INTO "RoomsTypes" ("Id", "Description", "MaxCapacity", "NightlyRate", "Title")
+VALUES (@p97, @p98, @p99, @p100, @p101);
+INSERT INTO "HotelBranches" ("Id", "LocationId", "Name")
+VALUES (@p102, @p103, @p104);
+INSERT INTO "HotelBranches" ("Id", "LocationId", "Name")
+VALUES (@p105, @p106, @p107);
+INSERT INTO "HotelBranches" ("Id", "LocationId", "Name")
+VALUES (@p108, @p109, @p110);
+INSERT INTO "ImageForRoomType" ("Path", "RoomTypeId")
+VALUES (@p111, @p112);
+INSERT INTO "ImageForRoomType" ("Path", "RoomTypeId")
+VALUES (@p113, @p114);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p115, @p116, @p117, @p118, @p119);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p120, @p121, @p122, @p123, @p124);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p125, @p126, @p127, @p128, @p129);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p130, @p131, @p132, @p133, @p134);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p135, @p136, @p137, @p138, @p139);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p140, @p141, @p142, @p143, @p144);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p145, @p146, @p147, @p148, @p149);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p150, @p151, @p152, @p153, @p154);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p155, @p156, @p157, @p158, @p159);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p160, @p161, @p162, @p163, @p164);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p165, @p166, @p167, @p168, @p169);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p170, @p171, @p172, @p173, @p174);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p175, @p176, @p177, @p178, @p179);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p180, @p181, @p182, @p183, @p184);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p185, @p186, @p187, @p188, @p189);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p190, @p191, @p192, @p193, @p194);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p195, @p196, @p197, @p198, @p199);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p200, @p201, @p202, @p203, @p204);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p205, @p206, @p207, @p208, @p209);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p210, @p211, @p212, @p213, @p214);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p215, @p216, @p217, @p218, @p219);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p220, @p221, @p222, @p223, @p224);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p225, @p226, @p227, @p228, @p229);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p230, @p231, @p232, @p233, @p234);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p235, @p236, @p237, @p238, @p239);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p240, @p241, @p242, @p243, @p244);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p245, @p246, @p247, @p248, @p249);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p250, @p251, @p252, @p253, @p254);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p255, @p256, @p257, @p258, @p259);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p260, @p261, @p262, @p263, @p264);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p265, @p266, @p267, @p268, @p269);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p270, @p271, @p272, @p273, @p274);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p275, @p276, @p277, @p278, @p279);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p280, @p281, @p282, @p283, @p284);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p285, @p286, @p287, @p288, @p289);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p290, @p291, @p292, @p293, @p294);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p295, @p296, @p297, @p298, @p299);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p300, @p301, @p302, @p303, @p304);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p305, @p306, @p307, @p308, @p309);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p310, @p311, @p312, @p313, @p314);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p315, @p316, @p317, @p318, @p319);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p320, @p321, @p322, @p323, @p324);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p325, @p326, @p327, @p328, @p329);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p330, @p331, @p332, @p333, @p334);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p335, @p336, @p337, @p338, @p339);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p340, @p341, @p342, @p343, @p344);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p345, @p346, @p347, @p348, @p349);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p350, @p351, @p352, @p353, @p354);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p355, @p356, @p357, @p358, @p359);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p360, @p361, @p362, @p363, @p364);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p365, @p366, @p367, @p368, @p369);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p370, @p371, @p372, @p373, @p374);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p375, @p376, @p377, @p378, @p379);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p380, @p381, @p382, @p383, @p384);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p385, @p386, @p387, @p388, @p389);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p390, @p391, @p392, @p393, @p394);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p395, @p396, @p397, @p398, @p399);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p400, @p401, @p402, @p403, @p404);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p405, @p406, @p407, @p408, @p409);
+INSERT INTO "Rooms" ("Id", "HotelBranchId", "IsDisabled", "Number", "TypeId")
+VALUES (@p410, @p411, @p412, @p413, @p414);
+2024-04-07 00:01:30.211 +05:00  INF  Application started. Press Ctrl+C to shut down.
+2024-04-07 00:01:30.213 +05:00  INF  Hosting environment: Development
+2024-04-07 00:01:30.213 +05:00  INF  Content root path: C:\Users\Администратор\RiderProjects\Hotel\RoomService
+2024-04-07 00:01:30.290 +05:00  INF  Request starting HTTP/2 GET https://localhost:44318/swagger - -
+2024-04-07 00:01:30.764 +05:00  INF  Request finished HTTP/2 GET https://localhost:44318/swagger - - - 0 - - 478.2488ms
+2024-04-07 00:01:49.188 +05:00  INF  Request starting HTTP/1.1 GET https://localhost:44318/api/v1/room-types - -
+2024-04-07 00:01:49.233 +05:00  INF  Executing endpoint 'RoomService.Controllers.RoomTypeController.GetAll (RoomService)'
+2024-04-07 00:01:49.325 +05:00  INF  Route matched with {action = "GetAll", controller = "RoomType"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[RoomService.DTO.ResponseRoomTypeDto]]] GetAll(System.Threading.CancellationToken) on controller RoomService.Controllers.RoomTypeController (RoomService).
+2024-04-07 00:01:49.399 +05:00  INF  Executing action method RoomService.Controllers.RoomTypeController.GetAll (RoomService) - Validation state: "Valid"
+2024-04-07 00:01:51.795 +05:00  WRN  Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-04-07 00:01:52.009 +05:00  INF  Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT r."Id", r."Title", r."Description", r."MaxCapacity", r."NightlyRate", i."Path", t."Id", t."Description", t."Title", t."AmenitiesId", t."RoomTypesId"
+FROM "RoomsTypes" AS r
+LEFT JOIN "ImageForRoomType" AS i ON r."Id" = i."RoomTypeId"
+LEFT JOIN (
+    SELECT a0."Id", a0."Description", a0."Title", a."AmenitiesId", a."RoomTypesId"
+    FROM "AmenityRoomType" AS a
+    INNER JOIN "Amenities" AS a0 ON a."AmenitiesId" = a0."Id"
+) AS t ON r."Id" = t."RoomTypesId"
+ORDER BY r."Id", i."Path", t."AmenitiesId", t."RoomTypesId"
+2024-04-07 00:01:52.647 +05:00  INF  Cached list of RoomTypes
+2024-04-07 00:01:52.685 +05:00  INF  Executed action method RoomService.Controllers.RoomTypeController.GetAll (RoomService), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 3271.6723ms.
+2024-04-07 00:01:52.725 +05:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[RoomService.DTO.ResponseRoomTypeDto, RoomService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-04-07 00:01:53.368 +05:00  INF  Executed action RoomService.Controllers.RoomTypeController.GetAll (RoomService) in 4020.6317ms
+2024-04-07 00:01:53.372 +05:00  INF  Executed endpoint 'RoomService.Controllers.RoomTypeController.GetAll (RoomService)'
+2024-04-07 00:01:53.500 +05:00  INF  Request finished HTTP/1.1 GET https://localhost:44318/api/v1/room-types - - - 200 - application/json;+charset=utf-8 4312.1793ms
+2024-04-07 00:01:58.645 +05:00  INF  Request starting HTTP/1.1 GET https://localhost:44318/api/v1/room-types/de94604d-f0a2-47bb-940a-7200a0f2d688 - -
+2024-04-07 00:01:58.654 +05:00  INF  Executing endpoint 'RoomService.Controllers.RoomTypeController.GetById (RoomService)'
+2024-04-07 00:01:58.671 +05:00  INF  Route matched with {action = "GetById", controller = "RoomType"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[RoomService.DTO.ResponseRoomTypeDto]]] GetById(System.Guid, System.Threading.CancellationToken) on controller RoomService.Controllers.RoomTypeController (RoomService).
+2024-04-07 00:01:58.679 +05:00  INF  Executing action method RoomService.Controllers.RoomTypeController.GetById (RoomService) - Validation state: "Valid"
+2024-04-07 00:01:58.992 +05:00  WRN  Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-04-07 00:01:59.030 +05:00  INF  Executed DbCommand (6ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."Title", t."Description", t."MaxCapacity", t."NightlyRate", i."Path", t0."Id", t0."Description", t0."Title", t0."AmenitiesId", t0."RoomTypesId"
+FROM (
+    SELECT r."Id", r."Title", r."Description", r."MaxCapacity", r."NightlyRate"
+    FROM "RoomsTypes" AS r
+    WHERE r."Id" = @__id_0
+    LIMIT 2
+) AS t
+LEFT JOIN "ImageForRoomType" AS i ON t."Id" = i."RoomTypeId"
+LEFT JOIN (
+    SELECT a0."Id", a0."Description", a0."Title", a."AmenitiesId", a."RoomTypesId"
+    FROM "AmenityRoomType" AS a
+    INNER JOIN "Amenities" AS a0 ON a."AmenitiesId" = a0."Id"
+) AS t0 ON t."Id" = t0."RoomTypesId"
+ORDER BY t."Id", i."Path", t0."AmenitiesId", t0."RoomTypesId"
+2024-04-07 00:01:59.041 +05:00  INF  RoomTypes cached
+2024-04-07 00:01:59.042 +05:00  INF  Executed action method RoomService.Controllers.RoomTypeController.GetById (RoomService), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 363.1288ms.
+2024-04-07 00:01:59.044 +05:00  INF  Executing OkObjectResult, writing value of type 'RoomService.DTO.ResponseRoomTypeDto'.
+2024-04-07 00:01:59.049 +05:00  INF  Executed action RoomService.Controllers.RoomTypeController.GetById (RoomService) in 377.9997ms
+2024-04-07 00:01:59.050 +05:00  INF  Executed endpoint 'RoomService.Controllers.RoomTypeController.GetById (RoomService)'
+2024-04-07 00:01:59.052 +05:00  INF  Request finished HTTP/1.1 GET https://localhost:44318/api/v1/room-types/de94604d-f0a2-47bb-940a-7200a0f2d688 - - - 200 - application/json;+charset=utf-8 407.6354ms
+2024-04-07 00:03:28.668 +05:00  INF  Request starting HTTP/1.1 GET https://localhost:44318/api/v1/room-types/de94604d-f0a2-47bb-940a-7200a0f2d688 - -
+2024-04-07 00:03:28.690 +05:00  INF  Executing endpoint 'RoomService.Controllers.RoomTypeController.GetById (RoomService)'
+2024-04-07 00:03:28.696 +05:00  INF  Route matched with {action = "GetById", controller = "RoomType"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[RoomService.DTO.ResponseRoomTypeDto]]] GetById(System.Guid, System.Threading.CancellationToken) on controller RoomService.Controllers.RoomTypeController (RoomService).
+2024-04-07 00:03:28.741 +05:00  INF  Executing action method RoomService.Controllers.RoomTypeController.GetById (RoomService) - Validation state: "Valid"
+2024-04-07 00:03:28.918 +05:00  INF  Executed action method RoomService.Controllers.RoomTypeController.GetById (RoomService), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 175.7954ms.
+2024-04-07 00:03:28.925 +05:00  INF  Executing OkObjectResult, writing value of type 'RoomService.DTO.ResponseRoomTypeDto'.
+2024-04-07 00:03:28.931 +05:00  INF  Executed action RoomService.Controllers.RoomTypeController.GetById (RoomService) in 234.5194ms
+2024-04-07 00:03:28.931 +05:00  INF  Executed endpoint 'RoomService.Controllers.RoomTypeController.GetById (RoomService)'
+2024-04-07 00:03:28.932 +05:00  INF  Request finished HTTP/1.1 GET https://localhost:44318/api/v1/room-types/de94604d-f0a2-47bb-940a-7200a0f2d688 - - - 200 - application/json;+charset=utf-8 269.1235ms
+2024-04-07 00:03:51.500 +05:00  INF  Application is shutting down...

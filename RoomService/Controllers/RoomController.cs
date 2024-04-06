@@ -16,42 +16,71 @@ public class RoomController : ControllerBase
     }
 
     [HttpGet]
-    [Route("")]
     public async Task<IActionResult> GetAllAsync(CancellationToken ct)
     {
-        var rooms = await _roomService.GetAllAsync(ct);
-        return Ok(rooms);
+        var result = await _roomService.GetAllAsync(ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 
     [HttpGet]
     [Route("{id:guid}")]
     public async Task<IActionResult> GetAllAsync(Guid id, CancellationToken ct)
     {
-        var rooms = await _roomService.GetRoomsByTypeAsync(id, ct);
-        return Ok(rooms);
+        var result = await _roomService.GetRoomsByTypeAsync(id, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 
     [HttpPost]
-    [Route("")]
     public async Task<IActionResult> CreateAsync([FromBody] CreateRoomDto roomDto, CancellationToken ct)
     {
-        var createdRoomId = await _roomService.CreateAsync(roomDto, ct);
-        return Ok();
+        var result = await _roomService.CreateAsync(roomDto, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 
     [HttpPut]
-    [Route("")]
     public async Task<IActionResult> UpdateRoomDto([FromBody] UpdateRoomDto roomDto, CancellationToken ct)
     {
-        var updatedRoomId = await _roomService.UpdateAsync(roomDto, ct);
-        return Ok();
+        var result = await _roomService.UpdateAsync(roomDto, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 
     [HttpDelete]
     [Route("{id:guid}")]
     public async Task<IActionResult> DeleteRoomAsync(Guid id, CancellationToken ct)
     {
-        await _roomService.DeleteAsync(id, ct);
-        return NoContent();
+        var result = await _roomService.DeleteAsync(id, ct);
+        if (result.IsSuccess)
+            return NoContent();
+        return BadRequest(result.Reasons);
+    }
+    
+    [HttpPut]
+    [Route("enable/{roomId}")]
+    public async Task<IActionResult> EnableRoom(Guid roomId, CancellationToken ct)
+    {
+        var result = await _roomService.EnableRoomAsync(roomId, ct);
+        if (result.IsSuccess)
+            return Ok();
+
+        return BadRequest(result.Errors);
+    }
+
+    [HttpPut]
+    [Route("disable/{roomId}")]
+    public async Task<IActionResult> DisableRoom(Guid roomId, CancellationToken ct)
+    {
+        var result = await _roomService.DisableRoomAsync(roomId, ct);
+        if (result.IsSuccess)
+            return Ok();
+
+        return BadRequest(result.Errors);
     }
 }

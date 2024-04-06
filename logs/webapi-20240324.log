@@ -1,0 +1,351 @@
+2024-03-24 20:14:47.175 +05:00  INF  Executed DbCommand (46ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-03-24 20:14:47.550 +05:00  INF  Executed DbCommand (69ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2024-03-24 20:14:47.745 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-03-24 20:14:47.770 +05:00  INF  Executed DbCommand (17ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-03-24 20:14:48.365 +05:00  INF  No migrations were applied. The database is already up to date.
+2024-03-24 20:14:49.543 +05:00  INF  Executed DbCommand (129ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+REVOKE CONNECT ON DATABASE "RoomService" FROM PUBLIC;
+SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE datname = 'RoomService';
+2024-03-24 20:14:50.704 +05:00  INF  Executed DbCommand (1,161ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DROP DATABASE "RoomService";
+2024-03-24 20:14:54.080 +05:00  INF  Executed DbCommand (2,729ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE DATABASE "RoomService";
+2024-03-24 20:14:54.439 +05:00  INF  Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Amenities" (
+    "Id" uuid NOT NULL,
+    "Title" text NOT NULL,
+    "Description" text NULL,
+    CONSTRAINT "PK_Amenities" PRIMARY KEY ("Id")
+);
+2024-03-24 20:14:54.448 +05:00  INF  Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Location" (
+    "Id" uuid NOT NULL,
+    "Country" text NOT NULL,
+    "City" text NOT NULL,
+    "Street" text NOT NULL,
+    "HouseNumber" text NULL,
+    CONSTRAINT "PK_Location" PRIMARY KEY ("Id")
+);
+2024-03-24 20:14:54.460 +05:00  INF  Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "RoomsTypes" (
+    "Id" uuid NOT NULL,
+    "Title" text NOT NULL,
+    "Description" text NULL,
+    "ImagePath" text NULL,
+    "MaxCapacity" integer NOT NULL,
+    "NightlyRate" numeric NOT NULL,
+    CONSTRAINT "PK_RoomsTypes" PRIMARY KEY ("Id")
+);
+2024-03-24 20:14:54.473 +05:00  INF  Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "HotelBranches" (
+    "Id" uuid NOT NULL,
+    "Name" text NOT NULL,
+    "LocationId" uuid NOT NULL,
+    CONSTRAINT "PK_HotelBranches" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_HotelBranches_Location_LocationId" FOREIGN KEY ("LocationId") REFERENCES "Location" ("Id") ON DELETE CASCADE
+);
+2024-03-24 20:14:54.493 +05:00  INF  Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AmenityRoomType" (
+    "AmenitiesId" uuid NOT NULL,
+    "RoomTypesId" uuid NOT NULL,
+    CONSTRAINT "PK_AmenityRoomType" PRIMARY KEY ("AmenitiesId", "RoomTypesId"),
+    CONSTRAINT "FK_AmenityRoomType_Amenities_AmenitiesId" FOREIGN KEY ("AmenitiesId") REFERENCES "Amenities" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_AmenityRoomType_RoomsTypes_RoomTypesId" FOREIGN KEY ("RoomTypesId") REFERENCES "RoomsTypes" ("Id") ON DELETE CASCADE
+);
+2024-03-24 20:14:54.498 +05:00  INF  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Reservations" (
+    "Id" uuid NOT NULL,
+    "DateIn" timestamp with time zone NOT NULL,
+    "DateOut" timestamp with time zone NOT NULL,
+    "MadeBy" integer NOT NULL,
+    "Status" integer NOT NULL,
+    "HotelBranchId" uuid NOT NULL,
+    "ReservationCreatorId" uuid NOT NULL,
+    CONSTRAINT "PK_Reservations" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Reservations_HotelBranches_HotelBranchId" FOREIGN KEY ("HotelBranchId") REFERENCES "HotelBranches" ("Id") ON DELETE CASCADE
+);
+2024-03-24 20:14:54.512 +05:00  INF  Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Rooms" (
+    "Id" uuid NOT NULL,
+    "Number" text NOT NULL,
+    "TypeId" uuid NOT NULL,
+    "HotelBranchId" uuid NOT NULL,
+    CONSTRAINT "PK_Rooms" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_Rooms_HotelBranches_HotelBranchId" FOREIGN KEY ("HotelBranchId") REFERENCES "HotelBranches" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_Rooms_RoomsTypes_TypeId" FOREIGN KEY ("TypeId") REFERENCES "RoomsTypes" ("Id") ON DELETE CASCADE
+);
+2024-03-24 20:14:54.516 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "OccupiedRooms" (
+    "Id" uuid NOT NULL,
+    "CheckIn" timestamp with time zone NULL,
+    "CheckOut" timestamp with time zone NULL,
+    "Status" integer NOT NULL,
+    "RoomId" uuid NULL,
+    "ReservationId" uuid NOT NULL,
+    CONSTRAINT "PK_OccupiedRooms" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_OccupiedRooms_Reservations_ReservationId" FOREIGN KEY ("ReservationId") REFERENCES "Reservations" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_OccupiedRooms_Rooms_RoomId" FOREIGN KEY ("RoomId") REFERENCES "Rooms" ("Id")
+);
+2024-03-24 20:14:54.522 +05:00  INF  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AmenityRoomType_RoomTypesId" ON "AmenityRoomType" ("RoomTypesId");
+2024-03-24 20:14:54.528 +05:00  INF  Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_HotelBranches_LocationId" ON "HotelBranches" ("LocationId");
+2024-03-24 20:14:54.530 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_OccupiedRooms_ReservationId" ON "OccupiedRooms" ("ReservationId");
+2024-03-24 20:14:54.533 +05:00  INF  Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_OccupiedRooms_RoomId" ON "OccupiedRooms" ("RoomId");
+2024-03-24 20:14:54.540 +05:00  INF  Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Reservations_HotelBranchId" ON "Reservations" ("HotelBranchId");
+2024-03-24 20:14:54.545 +05:00  INF  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Rooms_HotelBranchId" ON "Rooms" ("HotelBranchId");
+2024-03-24 20:14:54.548 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Rooms_TypeId" ON "Rooms" ("TypeId");
+2024-03-24 20:14:56.178 +05:00  INF  Application started. Press Ctrl+C to shut down.
+2024-03-24 20:14:56.180 +05:00  INF  Hosting environment: Development
+2024-03-24 20:14:56.180 +05:00  INF  Content root path: C:\Users\Администратор\RiderProjects\Hotel\RoomService
+2024-03-24 20:14:56.310 +05:00  INF  Request starting HTTP/2 GET https://localhost:44318/swagger - -
+2024-03-24 20:14:56.536 +05:00  INF  Request finished HTTP/2 GET https://localhost:44318/swagger - - - 301 - - 232.8187ms
+2024-03-24 20:14:56.604 +05:00  INF  Request starting HTTP/2 GET https://localhost:44318/swagger/index.html - -
+2024-03-24 20:14:57.007 +05:00  INF  Request finished HTTP/2 GET https://localhost:44318/swagger/index.html - - - 200 - text/html;charset=utf-8 402.2217ms
+2024-03-24 20:14:57.091 +05:00  INF  Request starting HTTP/2 GET https://localhost:44318/swagger/swagger-ui.css - -
+2024-03-24 20:14:57.105 +05:00  INF  Request starting HTTP/2 GET https://localhost:44318/swagger/swagger-ui-bundle.js - -
+2024-03-24 20:14:57.108 +05:00  INF  Request starting HTTP/2 GET https://localhost:44318/swagger/swagger-ui-standalone-preset.js - -
+2024-03-24 20:14:57.125 +05:00  INF  Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2024-03-24 20:14:57.125 +05:00  INF  Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2024-03-24 20:14:57.130 +05:00  INF  Request finished HTTP/2 GET https://localhost:44318/swagger/swagger-ui.css - - - 200 143943 text/css 38.5539ms
+2024-03-24 20:14:57.132 +05:00  INF  Request finished HTTP/2 GET https://localhost:44318/swagger/swagger-ui-standalone-preset.js - - - 200 339486 text/javascript 23.7192ms
+2024-03-24 20:14:57.137 +05:00  INF  Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2024-03-24 20:14:57.160 +05:00  INF  Request finished HTTP/2 GET https://localhost:44318/swagger/swagger-ui-bundle.js - - - 200 1096145 text/javascript 54.8249ms
+2024-03-24 20:14:57.478 +05:00  INF  Request starting HTTP/2 GET https://localhost:44318/swagger/favicon-32x32.png - -
+2024-03-24 20:14:57.480 +05:00  INF  Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2024-03-24 20:14:57.483 +05:00  INF  Request finished HTTP/2 GET https://localhost:44318/swagger/favicon-32x32.png - - - 200 628 image/png 3.7628ms
+2024-03-24 20:14:57.542 +05:00  INF  Request starting HTTP/2 GET https://localhost:44318/swagger/v1/swagger.json - -
+2024-03-24 20:14:57.837 +05:00  INF  Request finished HTTP/2 GET https://localhost:44318/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 294.9493ms
+2024-03-24 20:17:31.674 +05:00  INF  Request starting HTTP/1.1 POST https://localhost:44318/ application/json 172
+2024-03-24 20:17:31.683 +05:00  INF  Request finished HTTP/1.1 POST https://localhost:44318/ application/json 172 - 404 - - 9.8541ms
+2024-03-24 20:17:57.549 +05:00  INF  Request starting HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 172
+2024-03-24 20:17:57.566 +05:00  INF  Executing endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:17:57.644 +05:00  INF  Route matched with {action = "Create", controller = "Amenity"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(RoomService.DTO.CreateAmenityDto, System.Threading.CancellationToken) on controller RoomService.Controllers.AmenityController (RoomService).
+2024-03-24 20:17:57.775 +05:00  INF  Executing action method RoomService.Controllers.AmenityController.Create (RoomService) - Validation state: "Valid"
+2024-03-24 20:17:58.313 +05:00  INF  Executed DbCommand (49ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p0, @p1, @p2);
+2024-03-24 20:17:58.347 +05:00  INF  Amenity created with Id: 2793b7ca-4de1-4334-8f13-bcb9f0e27651
+2024-03-24 20:17:58.370 +05:00  INF  Executed action method RoomService.Controllers.AmenityController.Create (RoomService), returned result Microsoft.AspNetCore.Mvc.OkResult in 583.1152ms.
+2024-03-24 20:17:58.402 +05:00  INF  Executing StatusCodeResult, setting HTTP status code 200
+2024-03-24 20:17:58.416 +05:00  INF  Executed action RoomService.Controllers.AmenityController.Create (RoomService) in 760.5319ms
+2024-03-24 20:17:58.418 +05:00  INF  Executed endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:17:58.437 +05:00  INF  Request finished HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 172 - 200 - - 888.0636ms
+2024-03-24 20:18:16.032 +05:00  INF  Request starting HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 194
+2024-03-24 20:18:16.035 +05:00  INF  Executing endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:16.036 +05:00  INF  Route matched with {action = "Create", controller = "Amenity"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(RoomService.DTO.CreateAmenityDto, System.Threading.CancellationToken) on controller RoomService.Controllers.AmenityController (RoomService).
+2024-03-24 20:18:16.039 +05:00  INF  Executing action method RoomService.Controllers.AmenityController.Create (RoomService) - Validation state: "Valid"
+2024-03-24 20:18:16.116 +05:00  INF  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p0, @p1, @p2);
+2024-03-24 20:18:16.116 +05:00  INF  Amenity created with Id: 6744f7bb-1e1f-443a-ad3a-5f0c747a1e26
+2024-03-24 20:18:16.116 +05:00  INF  Executed action method RoomService.Controllers.AmenityController.Create (RoomService), returned result Microsoft.AspNetCore.Mvc.OkResult in 76.8299ms.
+2024-03-24 20:18:16.117 +05:00  INF  Executing StatusCodeResult, setting HTTP status code 200
+2024-03-24 20:18:16.117 +05:00  INF  Executed action RoomService.Controllers.AmenityController.Create (RoomService) in 80.8679ms
+2024-03-24 20:18:16.117 +05:00  INF  Executed endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:16.118 +05:00  INF  Request finished HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 194 - 200 - - 85.6742ms
+2024-03-24 20:18:22.488 +05:00  INF  Request starting HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 177
+2024-03-24 20:18:22.488 +05:00  INF  Executing endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:22.488 +05:00  INF  Route matched with {action = "Create", controller = "Amenity"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(RoomService.DTO.CreateAmenityDto, System.Threading.CancellationToken) on controller RoomService.Controllers.AmenityController (RoomService).
+2024-03-24 20:18:22.491 +05:00  INF  Executing action method RoomService.Controllers.AmenityController.Create (RoomService) - Validation state: "Valid"
+2024-03-24 20:18:22.494 +05:00  INF  Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p0, @p1, @p2);
+2024-03-24 20:18:22.495 +05:00  INF  Amenity created with Id: ea3425e5-37c8-4090-8b19-d89671352301
+2024-03-24 20:18:22.495 +05:00  INF  Executed action method RoomService.Controllers.AmenityController.Create (RoomService), returned result Microsoft.AspNetCore.Mvc.OkResult in 3.7059ms.
+2024-03-24 20:18:22.495 +05:00  INF  Executing StatusCodeResult, setting HTTP status code 200
+2024-03-24 20:18:22.495 +05:00  INF  Executed action RoomService.Controllers.AmenityController.Create (RoomService) in 6.8525ms
+2024-03-24 20:18:22.495 +05:00  INF  Executed endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:22.495 +05:00  INF  Request finished HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 177 - 200 - - 7.5850ms
+2024-03-24 20:18:31.207 +05:00  INF  Request starting HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 216
+2024-03-24 20:18:31.208 +05:00  INF  Executing endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:31.208 +05:00  INF  Route matched with {action = "Create", controller = "Amenity"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(RoomService.DTO.CreateAmenityDto, System.Threading.CancellationToken) on controller RoomService.Controllers.AmenityController (RoomService).
+2024-03-24 20:18:31.209 +05:00  INF  Executing action method RoomService.Controllers.AmenityController.Create (RoomService) - Validation state: "Valid"
+2024-03-24 20:18:31.213 +05:00  INF  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p0, @p1, @p2);
+2024-03-24 20:18:31.214 +05:00  INF  Amenity created with Id: 40ec95a5-205e-4b20-8d38-26c3d79f1a03
+2024-03-24 20:18:31.214 +05:00  INF  Executed action method RoomService.Controllers.AmenityController.Create (RoomService), returned result Microsoft.AspNetCore.Mvc.OkResult in 4.7632ms.
+2024-03-24 20:18:31.214 +05:00  INF  Executing StatusCodeResult, setting HTTP status code 200
+2024-03-24 20:18:31.214 +05:00  INF  Executed action RoomService.Controllers.AmenityController.Create (RoomService) in 6.3954ms
+2024-03-24 20:18:31.215 +05:00  INF  Executed endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:31.215 +05:00  INF  Request finished HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 216 - 200 - - 7.7701ms
+2024-03-24 20:18:38.837 +05:00  INF  Request starting HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 194
+2024-03-24 20:18:38.837 +05:00  INF  Executing endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:38.837 +05:00  INF  Route matched with {action = "Create", controller = "Amenity"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(RoomService.DTO.CreateAmenityDto, System.Threading.CancellationToken) on controller RoomService.Controllers.AmenityController (RoomService).
+2024-03-24 20:18:38.838 +05:00  INF  Executing action method RoomService.Controllers.AmenityController.Create (RoomService) - Validation state: "Valid"
+2024-03-24 20:18:38.849 +05:00  INF  Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p0, @p1, @p2);
+2024-03-24 20:18:38.849 +05:00  INF  Amenity created with Id: 0b5c978c-4c5a-499c-be96-0b1320016562
+2024-03-24 20:18:38.850 +05:00  INF  Executed action method RoomService.Controllers.AmenityController.Create (RoomService), returned result Microsoft.AspNetCore.Mvc.OkResult in 11.3018ms.
+2024-03-24 20:18:38.850 +05:00  INF  Executing StatusCodeResult, setting HTTP status code 200
+2024-03-24 20:18:38.850 +05:00  INF  Executed action RoomService.Controllers.AmenityController.Create (RoomService) in 12.7765ms
+2024-03-24 20:18:38.850 +05:00  INF  Executed endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:38.850 +05:00  INF  Request finished HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 194 - 200 - - 13.8188ms
+2024-03-24 20:18:45.173 +05:00  INF  Request starting HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 224
+2024-03-24 20:18:45.174 +05:00  INF  Executing endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:45.174 +05:00  INF  Route matched with {action = "Create", controller = "Amenity"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(RoomService.DTO.CreateAmenityDto, System.Threading.CancellationToken) on controller RoomService.Controllers.AmenityController (RoomService).
+2024-03-24 20:18:45.176 +05:00  INF  Executing action method RoomService.Controllers.AmenityController.Create (RoomService) - Validation state: "Valid"
+2024-03-24 20:18:45.188 +05:00  INF  Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p0, @p1, @p2);
+2024-03-24 20:18:45.188 +05:00  INF  Amenity created with Id: 9ba701b0-4f0c-40e6-b6aa-bde190c95a82
+2024-03-24 20:18:45.188 +05:00  INF  Executed action method RoomService.Controllers.AmenityController.Create (RoomService), returned result Microsoft.AspNetCore.Mvc.OkResult in 12.1452ms.
+2024-03-24 20:18:45.189 +05:00  INF  Executing StatusCodeResult, setting HTTP status code 200
+2024-03-24 20:18:45.189 +05:00  INF  Executed action RoomService.Controllers.AmenityController.Create (RoomService) in 14.1423ms
+2024-03-24 20:18:45.189 +05:00  INF  Executed endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:45.189 +05:00  INF  Request finished HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 224 - 200 - - 16.1439ms
+2024-03-24 20:18:52.281 +05:00  INF  Request starting HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 190
+2024-03-24 20:18:52.281 +05:00  INF  Executing endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:52.282 +05:00  INF  Route matched with {action = "Create", controller = "Amenity"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(RoomService.DTO.CreateAmenityDto, System.Threading.CancellationToken) on controller RoomService.Controllers.AmenityController (RoomService).
+2024-03-24 20:18:52.283 +05:00  INF  Executing action method RoomService.Controllers.AmenityController.Create (RoomService) - Validation state: "Valid"
+2024-03-24 20:18:52.293 +05:00  INF  Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Amenities" ("Id", "Description", "Title")
+VALUES (@p0, @p1, @p2);
+2024-03-24 20:18:52.294 +05:00  INF  Amenity created with Id: 2ea4ecfc-d5de-497c-a155-5b0e7f2c79d3
+2024-03-24 20:18:52.294 +05:00  INF  Executed action method RoomService.Controllers.AmenityController.Create (RoomService), returned result Microsoft.AspNetCore.Mvc.OkResult in 11.0019ms.
+2024-03-24 20:18:52.294 +05:00  INF  Executing StatusCodeResult, setting HTTP status code 200
+2024-03-24 20:18:52.294 +05:00  INF  Executed action RoomService.Controllers.AmenityController.Create (RoomService) in 12.2946ms
+2024-03-24 20:18:52.294 +05:00  INF  Executed endpoint 'RoomService.Controllers.AmenityController.Create (RoomService)'
+2024-03-24 20:18:52.294 +05:00  INF  Request finished HTTP/1.1 POST https://localhost:44318/api/v1/amenities application/json 190 - 200 - - 13.1826ms
+2024-03-24 20:18:57.884 +05:00  INF  Request starting HTTP/1.1 GET https://localhost:44318/api/v1/amenities application/json 190
+2024-03-24 20:18:57.885 +05:00  INF  Executing endpoint 'RoomService.Controllers.AmenityController.GetAll (RoomService)'
+2024-03-24 20:18:57.894 +05:00  INF  Route matched with {action = "GetAll", controller = "Amenity"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[RoomService.DTO.ResponseAmenityDto]]] GetAll(System.Threading.CancellationToken) on controller RoomService.Controllers.AmenityController (RoomService).
+2024-03-24 20:18:57.895 +05:00  INF  Executing action method RoomService.Controllers.AmenityController.GetAll (RoomService) - Validation state: "Valid"
+2024-03-24 20:18:58.495 +05:00  INF  Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."Title" AS "Name", a."Description"
+FROM "Amenities" AS a
+2024-03-24 20:18:58.511 +05:00  INF  Retrieved 7 amenities
+2024-03-24 20:18:58.513 +05:00  INF  Executed action method RoomService.Controllers.AmenityController.GetAll (RoomService), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 618.3118ms.
+2024-03-24 20:18:58.518 +05:00  INF  Executing OkObjectResult, writing value of type 'FluentResults.Result`1[[System.Collections.Generic.IEnumerable`1[[RoomService.DTO.ResponseAmenityDto, RoomService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-03-24 20:18:58.555 +05:00  INF  Executed action RoomService.Controllers.AmenityController.GetAll (RoomService) in 660.9325ms
+2024-03-24 20:18:58.556 +05:00  INF  Executed endpoint 'RoomService.Controllers.AmenityController.GetAll (RoomService)'
+2024-03-24 20:18:58.556 +05:00  INF  Request finished HTTP/1.1 GET https://localhost:44318/api/v1/amenities application/json 190 - 200 - application/json;+charset=utf-8 671.4216ms
+2024-03-24 20:24:58.327 +05:00  INF  Request starting HTTP/1.1 POST https://localhost:44318/api/v1/room-types application/json 403
+2024-03-24 20:24:58.334 +05:00  INF  Executing endpoint 'RoomService.Controllers.RoomTypeController.Create (RoomService)'
+2024-03-24 20:24:58.361 +05:00  INF  Route matched with {action = "Create", controller = "RoomType"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(RoomService.DTO.CreateRoomTypeDto, System.Threading.CancellationToken) on controller RoomService.Controllers.RoomTypeController (RoomService).
+2024-03-24 20:24:58.466 +05:00  INF  Executing action method RoomService.Controllers.RoomTypeController.Create (RoomService) - Validation state: "Valid"
+2024-03-24 20:24:58.923 +05:00  INF  Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."Description", a."Title"
+FROM "Amenities" AS a
+WHERE a."Id" IN ('2793b7ca-4de1-4334-8f13-bcb9f0e27651', '6744f7bb-1e1f-443a-ad3a-5f0c747a1e26')
+2024-03-24 20:24:59.167 +05:00  INF  Executed DbCommand (30ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?' (DbType = Int32), @p4='?' (DbType = Decimal), @p5='?', @p6='?' (DbType = Guid), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RoomsTypes" ("Id", "Description", "ImagePath", "MaxCapacity", "NightlyRate", "Title")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+INSERT INTO "AmenityRoomType" ("AmenitiesId", "RoomTypesId")
+VALUES (@p6, @p7);
+INSERT INTO "AmenityRoomType" ("AmenitiesId", "RoomTypesId")
+VALUES (@p8, @p9);
+2024-03-24 20:24:59.178 +05:00  INF  RoomType created with Id: 70a91fb9-d472-4ebd-99fd-ecd2e897531e
+2024-03-24 20:24:59.178 +05:00  INF  Executed action method RoomService.Controllers.RoomTypeController.Create (RoomService), returned result Microsoft.AspNetCore.Mvc.OkResult in 712.1866ms.
+2024-03-24 20:24:59.178 +05:00  INF  Executing StatusCodeResult, setting HTTP status code 200
+2024-03-24 20:24:59.178 +05:00  INF  Executed action RoomService.Controllers.RoomTypeController.Create (RoomService) in 817.5411ms
+2024-03-24 20:24:59.179 +05:00  INF  Executed endpoint 'RoomService.Controllers.RoomTypeController.Create (RoomService)'
+2024-03-24 20:24:59.179 +05:00  INF  Request finished HTTP/1.1 POST https://localhost:44318/api/v1/room-types application/json 403 - 200 - - 856.8806ms
+2024-03-24 20:25:11.351 +05:00  INF  Request starting HTTP/2 GET https://localhost:44318/api/v1/room-types - -
+2024-03-24 20:25:11.351 +05:00  INF  Executing endpoint 'RoomService.Controllers.RoomTypeController.GetAll (RoomService)'
+2024-03-24 20:25:11.359 +05:00  INF  Route matched with {action = "GetAll", controller = "RoomType"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[RoomService.DTO.ResponseRoomTypeDto]]] GetAll(System.Threading.CancellationToken) on controller RoomService.Controllers.RoomTypeController (RoomService).
+2024-03-24 20:25:11.362 +05:00  INF  Executing action method RoomService.Controllers.RoomTypeController.GetAll (RoomService) - Validation state: "Valid"
+2024-03-24 20:25:11.569 +05:00  INF  Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT r."Id", r."Title", r."Description", r."MaxCapacity", r."NightlyRate", t."Id", t."Description", t."Title", t."AmenitiesId", t."RoomTypesId"
+FROM "RoomsTypes" AS r
+LEFT JOIN (
+    SELECT a0."Id", a0."Description", a0."Title", a."AmenitiesId", a."RoomTypesId"
+    FROM "AmenityRoomType" AS a
+    INNER JOIN "Amenities" AS a0 ON a."AmenitiesId" = a0."Id"
+) AS t ON r."Id" = t."RoomTypesId"
+ORDER BY r."Id", t."AmenitiesId", t."RoomTypesId"
+2024-03-24 20:25:11.593 +05:00  INF  Retrieved 1 RoomTypes
+2024-03-24 20:25:11.593 +05:00  INF  Executed action method RoomService.Controllers.RoomTypeController.GetAll (RoomService), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 230.9425ms.
+2024-03-24 20:25:11.598 +05:00  INF  Executing OkObjectResult, writing value of type 'FluentResults.Result`1[[System.Collections.Generic.IEnumerable`1[[RoomService.DTO.ResponseRoomTypeDto, RoomService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-03-24 20:25:11.618 +05:00  INF  Executed action RoomService.Controllers.RoomTypeController.GetAll (RoomService) in 258.4988ms
+2024-03-24 20:25:11.618 +05:00  INF  Executed endpoint 'RoomService.Controllers.RoomTypeController.GetAll (RoomService)'
+2024-03-24 20:25:11.618 +05:00  INF  Request finished HTTP/2 GET https://localhost:44318/api/v1/room-types - - - 200 - application/json;+charset=utf-8 267.6793ms
+2024-03-24 20:25:45.643 +05:00  INF  Request starting HTTP/1.1 POST https://localhost:44318/api/v1/room-types application/json 527
+2024-03-24 20:25:45.643 +05:00  INF  Executing endpoint 'RoomService.Controllers.RoomTypeController.Create (RoomService)'
+2024-03-24 20:25:45.644 +05:00  INF  Route matched with {action = "Create", controller = "RoomType"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(RoomService.DTO.CreateRoomTypeDto, System.Threading.CancellationToken) on controller RoomService.Controllers.RoomTypeController (RoomService).
+2024-03-24 20:25:45.649 +05:00  INF  Executing action method RoomService.Controllers.RoomTypeController.Create (RoomService) - Validation state: "Valid"
+2024-03-24 20:25:45.660 +05:00  INF  Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."Description", a."Title"
+FROM "Amenities" AS a
+WHERE a."Id" IN ('2793b7ca-4de1-4334-8f13-bcb9f0e27651', '6744f7bb-1e1f-443a-ad3a-5f0c747a1e26', 'ea3425e5-37c8-4090-8b19-d89671352301')
+2024-03-24 20:25:45.666 +05:00  INF  Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?' (DbType = Int32), @p4='?' (DbType = Decimal), @p5='?', @p6='?' (DbType = Guid), @p7='?' (DbType = Guid), @p8='?' (DbType = Guid), @p9='?' (DbType = Guid), @p10='?' (DbType = Guid), @p11='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "RoomsTypes" ("Id", "Description", "ImagePath", "MaxCapacity", "NightlyRate", "Title")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+INSERT INTO "AmenityRoomType" ("AmenitiesId", "RoomTypesId")
+VALUES (@p6, @p7);
+INSERT INTO "AmenityRoomType" ("AmenitiesId", "RoomTypesId")
+VALUES (@p8, @p9);
+INSERT INTO "AmenityRoomType" ("AmenitiesId", "RoomTypesId")
+VALUES (@p10, @p11);
+2024-03-24 20:25:45.668 +05:00  INF  RoomType created with Id: 5216f621-79bd-4f6d-935e-c9247586db7c
+2024-03-24 20:25:45.668 +05:00  INF  Executed action method RoomService.Controllers.RoomTypeController.Create (RoomService), returned result Microsoft.AspNetCore.Mvc.OkResult in 19.0396ms.
+2024-03-24 20:25:45.668 +05:00  INF  Executing StatusCodeResult, setting HTTP status code 200
+2024-03-24 20:25:45.668 +05:00  INF  Executed action RoomService.Controllers.RoomTypeController.Create (RoomService) in 24.4577ms
+2024-03-24 20:25:45.668 +05:00  INF  Executed endpoint 'RoomService.Controllers.RoomTypeController.Create (RoomService)'
+2024-03-24 20:25:45.669 +05:00  INF  Request finished HTTP/1.1 POST https://localhost:44318/api/v1/room-types application/json 527 - 200 - - 25.7429ms
+2024-03-24 20:25:53.032 +05:00  INF  Request starting HTTP/2 GET https://localhost:44318/api/v1/room-types - -
+2024-03-24 20:25:53.032 +05:00  INF  Executing endpoint 'RoomService.Controllers.RoomTypeController.GetAll (RoomService)'
+2024-03-24 20:25:53.032 +05:00  INF  Route matched with {action = "GetAll", controller = "RoomType"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[RoomService.DTO.ResponseRoomTypeDto]]] GetAll(System.Threading.CancellationToken) on controller RoomService.Controllers.RoomTypeController (RoomService).
+2024-03-24 20:25:53.034 +05:00  INF  Executing action method RoomService.Controllers.RoomTypeController.GetAll (RoomService) - Validation state: "Valid"
+2024-03-24 20:25:53.041 +05:00  INF  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT r."Id", r."Title", r."Description", r."MaxCapacity", r."NightlyRate", t."Id", t."Description", t."Title", t."AmenitiesId", t."RoomTypesId"
+FROM "RoomsTypes" AS r
+LEFT JOIN (
+    SELECT a0."Id", a0."Description", a0."Title", a."AmenitiesId", a."RoomTypesId"
+    FROM "AmenityRoomType" AS a
+    INNER JOIN "Amenities" AS a0 ON a."AmenitiesId" = a0."Id"
+) AS t ON r."Id" = t."RoomTypesId"
+ORDER BY r."Id", t."AmenitiesId", t."RoomTypesId"
+2024-03-24 20:25:53.042 +05:00  INF  Retrieved 2 RoomTypes
+2024-03-24 20:25:53.042 +05:00  INF  Executed action method RoomService.Controllers.RoomTypeController.GetAll (RoomService), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 8.385ms.
+2024-03-24 20:25:53.043 +05:00  INF  Executing OkObjectResult, writing value of type 'FluentResults.Result`1[[System.Collections.Generic.IEnumerable`1[[RoomService.DTO.ResponseRoomTypeDto, RoomService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-03-24 20:25:53.043 +05:00  INF  Executed action RoomService.Controllers.RoomTypeController.GetAll (RoomService) in 10.8977ms
+2024-03-24 20:25:53.044 +05:00  INF  Executed endpoint 'RoomService.Controllers.RoomTypeController.GetAll (RoomService)'
+2024-03-24 20:25:53.044 +05:00  INF  Request finished HTTP/2 GET https://localhost:44318/api/v1/room-types - - - 200 - application/json;+charset=utf-8 12.2625ms
+2024-03-24 20:26:34.573 +05:00  INF  Request starting HTTP/1.1 GET https://localhost:44318/api/v1/room-types application/json 527
+2024-03-24 20:26:34.573 +05:00  INF  Executing endpoint 'RoomService.Controllers.RoomTypeController.GetAll (RoomService)'
+2024-03-24 20:26:34.574 +05:00  INF  Route matched with {action = "GetAll", controller = "RoomType"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[RoomService.DTO.ResponseRoomTypeDto]]] GetAll(System.Threading.CancellationToken) on controller RoomService.Controllers.RoomTypeController (RoomService).
+2024-03-24 20:26:34.575 +05:00  INF  Executing action method RoomService.Controllers.RoomTypeController.GetAll (RoomService) - Validation state: "Valid"
+2024-03-24 20:26:34.577 +05:00  INF  Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT r."Id", r."Title", r."Description", r."MaxCapacity", r."NightlyRate", t."Id", t."Description", t."Title", t."AmenitiesId", t."RoomTypesId"
+FROM "RoomsTypes" AS r
+LEFT JOIN (
+    SELECT a0."Id", a0."Description", a0."Title", a."AmenitiesId", a."RoomTypesId"
+    FROM "AmenityRoomType" AS a
+    INNER JOIN "Amenities" AS a0 ON a."AmenitiesId" = a0."Id"
+) AS t ON r."Id" = t."RoomTypesId"
+ORDER BY r."Id", t."AmenitiesId", t."RoomTypesId"
+2024-03-24 20:26:34.578 +05:00  INF  Retrieved 2 RoomTypes
+2024-03-24 20:26:34.578 +05:00  INF  Executed action method RoomService.Controllers.RoomTypeController.GetAll (RoomService), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 2.9713ms.
+2024-03-24 20:26:34.578 +05:00  INF  Executing OkObjectResult, writing value of type 'FluentResults.Result`1[[System.Collections.Generic.IEnumerable`1[[RoomService.DTO.ResponseRoomTypeDto, RoomService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-03-24 20:26:34.579 +05:00  INF  Executed action RoomService.Controllers.RoomTypeController.GetAll (RoomService) in 5.1334ms
+2024-03-24 20:26:34.579 +05:00  INF  Executed endpoint 'RoomService.Controllers.RoomTypeController.GetAll (RoomService)'
+2024-03-24 20:26:34.580 +05:00  INF  Request finished HTTP/1.1 GET https://localhost:44318/api/v1/room-types application/json 527 - 200 - application/json;+charset=utf-8 6.9038ms
+2024-03-24 20:31:14.965 +05:00  INF  Application is shutting down...

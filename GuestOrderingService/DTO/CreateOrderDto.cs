@@ -6,5 +6,6 @@ namespace GuestOrderingService.DTO;
 public class CreateOrderDto
 {
     public Guid CustomerId { get; set; }
+    public Guid ServiceId { get; set; }
     public Guid RoomId { get; set; }
 }

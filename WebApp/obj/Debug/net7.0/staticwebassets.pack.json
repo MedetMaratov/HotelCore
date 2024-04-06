@@ -13,6 +13,66 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\10.jpg",
+      "PackagePath": "staticwebassets\\images\\10.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\11.jpg",
+      "PackagePath": "staticwebassets\\images\\11.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\1.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\1.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\10.1.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\10.1.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\10.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\10.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\11.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\11.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\12.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\12.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\2.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\2.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\3.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\3.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\4.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\4.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\5.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\5.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\6.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\6.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\7.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\7.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\8.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\8.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\9.png",
+      "PackagePath": "staticwebassets\\images\\roomType\\9.png"
+    },
+    {
       "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

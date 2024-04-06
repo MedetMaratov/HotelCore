@@ -14,10 +14,10 @@ public class AppDbContext: DbContext
     public DbSet<OccupiedRoom> OccupiedRooms { get; set; }
     public DbSet<Amenity> Amenities { get; set; }
     public DbSet<HotelBranch> HotelBranches { get; set; }
+    public DbSet<PhoneNumber> PhoneNumbers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
     }
 
 }

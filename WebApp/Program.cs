@@ -1,18 +1,23 @@
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddRazorPages();
-builder.Services.AddHttpClient("RoomApi", c =>
+builder.Services.AddCors(options =>
 {
-    var roomApiUrl = builder.Configuration.GetSection("AllowedOrigins")["RoomApi"];
-    if (!string.IsNullOrEmpty(roomApiUrl)) c.BaseAddress = new Uri(roomApiUrl);
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowAnyOrigin();
+    });
 });
+// Add services to the container.
+builder.Services.AddHttpClient();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -24,6 +29,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

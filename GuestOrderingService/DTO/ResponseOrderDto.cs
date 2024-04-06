@@ -1,5 +1,6 @@
 using GuestOrderingService.Enums;
 using GuestOrderingService.Models;
+using GuestOrderingService.Models.Service;
 
 namespace GuestOrderingService.DTO;
 

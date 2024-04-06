@@ -1,4 +1,5 @@
 using GuestOrderingService.Models;
+using GuestOrderingService.Models.Amenity;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GuestOrderingService.DataAccess.EntityConfigs;

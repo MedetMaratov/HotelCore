@@ -1,4 +1,5 @@
 using GuestOrderingService.Models;
+using GuestOrderingService.Models.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

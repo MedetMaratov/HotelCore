@@ -1,3 +1,5 @@
+using RoomService.Models;
+
 namespace RoomService.DTO;
 
 public class ResponseRoomTypeDto
@@ -7,5 +9,6 @@ public class ResponseRoomTypeDto
     public string? Description { get; set; }
     public int MaxCapacity { get; set; }
     public decimal NightlyRate { get; set; }
-    public ICollection<Models.Amenity> Amenities { get; set; } = new List<Models.Amenity>();
+    public List<string> ImagePathes { get; set; }
+    public ICollection<Amenity> Amenities { get; set; } = new List<Amenity>();
 }

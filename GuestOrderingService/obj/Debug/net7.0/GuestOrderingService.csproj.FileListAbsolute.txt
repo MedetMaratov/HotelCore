@@ -46,3 +46,4 @@ C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService\obj
 C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService\obj\Debug\net7.0\GuestOrderingService.pdb
 C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService\obj\Debug\net7.0\GuestOrderingService.genruntimeconfig.cache
 C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService\obj\Debug\net7.0\ref\GuestOrderingService.dll
+C:\Users\Администратор\RiderProjects\Hotel\GuestOrderingService\bin\Debug\net7.0\FluentResults.dll

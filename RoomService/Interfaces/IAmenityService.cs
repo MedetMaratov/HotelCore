@@ -9,4 +9,6 @@ public interface IAmenityService
     Task<Result<Guid>> UpdateAsync(UpdateAmenityDto updateAmenityDto, CancellationToken ct);
     Task<Result<Guid>> DeleteAsync(Guid id, CancellationToken ct);
     Task<Result<IEnumerable<ResponseAmenityDto>>> GetAllAsync(CancellationToken ct);
+    Task<Result<IEnumerable<ResponseAmenityDto>>> GetAllByTitleAsync(string title, CancellationToken ct);
+    Task<Result<ResponseAmenityDto>> GetByIdAsync(Guid id, CancellationToken ct);
 }

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "uqMIt76nNRSK2huq72LDjdgyq4SRnSKF2LFAykzKGcqKCtgmZsyre3oREhf+Bvk3wqz5iyxbasjaaO7J7WEqaA==",
+  "dgSpecHash": "VQ6arcruaXuPk9ZinfYZq3GXwgFaqbao+3X7BVodfS3th7SJSI3WU1WuBZpROPpqpMSCx9xIZ9j+XZXg7Epz5A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\GuestOrderingService\\GuestOrderingService.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Администратор\\.nuget\\packages\\fluentresults\\3.15.2\\fluentresults.3.15.2.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.16\\microsoft.aspnetcore.openapi.7.0.16.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.11\\microsoft.entityframeworkcore.7.0.11.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.11\\microsoft.entityframeworkcore.abstractions.7.0.11.nupkg.sha512",
@@ -40,7 +41,8 @@
     "C:\\Users\\Администратор\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
     "C:\\Users\\Администратор\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\Администратор\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512"
+    "C:\\Users\\Администратор\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
+    "C:\\Users\\Администратор\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
   "logs": []
 }

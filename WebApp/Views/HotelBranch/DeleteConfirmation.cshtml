@@ -1,0 +1,58 @@
+@model WebApp.Models.HotelBranch.DeleteHotelBranchViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Удаление филиалов</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h2>Удалить филиал</h2>
+    <form method="post" asp-action="Delete">
+        <input type="hidden" asp-for="Id"/>
+        <div class="form-group">
+                    <label for="Title">Название:</label>
+                    <input asp-for="Name" disabled class="form-control"/>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="County">Страна:</label>
+                    <input asp-for="Location.Country" disabled class="form-control"/>
+                    <span asp-validation-for="Location.Country" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="City">Город:</label>
+                    <input asp-for="Location.City" disabled class="form-control"/>
+                    <span asp-validation-for="Location.Street" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="Street">Улица:</label>
+                    <input asp-for="Location.Street" disabled class="form-control"/>
+                    <span asp-validation-for="Location.Street" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label for="House">Дом:</label>
+                    <input asp-for="Location.HouseNumber" disabled class="form-control"/>
+                    <span asp-validation-for="Location.HouseNumber" class="text-danger"></span>
+                </div>
+        <div class="col">
+            <button type="submit" class="btn btn-danger w-100">Удалить</button> |
+        </div>
+        <div class="col">
+            <a asp-action="Index" class="btn btn-primary w-100"><i class="fas fa-sign-out-alt"></i> Назад</a>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

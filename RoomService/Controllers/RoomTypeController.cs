@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RoomService.DTO;
 using RoomService.Interfaces;
@@ -16,38 +17,53 @@ public class RoomTypeController : ControllerBase
     }
 
     [HttpPost]
-    [Route("")]
     public async Task<IActionResult> Create(
         [FromBody] CreateRoomTypeDto roomTypeDto, 
         CancellationToken ct)
     {
-        var createRoomTypeId = await _roomTypeService.CreateAsync(roomTypeDto, ct);
-        return Ok();
+        var result = await _roomTypeService.CreateAsync(roomTypeDto, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 
     [HttpPut]
-    [Route("")]
     public async Task<IActionResult> Update(
         [FromBody] UpdateRoomTypeDto roomTypeDto, 
         CancellationToken ct)
     {
-        var updateRoomId = await _roomTypeService.UpdateAsync(roomTypeDto, ct);
-        return Ok();
+        var result = await _roomTypeService.UpdateAsync(roomTypeDto, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 
     [HttpDelete]
     [Route("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
-        await _roomTypeService.DeleteAsync(id, ct);
-        return NoContent();
+        var result = await _roomTypeService.DeleteAsync(id, ct);
+        if (result.IsSuccess)
+            return NoContent();
+        return BadRequest(result.Reasons);
     }
 
     [HttpGet]
-    [Route("")]
     public async Task<ActionResult<IEnumerable<ResponseRoomTypeDto>>> GetAll(CancellationToken ct)
     {
-        var roomTypes = await _roomTypeService.GetAllRoomTypesAsync(ct);
-        return Ok(roomTypes);
+        var result = await _roomTypeService.GetAllRoomTypesAsync(ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
+    }
+    
+    [HttpGet]
+    [Route("{id:guid}")]
+    public async Task<ActionResult<IEnumerable<ResponseRoomTypeDto>>> GetById(Guid id, CancellationToken ct)
+    {
+        var result = await _roomTypeService.GetRoomTypeByIdAsync(id, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 }

@@ -18,15 +18,19 @@ public class OccupiedRoomController : ControllerBase
     [Route("check-in/{roomId:guid}")]
     public async Task<IActionResult> SetCheckIn(Guid roomId, CancellationToken ct)
     {
-        var id = await _occupiedRoomService.SetCheckInAsync(roomId, ct);
-        return Ok();
+        var result = await _occupiedRoomService.SetCheckInAsync(roomId, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 
     [HttpPut]
     [Route("check-out/{roomId:guid}")]
     public async Task<IActionResult> SetCheckOut(Guid roomId, CancellationToken ct)
     {
-        var id = await _occupiedRoomService.SetCheckOutAsync(roomId, ct);
-        return Ok();
+        var result = await _occupiedRoomService.SetCheckOutAsync(roomId, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 }

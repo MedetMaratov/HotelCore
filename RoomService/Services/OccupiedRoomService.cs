@@ -1,9 +1,9 @@
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using RoomService.DataAccess;
 using RoomService.DTO;
 using RoomService.Enums;
-using RoomService.Exceptions;
 using RoomService.Interfaces;
 using RoomService.Models;
 
@@ -12,16 +12,17 @@ namespace RoomService.Services;
 public class OccupiedRoomService : IOccupiedRoomService
 {
     private readonly AppDbContext _dbContext;
+    private readonly IDistributedCache _distributedCache;
     private readonly ILogger<OccupiedRoomService> _logger;
-
-
-    public OccupiedRoomService(AppDbContext dbContext, ILogger<OccupiedRoomService> logger)
+    
+    public OccupiedRoomService(AppDbContext dbContext, IDistributedCache distributedCache, ILogger<OccupiedRoomService> logger)
     {
         _dbContext = dbContext;
+        _distributedCache = distributedCache;
         _logger = logger;
     }
 
-    public async Task<Result<OccupiedRoom>> CreateAsync(CreateOccupiedRoomDto occupiedRoomDto, CancellationToken ct)
+    public OccupiedRoom Create(CreateOccupiedRoomDto occupiedRoomDto, CancellationToken ct)
     {
         var occupiedRoom = new OccupiedRoom()
         {
@@ -32,13 +33,8 @@ public class OccupiedRoomService : IOccupiedRoomService
             CheckOut = null,
             Status = OccupiedRoomStatus.Expected,
         };
-
-        await _dbContext.OccupiedRooms.AddAsync(occupiedRoom, ct);
-        await _dbContext.SaveChangesAsync(ct);
-
-        _logger.LogInformation($"{nameof(OccupiedRoom)} created with Id: {occupiedRoom.Id}");
-
-        return Result.Ok(occupiedRoom);
+        
+        return occupiedRoom;
     }
 
     public async Task<Result<Guid>> SetCheckInAsync(Guid roomId, CancellationToken ct)

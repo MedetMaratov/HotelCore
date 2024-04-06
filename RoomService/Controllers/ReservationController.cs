@@ -1,10 +1,11 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RoomService.DTO;
 using RoomService.Interfaces;
 
 namespace RoomService.Controllers;
 
-[Route("api/v1")]
+[Route("api/v1/reservations")]
 [ApiController]
 public class ReservationController : ControllerBase
 {
@@ -16,12 +17,22 @@ public class ReservationController : ControllerBase
     }
 
     [HttpPost]
-    [Route("reservation")]
-    public async Task<IActionResult> Reserve(
+    public async Task<IActionResult> ReserveAsync(
         CreateReservationDto createReservationDto, 
         CancellationToken ct)
     {
-        var reservation = await _reservationService.ReserveAsync(createReservationDto, ct);
-        return Ok();
+        var result = await _reservationService.ReserveAsync(createReservationDto, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllAsync(CancellationToken ct)
+    {
+        var result = await _reservationService.GetAllAsync(ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 }

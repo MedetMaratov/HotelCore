@@ -18,42 +18,60 @@ public class HotelBranchController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateAsync([FromBody] CreateHotelBranchDto hotelBranchDto, CancellationToken ct)
     {
-        if (!ModelState.IsValid) return BadRequest();
-        await _hotelBranchService.CreateAsync(hotelBranchDto, ct);
-        return Ok();
-
+        var result = await _hotelBranchService.CreateAsync(hotelBranchDto, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 
     [HttpPut]
     public async Task<ActionResult> UpdateAsync([FromBody] UpdateHotelBranchDto hotelBranchDto, CancellationToken ct)
     {
-        if (!ModelState.IsValid) return BadRequest();
-        await _hotelBranchService.UpdateAsync(hotelBranchDto, ct);
-        return Ok();
+        var result = await _hotelBranchService.UpdateAsync(hotelBranchDto, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 
     [HttpDelete]
+    [Route("{hotelBranchId:guid}")]
     public async Task<ActionResult> DeleteAsync(Guid hotelBranchId, CancellationToken ct)
     {
-        await _hotelBranchService.DeleteAsync(hotelBranchId, ct);
-        return NoContent();
+        var result = await _hotelBranchService.DeleteAsync(hotelBranchId, ct);
+        if (result.IsSuccess)
+            return NoContent();
+        return BadRequest(result.Reasons);
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ResponseHotelBranchDto>>> GetAllAsync(CancellationToken ct)
     {
-        var hotelBranches = await _hotelBranchService.GetAllAsync(ct);
-        return Ok(hotelBranches);
+        var result = await _hotelBranchService.GetAllAsync(ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 
+    [HttpGet]
+    [Route("{id:guid}")]
+    public async Task<ActionResult<IEnumerable<ResponseHotelBranchDto>>> GetByIdAsync(Guid id, CancellationToken ct)
+    {
+        var result = await _hotelBranchService.GetByIdAsync(id, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
+    }
+    
     [HttpGet]
     [Route("{country}/{city}")]
     public async Task<ActionResult<IEnumerable<ResponseHotelBranchDto>>> GetAllByLocationAsync(
         string country,
-        string city, 
+        string city,
         CancellationToken ct)
     {
-        var hotelBranches = await _hotelBranchService.GetAllByLocationAsync(country, city, ct);
-        return Ok(hotelBranches);
+        var result = await _hotelBranchService.GetAllByLocationAsync(country, city, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
     }
 }

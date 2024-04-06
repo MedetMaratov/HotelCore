@@ -1,5 +1,8 @@
+using System.Linq.Expressions;
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
+using Newtonsoft.Json;
 using RoomService.DataAccess;
 using RoomService.DTO;
 using RoomService.Interfaces;
@@ -10,21 +13,23 @@ namespace RoomService.Services;
 public class RoomTypeService : IRoomTypeService
 {
     private readonly AppDbContext _dbContext;
+    private readonly IDistributedCache _distributedCache;
     private readonly ILogger<RoomTypeService> _logger;
 
-    public RoomTypeService(AppDbContext dbContext, ILogger<RoomTypeService> logger)
+    public RoomTypeService(AppDbContext dbContext, IDistributedCache distributedCache, ILogger<RoomTypeService> logger)
     {
         _dbContext = dbContext;
+        _distributedCache = distributedCache;
         _logger = logger;
     }
 
     public async Task<Result<Guid>> CreateAsync(CreateRoomTypeDto roomTypeDto, CancellationToken ct)
     {
-        var roomType = new RoomType()
+        var roomType = new RoomType
         {
             Id = Guid.NewGuid(),
             Title = roomTypeDto.Title,
-            ImagePath = roomTypeDto.ImagePath,
+            Images = roomTypeDto.Images,
             NightlyRate = roomTypeDto.NightlyRate,
             Description = roomTypeDto.Description,
             MaxCapacity = roomTypeDto.MaxCapacity,
@@ -53,12 +58,7 @@ public class RoomTypeService : IRoomTypeService
         if (roomTypeForUpdate == null)
             return Result.Fail("Room type not found");
 
-        roomTypeForUpdate.Title = updateDto.Title;
-        roomTypeForUpdate.Description = updateDto.Description;
-        roomTypeForUpdate.MaxCapacity = updateDto.MaxCapacity;
-        roomTypeForUpdate.Amenities = updateDto.Amenities;
-        roomTypeForUpdate.NightlyRate = updateDto.NightlyRate;
-        roomTypeForUpdate.ImagePath = updateDto.ImagePath;
+        UpdateRoomType(roomTypeForUpdate, updateDto);
 
         _dbContext.Update(roomTypeForUpdate);
         await _dbContext.SaveChangesAsync(ct);
@@ -87,20 +87,71 @@ public class RoomTypeService : IRoomTypeService
 
     public async Task<Result<IEnumerable<ResponseRoomTypeDto>>> GetAllRoomTypesAsync(CancellationToken ct)
     {
-        var roomTypes = await _dbContext
-            .RoomsTypes
-            .Select(rt => new ResponseRoomTypeDto()
+        const string keyForRedisCache = "room_types";
+        var cachedRoomTypes = await _distributedCache.GetStringAsync(keyForRedisCache, ct);
+        IEnumerable<ResponseRoomTypeDto> roomTypes;
+        if (string.IsNullOrEmpty(cachedRoomTypes))
+        {
+            roomTypes = await _dbContext
+                .RoomsTypes
+                .Select(MapToResponseRoomTypeDto)
+                .ToListAsync(ct);
+            if (roomTypes.Any())
             {
-                Id = rt.Id,
-                Title = rt.Title,
-                Description = rt.Description,
-                MaxCapacity = rt.MaxCapacity,
-                NightlyRate = rt.NightlyRate,
-                Amenities = rt.Amenities,
-            }).ToListAsync(ct);
+                await _distributedCache.SetStringAsync(keyForRedisCache, JsonConvert.SerializeObject(roomTypes), ct);
+                _logger.LogInformation($"Cached list of RoomTypes");
+            }
+            
+            return Result.Ok(roomTypes);
+        }
 
-        _logger.LogInformation($"Retrieved {roomTypes.Count} RoomTypes");
-
-        return Result.Ok<IEnumerable<ResponseRoomTypeDto>>(roomTypes);
+        roomTypes = JsonConvert.DeserializeObject<IEnumerable<ResponseRoomTypeDto>>(cachedRoomTypes);
+        return Result.Ok(roomTypes);
     }
+    
+    public async Task<Result<ResponseRoomTypeDto>> GetRoomTypeByIdAsync(Guid id, CancellationToken ct)
+    {
+        string keyForRedisCache = $"room_types-{id}";
+        var cachedRoomTypes = await _distributedCache.GetStringAsync(keyForRedisCache, ct);
+        ResponseRoomTypeDto? roomType;
+        if (string.IsNullOrEmpty(cachedRoomTypes))
+        {
+            roomType = await _dbContext
+                .RoomsTypes
+                .Select(MapToResponseRoomTypeDto)
+                .SingleOrDefaultAsync(rt => rt.Id == id, ct);
+            if (roomType is not null)
+            {
+                await _distributedCache.SetStringAsync(keyForRedisCache, JsonConvert.SerializeObject(roomType), ct);
+                _logger.LogInformation($"RoomTypes cached");
+            }
+            
+            return Result.Ok(roomType);
+        }
+
+        roomType = JsonConvert.DeserializeObject<ResponseRoomTypeDto>(cachedRoomTypes);
+        return Result.Ok(roomType);
+    }
+
+    private void UpdateRoomType(RoomType roomType, UpdateRoomTypeDto updateDto)
+    {
+        roomType.Title = updateDto.Title;
+        roomType.Description = updateDto.Description;
+        roomType.MaxCapacity = updateDto.MaxCapacity;
+        roomType.Amenities = updateDto.Amenities;
+        roomType.NightlyRate = updateDto.NightlyRate;
+        roomType.Images = updateDto.Images;
+    }
+
+    private static readonly Expression<Func<RoomType, ResponseRoomTypeDto>> MapToResponseRoomTypeDto = rt =>
+        new ResponseRoomTypeDto
+        {
+            Id = rt.Id,
+            Title = rt.Title,
+            Description = rt.Description,
+            MaxCapacity = rt.MaxCapacity,
+            NightlyRate = rt.NightlyRate,
+            ImagePathes = rt.Images.Select(i => i.Path).ToList(),
+            Amenities = rt.Amenities
+        };
 }
