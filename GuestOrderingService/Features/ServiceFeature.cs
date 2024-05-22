@@ -3,6 +3,7 @@ using FluentResults;
 using GuestOrderingService.DataAccess;
 using GuestOrderingService.DTO;
 using GuestOrderingService.Models.Service;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace GuestOrderingService.Features;
@@ -24,7 +25,8 @@ public class ServiceFeature
             Name = dto.Name,
             Description = dto.Description,
             Price = dto.Price,
-            WaitingTime = dto.WaitingTime
+            WaitingTime = dto.WaitingTime,
+            ImagePath = dto.ImagePath
         };
 
         await _dbContext.Services.AddAsync(service, ct);
@@ -45,6 +47,7 @@ public class ServiceFeature
         serviceToUpdate.Description = serviceDto.Description;
         serviceToUpdate.Price = serviceDto.Price;
         serviceToUpdate.WaitingTime = serviceDto.WaitingTime;
+        serviceToUpdate.ImagePath = serviceDto.ImagePath;
 
         _dbContext.Services.Update(serviceToUpdate);
         await _dbContext.SaveChangesAsync(ct);
@@ -76,6 +79,20 @@ public class ServiceFeature
         return Result.Ok<IEnumerable<ResponseServiceDto>>(services);
     }
     
+    public async Task<Result<ResponseServiceDto>> GetByIdAsync(Guid id, CancellationToken ct)
+    {
+        var service = await _dbContext.Services
+            .Select(MapToResponseServiceDto())
+            .SingleOrDefaultAsync(s => s.Id == id, ct);
+        
+        if (service is null)
+        {
+            return Result.Fail("Service not found");
+        }
+        
+        return Result.Ok(service);
+    }
+    
     private static Expression<Func<Service, ResponseServiceDto>> MapToResponseServiceDto()
     {
         return s => new ResponseServiceDto()
@@ -84,7 +101,8 @@ public class ServiceFeature
             Name = s.Name,
             Description = s.Description,
             Price = s.Price,
-            WaitingTime = s.WaitingTime
+            WaitingTime = s.WaitingTime,
+            ImagePath = s.ImagePath
         };
     }
 }

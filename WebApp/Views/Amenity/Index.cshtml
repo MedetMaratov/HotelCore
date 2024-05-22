@@ -2,27 +2,38 @@
 @model IEnumerable<WebApp.Models.Amenity.AmenityViewModel>
 
 @{
-    ViewData["Title"] = "Amenities";
+    ViewData["Title"] = "Удобства номеров";
     Layout = "_Layout";
 }
 
-<div class="container p-5">
-    <h2>Удобства</h2>
-    
-    <p>
-        <a asp-action="Create">Создать</a>
-    </p>
-    <form asp-action="Index" method="get">
-        <input type="text" name="searchString" placeholder="Search by Title"/>
-        <input type="submit" value="Search"/>
-    </form>
-
-    <table class="table">
+<section class="breadcrumb-area overlay-dark-2 bg-3" style="background-image: url('@Url.Content("~/images/bg/3.jpg")');">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-text text-center">
+                    <h2>@ViewBag.Title</h2>
+                    <p>Панель администрирования</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container pt-30 pb-30">
+    <div class="input-group mb-3">
+        <form asp-action="Index" method="get">
+            <input type="text" class="form-control" name="searchString" placeholder="Найти по названию">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-secondary">Найти</button>
+            </div>
+        </form>
+    </div>
+    <a href="@Url.Action("Create", "Amenity")" class="btn btn-primary">Создать</a>
+    <table class="table mt-4">
         <thead>
         <tr>
             <th>Название</th>
             <th>Описание</th>
-            <th></th>
+            <th>Операции</th>
         </tr>
         </thead>
         <tbody>
@@ -32,8 +43,8 @@
                 <td>@item.Title</td>
                 <td>@item.Description</td>
                 <td>
-                    <a href="@Url.Action("Edit", "Amenity", new { id = item.Id })">Редактировать</a> |
-                    <a href="@Url.Action("DeleteConfirmation", "Amenity", new { id = item.Id })">Удалить</a>
+                    <a href="@Url.Action("Edit", "Amenity", new { id = item.Id })" class="btn btn-primary">Редактировать</a>
+                    <a href="@Url.Action("DeleteConfirmation", "Amenity", new { id = item.Id })" class="btn btn-danger">Удалить</a>
                 </td>
             </tr>
         }

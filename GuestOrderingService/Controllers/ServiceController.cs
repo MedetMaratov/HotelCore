@@ -16,7 +16,7 @@ public class ServiceController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateServiceDto dto, CancellationToken ct)
+    public async Task<IActionResult> CreateAsync([FromBody] CreateServiceDto dto, CancellationToken ct)
     {
         var result = await _serviceFeature.CreateAsync(dto, ct);
         if (result.IsFailed)
@@ -47,6 +47,16 @@ public class ServiceController : ControllerBase
     public async Task<IActionResult> GetAllAsync(CancellationToken ct)
     {
         var result = await _serviceFeature.GetAllAsync(ct);
+        if (result.IsFailed)
+            return BadRequest(result.Reasons);
+        return Ok(result.Value);
+    }
+    
+    [HttpGet]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> GetByIdAsync(Guid id, CancellationToken ct)
+    {
+        var result = await _serviceFeature.GetByIdAsync(id, ct);
         if (result.IsFailed)
             return BadRequest(result.Reasons);
         return Ok(result.Value);

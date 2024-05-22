@@ -12,4 +12,6 @@ public class OccupiedRoom
     public Room? Room { get; set; }
     public Guid ReservationId { get; set; }
     public Reservation? Reservation { get; set; }
+    public Guid GuestId { get; set; }
+    public Guest Guest { get; set; }
 }

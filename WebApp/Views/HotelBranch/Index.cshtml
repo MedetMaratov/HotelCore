@@ -5,33 +5,42 @@
     Layout = "_Layout";
 }
 
-<div class="container p-5">
-    <h2>Филиалы отеля</h2>
-    
-    <p>
-        <a asp-action="Create">Создать</a>
-    </p>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Название</th>
-            <th>Локация</th>
-            <th>Действия</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model)
-        {
+<section class="breadcrumb-area overlay-dark-2 bg-3" style="background-image: url('@Url.Content("~/images/bg/3.jpg")');">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-text text-center">
+                    <h2>@ViewBag.Title</h2>
+                    <p>Панель администрирования</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="room-area pt-30 pb-30">
+    <div class="container">
+        <a href="@Url.Action("Create", "HotelBranch")" class="btn btn-primary">Создать</a>
+        <table class="table">
+            <thead>
             <tr>
-                <td>@item.Name</td>
-                <td>@item.Location.Country, @item.Location.City, улица @item.Location.Street, дом @item.Location.HouseNumber</td>
-                <td>
-                    <a href="@Url.Action("Edit", "HotelBranch", new { id = item.Id })">Редактировать</a> |
-                    <a href="@Url.Action("Details", "HotelBranch", new { id = item.Id })">Детали</a> |
-                    <a href="@Url.Action("DeleteConfirmation", "HotelBranch", new { id = item.Id })">Удалить |</a>
-                </td>
+                <th scope="col">Название</th>
+                <th scope="col">Местоположение</th>
+                <th scope="col">Операции</th>
             </tr>
-        }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Location.Country, @item.Location.City, улица @item.Location.Street, дом @item.Location.HouseNumber</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "HotelBranch", new { id = item.Id })" class="btn btn-primary">Редактировать</a>
+                        <a href="@Url.Action("DeleteConfirmation", "HotelBranch", new { id = item.Id })" class="btn btn-danger">Удалить</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</section>

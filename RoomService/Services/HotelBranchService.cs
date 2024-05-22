@@ -14,6 +14,7 @@ public class HotelBranchService : IHotelBranchService
     private readonly AppDbContext _dbContext;
     private readonly IDistributedCache _distributedCache;
     private readonly ILogger<HotelBranchService> _logger;
+    private const string KeyForRedisCache = "hotelBranches";
 
     public HotelBranchService(AppDbContext dbContext, IDistributedCache distributedCache,
         ILogger<HotelBranchService> logger)
@@ -34,14 +35,16 @@ public class HotelBranchService : IHotelBranchService
                 Country = hotelBranchDto.Country,
                 City = hotelBranchDto.City,
                 Street = hotelBranchDto.Street,
-                HouseNumber = hotelBranchDto.HouseNumber
+                HouseNumber = hotelBranchDto.HouseNumber,
             },
-            Name = hotelBranchDto.Name
+            Name = hotelBranchDto.Name,
+            Contacts = hotelBranchDto.Contacts
         };
 
         await _dbContext.HotelBranches.AddAsync(hotelBranch, ct);
         await _dbContext.SaveChangesAsync(ct);
 
+        await _distributedCache.RemoveAsync(KeyForRedisCache, ct);
         _logger.LogInformation($"{nameof(HotelBranch)} created with Id: {hotelBranch.Id}");
 
         return Result.Ok(hotelBranch.Id);
@@ -59,16 +62,19 @@ public class HotelBranchService : IHotelBranchService
 
         if (hotelBranchForUpdate.Location != null)
         {
+            hotelBranchForUpdate.Name = hotelBranchDto.Name;
             hotelBranchForUpdate.Location.Country = hotelBranchDto.Country;
             hotelBranchForUpdate.Location.City = hotelBranchDto.City;
             hotelBranchForUpdate.Location.Street = hotelBranchDto.Street;
             hotelBranchForUpdate.Location.HouseNumber = hotelBranchDto.HouseNumber;
+            hotelBranchDto.Contacts = hotelBranchDto.Contacts;
         }
 
         hotelBranchForUpdate.Name = hotelBranchForUpdate.Name;
 
         _dbContext.Update(hotelBranchForUpdate);
         await _dbContext.SaveChangesAsync(ct);
+        await _distributedCache.RemoveAsync(KeyForRedisCache, ct);
 
         _logger.LogInformation($"{nameof(HotelBranch)} updated with Id: {hotelBranchForUpdate.Id}");
 
@@ -85,6 +91,7 @@ public class HotelBranchService : IHotelBranchService
 
         _dbContext.HotelBranches.Remove(hotelBranchForDelete);
         await _dbContext.SaveChangesAsync(ct);
+        await _distributedCache.RemoveAsync(KeyForRedisCache, ct);
 
         _logger.LogInformation($"{nameof(HotelBranch)} deleted with Id: {hotelBranchId}");
 
@@ -93,9 +100,8 @@ public class HotelBranchService : IHotelBranchService
 
     public async Task<Result<IEnumerable<ResponseHotelBranchDto>>> GetAllAsync(CancellationToken ct)
     {
-        const string keyForRedisCache = "hotelBranches";
         IEnumerable<ResponseHotelBranchDto>? hotelBranches;
-        var cashedHotelBranches = await _distributedCache.GetStringAsync(keyForRedisCache, ct);
+        var cashedHotelBranches = await _distributedCache.GetStringAsync(KeyForRedisCache, ct);
 
         if (string.IsNullOrEmpty(cashedHotelBranches))
         {
@@ -105,14 +111,15 @@ public class HotelBranchService : IHotelBranchService
                 {
                     Id = hb.Id,
                     Location = hb.Location,
-                    Name = hb.Name
+                    Name = hb.Name,
+                    Contacts = hb.Contacts
                 })
                 .ToListAsync(ct);
             _logger.LogInformation($"Retrieved {hotelBranches.Count()} HotelBranches");
 
             if (hotelBranches.Any())
             {
-                await _distributedCache.SetStringAsync(keyForRedisCache, JsonConvert.SerializeObject(hotelBranches),
+                await _distributedCache.SetStringAsync(KeyForRedisCache, JsonConvert.SerializeObject(hotelBranches),
                     ct);
                 _logger.LogInformation($"Cashed list of hotel branches");
             }
@@ -126,35 +133,24 @@ public class HotelBranchService : IHotelBranchService
 
     public async Task<Result<ResponseHotelBranchDto>> GetByIdAsync(Guid id, CancellationToken ct)
     {
-        var keyForRedisCache = $"hotelBranches-{id}";
-        ResponseHotelBranchDto? hotelBranch;
-        var cashedHotelBranches = await _distributedCache.GetStringAsync(keyForRedisCache, ct);
-
-        if (string.IsNullOrEmpty(cashedHotelBranches))
-        {
-            hotelBranch = await _dbContext
-                .HotelBranches
-                .Select(hb => new ResponseHotelBranchDto()
-                {
-                    Id = hb.Id,
-                    Location = hb.Location,
-                    Name = hb.Name
-                })
-                .SingleOrDefaultAsync(hb => hb.Id == id, ct);
-            _logger.LogInformation($"HotelBranch retrieved");
-
-            if (hotelBranch is not null)
+        var hotelBranch = await _dbContext
+            .HotelBranches
+            .Select(hb => new ResponseHotelBranchDto()
             {
-                await _distributedCache.SetStringAsync(keyForRedisCache, JsonConvert.SerializeObject(hotelBranch),
-                    ct);
-                _logger.LogInformation($"Hotel branches cached");
-            }
+                Id = hb.Id,
+                Location = hb.Location,
+                Name = hb.Name,
+                Contacts = hb.Contacts
+            })
+            .SingleOrDefaultAsync(hb => hb.Id == id, ct);
+        _logger.LogInformation($"HotelBranch retrieved");
 
-            return Result.Ok<ResponseHotelBranchDto>(hotelBranch);
+        if (hotelBranch is null)
+        {
+            return Result.Fail("Hotel branch not found");
         }
 
-        hotelBranch = JsonConvert.DeserializeObject<ResponseHotelBranchDto>(cashedHotelBranches);
-        return Result.Ok(hotelBranch);
+        return Result.Ok<ResponseHotelBranchDto>(hotelBranch);
     }
 
     public async Task<Result<IEnumerable<ResponseHotelBranchDto>>> GetAllByLocationAsync(
@@ -162,37 +158,21 @@ public class HotelBranchService : IHotelBranchService
         string city,
         CancellationToken ct)
     {
-        var keyForRedisCache = $"hotelBranches-{country}-{city}";
-        IEnumerable<ResponseHotelBranchDto>? hotelBranches;
-        var cashedHotelBranches = await _distributedCache.GetStringAsync(keyForRedisCache, ct);
-
-        if (string.IsNullOrEmpty(cashedHotelBranches))
-        {
-            hotelBranches = await _dbContext
-                .HotelBranches
-                .Include(hb => hb.Location)
-                .Where(hb => hb.Location.Country == country && hb.Location.City == city)
-                .Select(hb => new ResponseHotelBranchDto()
-                {
-                    Id = hb.Id,
-                    Location = hb.Location,
-                    Name = hb.Name
-                })
-                .ToListAsync(ct);
-
-            _logger.LogInformation($"Retrieved {hotelBranches.Count()} HotelBranches by Location");
-
-            if (hotelBranches.Any())
+        var hotelBranches = await _dbContext
+            .HotelBranches
+            .Include(hb => hb.Location)
+            .Where(hb => hb.Location.Country == country && hb.Location.City == city)
+            .Select(hb => new ResponseHotelBranchDto()
             {
-                await _distributedCache.SetStringAsync(keyForRedisCache, JsonConvert.SerializeObject(hotelBranches),
-                    ct);
-                _logger.LogInformation($"Cashed list of hotel branches");
-            }
+                Id = hb.Id,
+                Location = hb.Location,
+                Name = hb.Name,
+                Contacts = hb.Contacts
+            })
+            .ToListAsync(ct);
 
-            return Result.Ok<IEnumerable<ResponseHotelBranchDto>>(hotelBranches);
-        }
+        _logger.LogInformation($"Retrieved {hotelBranches.Count()} HotelBranches by Location");
 
-        hotelBranches = JsonConvert.DeserializeObject<IEnumerable<ResponseHotelBranchDto>>(cashedHotelBranches);
         return Result.Ok<IEnumerable<ResponseHotelBranchDto>>(hotelBranches);
     }
 }

@@ -33,7 +33,8 @@ public class AmenityService : IAmenityService
 
         await _dbContext.Amenities.AddAsync(amenity, ct);
         await _dbContext.SaveChangesAsync(ct);
-
+        const string keyForRedisCache = "amenities";
+        await _distributedCache.RemoveAsync(keyForRedisCache, ct);
         _logger.LogInformation($"{nameof(Amenity)} created with Id: {amenity.Id}");
 
         return Result.Ok(amenity.Id);
@@ -54,6 +55,8 @@ public class AmenityService : IAmenityService
         _dbContext.Update(amenityForUpdate);
         await _dbContext.SaveChangesAsync(ct);
 
+        const string keyForRedisCache = "amenities";
+        await _distributedCache.RemoveAsync(keyForRedisCache, ct);
         _logger.LogInformation($"{nameof(Amenity)} updated with Id: {amenityForUpdate.Id}");
 
         return Result.Ok(amenityForUpdate.Id);
@@ -72,6 +75,9 @@ public class AmenityService : IAmenityService
 
         _dbContext.Amenities.Remove(amenityForDelete);
         await _dbContext.SaveChangesAsync(ct);
+
+        const string keyForRedisCache = "amenities";
+        await _distributedCache.RemoveAsync(keyForRedisCache, ct);
 
         _logger.LogInformation($"{nameof(Amenity)} deleted with Id: {amenityForDelete.Id}");
         return Result.Ok(amenityForDelete.Id);
@@ -111,10 +117,10 @@ public class AmenityService : IAmenityService
             {
                 ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
             });
-        
+
         return Result.Ok(amenities);
     }
-    
+
     public async Task<Result<IEnumerable<ResponseAmenityDto>>> GetAllByTitleAsync(string title, CancellationToken ct)
     {
         IEnumerable<ResponseAmenityDto>? amenities;
@@ -150,45 +156,29 @@ public class AmenityService : IAmenityService
             {
                 ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
             });
-        
+
         return Result.Ok(amenities);
     }
-    
+
     public async Task<Result<ResponseAmenityDto>> GetByIdAsync(Guid id, CancellationToken ct)
     {
-        ResponseAmenityDto? amenity;
-        var keyForRedisCache = $"amenity-{id}";
-        var cashedAmenities = await _distributedCache.GetStringAsync(keyForRedisCache, ct);
-
-        if (string.IsNullOrEmpty(cashedAmenities))
-        {
-            amenity = await _dbContext
-                .Amenities
-                .Select(a => new ResponseAmenityDto
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    Description = a.Description
-                })
-                .SingleOrDefaultAsync(a => a.Id == id, ct);
-
-            if (amenity != null)
+        var amenity = await _dbContext
+            .Amenities
+            .Select(a => new ResponseAmenityDto
             {
-                await _distributedCache.SetStringAsync(keyForRedisCache, JsonConvert.SerializeObject(amenity), ct);
-                _logger.LogInformation($"Amenity cached");
-            }
+                Id = a.Id,
+                Title = a.Title,
+                Description = a.Description
+            })
+            .SingleOrDefaultAsync(a => a.Id == id, ct);
 
-            _logger.LogInformation($"Retrieved amenity");
-
-            return Result.Ok(amenity);
+        if (amenity == null)
+        {
+            return Result.Fail("Amenity not found");
         }
 
-        amenity = JsonConvert.DeserializeObject<ResponseAmenityDto>(cashedAmenities,
-            new JsonSerializerSettings
-            {
-                ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
-            });
-        
+        _logger.LogInformation($"Retrieved amenity");
+
         return Result.Ok(amenity);
     }
 }

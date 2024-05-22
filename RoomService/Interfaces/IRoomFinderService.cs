@@ -7,5 +7,5 @@ namespace RoomService.Interfaces;
 
 public interface IRoomFinderService
 {
-    Task<Result<IEnumerable<Guid>>> GetRoomIdsForReservationAsync(RoomsForReserveDto roomsForReserveDto, CancellationToken ct);
+    Guid GetRoomIdsForReservationAsync(RoomForReserveDto roomForReserveDto);
 }

@@ -15,27 +15,15 @@ public class RoomFinderService : IRoomFinderService
         _dbContext = dbContext;
     }
 
-    public async Task<Result<IEnumerable<Guid>>> GetRoomIdsForReservationAsync(RoomsForReserveDto roomsForReserveDto,
-        CancellationToken ct)
+    public Guid GetRoomIdsForReservationAsync(RoomForReserveDto roomForReserveDto)
     {
-        var roomIds = await _dbContext
+        var room = _dbContext
             .Rooms
-            .Where(r => r.Type.Id == roomsForReserveDto.RoomTypeId &&
-                        !_dbContext.OccupiedRooms
-                            .Where(or =>
-                                or.Reservation.DateIn.CompareTo(roomsForReserveDto.ReservationStart) >= 0 &&
-                                or.Reservation.DateOut.CompareTo(roomsForReserveDto.ReservationEnd) <= 0)
-                            .Select(or => or.RoomId)
-                            .Contains(r.Id))
-            .Take(roomsForReserveDto.Quantity)
-            .Select(r => r.Id)
-            .ToListAsync(ct);
+            .Where(r => r.Type.Id == roomForReserveDto.RoomTypeId)
+            .FirstOrDefaultAsync(r => !_dbContext.OccupiedRooms
+                .Any(or => or.Reservation.DateIn.CompareTo(roomForReserveDto.ReservationStart) >= 0 &&
+                           or.Reservation.DateOut.CompareTo(roomForReserveDto.ReservationEnd) <= 0));
 
-        if (roomIds.Count < roomsForReserveDto.Quantity)
-        {
-            return Result.Fail<IEnumerable<Guid>>("Not enough available rooms");
-        }
-
-        return Result.Ok<IEnumerable<Guid>>(roomIds);
+        return room.Result.Id;
     }
 }

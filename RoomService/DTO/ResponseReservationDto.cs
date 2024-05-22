@@ -9,7 +9,7 @@ public class ResponseReservationDto
     public DateTime DateIn { get; set; }
     public DateTime DateOut { get; set; }
     public ReservationMethod MadeBy { get; set; }
-    public ReservationStatus Status { get; set; }
+    public string Status { get; set; }
     public Guid HotelBranchId { get; set; }
     public HotelBranch HotelBranch { get; set; }
     public Guid ReservationCreatorId { get; set; }

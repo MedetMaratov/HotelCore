@@ -18,7 +18,7 @@ public class RoomTypeController : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> Create(
-        [FromBody] CreateRoomTypeDto roomTypeDto, 
+        [FromBody] CreateRoomTypeDto roomTypeDto,
         CancellationToken ct)
     {
         var result = await _roomTypeService.CreateAsync(roomTypeDto, ct);
@@ -29,7 +29,7 @@ public class RoomTypeController : ControllerBase
 
     [HttpPut]
     public async Task<IActionResult> Update(
-        [FromBody] UpdateRoomTypeDto roomTypeDto, 
+        [FromBody] UpdateRoomTypeDto roomTypeDto,
         CancellationToken ct)
     {
         var result = await _roomTypeService.UpdateAsync(roomTypeDto, ct);
@@ -56,12 +56,28 @@ public class RoomTypeController : ControllerBase
             return Ok(result.Value);
         return BadRequest(result.Reasons);
     }
-    
+
     [HttpGet]
     [Route("{id:guid}")]
-    public async Task<ActionResult<IEnumerable<ResponseRoomTypeDto>>> GetById(Guid id, CancellationToken ct)
+    public async Task<ActionResult<ResponseRoomTypeDto>> GetById(Guid id, CancellationToken ct)
     {
         var result = await _roomTypeService.GetRoomTypeByIdAsync(id, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
+    }
+
+    [HttpGet]
+    [Route("available/{hotelBranchId:guid}/{reservationStart}/{reservationEnd}/{numberOfGuests:int}")]
+    public async Task<ActionResult<IEnumerable<ResponseRoomTypeDto>>> GetAvailableTypesForReservation(
+        Guid hotelBranchId,
+        DateTime reservationStart,
+        DateTime reservationEnd,
+        int numberOfGuests,
+        CancellationToken ct = default)
+    {
+        var result = await _roomTypeService.GetAvailableRoomTypesAsync(hotelBranchId, reservationStart, reservationEnd,
+            numberOfGuests, ct);
         if (result.IsSuccess)
             return Ok(result.Value);
         return BadRequest(result.Reasons);

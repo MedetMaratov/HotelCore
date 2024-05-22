@@ -16,7 +16,7 @@ public class OrderFeature
     {
         _dbContext = dbContext;
     }
-    
+
     public async Task<Result<Guid>> CreateAsync(CreateOrderDto createServiceDto, CancellationToken ct)
     {
         var order = new Order
@@ -32,7 +32,7 @@ public class OrderFeature
 
         return Result.Ok(order.Id);
     }
-    
+
     public async Task<Result> CancelAsync(Guid orderIdToCancel, CancellationToken ct)
     {
         var orderToCancel = await _dbContext.Orders.SingleOrDefaultAsync(o => o.Id == orderIdToCancel, ct);
@@ -54,7 +54,7 @@ public class OrderFeature
 
         return Result.Ok();
     }
-    
+
     public async Task<Result> CompleteAsync(Guid orderIdToComplete, CancellationToken ct)
     {
         var orderToComplete = await _dbContext.Orders.SingleOrDefaultAsync(o => o.Id == orderIdToComplete, ct);
@@ -76,12 +76,13 @@ public class OrderFeature
 
         return Result.Ok();
     }
-    
+
     public async Task<Result<IEnumerable<ResponseOrderDto>>> GetAllAsync(CancellationToken ct)
     {
         var orders = await _dbContext
             .Orders
-            .Select(MapToResponseOrderDto())
+            .OrderBy(o => o.Status)
+            .Select(MapToResponseOrderDto)
             .ToListAsync(ct);
 
         return Result.Ok<IEnumerable<ResponseOrderDto>>(orders);
@@ -92,15 +93,15 @@ public class OrderFeature
         var orders = await _dbContext
             .Orders
             .Where(o => o.CustomerId == customerId)
-            .Select(MapToResponseOrderDto())
+            .OrderBy(o => o.Status)
+            .Select(MapToResponseOrderDto)
             .ToListAsync(ct);
 
         return Result.Ok<IEnumerable<ResponseOrderDto>>(orders);
     }
-    
-    private static Expression<Func<Order, ResponseOrderDto>> MapToResponseOrderDto()
-    {
-        return o => new ResponseOrderDto()
+
+    private static readonly Expression<Func<Order, ResponseOrderDto>> MapToResponseOrderDto = o =>
+        new ResponseOrderDto
         {
             Id = o.Id,
             CompleteTime = o.CompleteTime,
@@ -108,7 +109,7 @@ public class OrderFeature
             RequestTime = o.RequestTime,
             RoomId = o.RoomId,
             ServiceId = o.ServiceId,
-            Status = OrderStatus.InProgress
+            ServiceName = o.Service.Name,
+            Status = o.Status.ToString()
         };
-    }
 }

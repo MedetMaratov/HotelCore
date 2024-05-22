@@ -10,5 +10,5 @@ public class RoomTypeDetailsViewModel
     public int MaxCapacity { get; set; }
     public decimal NightlyRate { get; set; }
     public List<string> ImagePathes { get; set; }
-    public ICollection<AmenityViewModel> Amenities { get; set; } = new List<AmenityViewModel>();
+    public ICollection<string> Amenities { get; set; } = new List<string>();
 }

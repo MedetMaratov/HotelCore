@@ -23,7 +23,9 @@ public class AmenityFeature
         {
             Id = Guid.NewGuid(),
             Name = amenityDto.Name,
-            Description = amenityDto.Description
+            Description = amenityDto.Description,
+            CategoryId = amenityDto.CateroryId,
+            ImagePath = amenityDto.ImagePath
         };
 
         await _dbContext.Amenities.AddAsync(amenity, ct);
@@ -45,6 +47,7 @@ public class AmenityFeature
 
         amenityForUpdate.Name = amenityDto.Name;
         amenityForUpdate.Description = amenityDto.Description;
+        amenityForUpdate.ImagePath = amenityDto.ImagePath;
 
         _dbContext.Amenities.Update(amenityForUpdate);
         await _dbContext.SaveChangesAsync(ct);
@@ -88,11 +91,14 @@ public class AmenityFeature
     
     private static Expression<Func<Amenity, ResponseAmenityDto>> MapToResponseAmenityDto()
     {
-        return a => new ResponseAmenityDto()
+        return a => new ResponseAmenityDto
         {
             Id = a.Id,
             Name = a.Name,
-            Description = a.Description
+            Description = a.Description,
+            CateroryId = a.CategoryId,
+            CategoryName = a.Category.Name,
+            ImagePath = a.ImagePath
         };
     }
 

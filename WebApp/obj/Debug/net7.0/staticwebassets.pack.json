@@ -5,12 +5,140 @@
       "PackagePath": "staticwebassets\\WebApp.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\animate.css",
+      "PackagePath": "staticwebassets\\css\\animate.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\magnific-popup.css",
+      "PackagePath": "staticwebassets\\css\\magnific-popup.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\material-design-iconic-font.css",
+      "PackagePath": "staticwebassets\\css\\material-design-iconic-font.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\material-design-iconic-font.min.css",
+      "PackagePath": "staticwebassets\\css\\material-design-iconic-font.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\meanmenu.min.css",
+      "PackagePath": "staticwebassets\\css\\meanmenu.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\owl.carousel.css",
+      "PackagePath": "staticwebassets\\css\\owl.carousel.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\owl.video.play.png",
+      "PackagePath": "staticwebassets\\css\\owl.video.play.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\responsive.css",
+      "PackagePath": "staticwebassets\\css\\responsive.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\shortcode\\default.css",
+      "PackagePath": "staticwebassets\\css\\shortcode\\default.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\shortcode\\footer.css",
+      "PackagePath": "staticwebassets\\css\\shortcode\\footer.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\shortcode\\header.css",
+      "PackagePath": "staticwebassets\\css\\shortcode\\header.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\shortcode\\shortcodes.css",
+      "PackagePath": "staticwebassets\\css\\shortcode\\shortcodes.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\shortcode\\slider.css",
+      "PackagePath": "staticwebassets\\css\\shortcode\\slider.css"
+    },
+    {
       "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\slick.css",
+      "PackagePath": "staticwebassets\\css\\slick.css"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
       "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\Material-Design-Iconic-Fontd1f1.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Material-Design-Iconic-Fontd1f1.ttf"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\Material-Design-Iconic-Fontd1f1.woff",
+      "PackagePath": "staticwebassets\\fonts\\Material-Design-Iconic-Fontd1f1.woff"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\Material-Design-Iconic-Fontd1f1.woff2",
+      "PackagePath": "staticwebassets\\fonts\\Material-Design-Iconic-Fontd1f1.woff2"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\fontawesome-webfont3e6e.eot",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont3e6e.eot"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\fontawesome-webfont3e6e.svg",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont3e6e.svg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\fontawesome-webfont3e6e.ttf",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont3e6e.ttf"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\fontawesome-webfont3e6e.woff",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont3e6e.woff"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\fontawesome-webfont3e6e.woff2",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfont3e6e.woff2"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\fontawesome-webfontd41d.eot",
+      "PackagePath": "staticwebassets\\fonts\\fontawesome-webfontd41d.eot"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\glyphicons-halflings-regular.eot",
+      "PackagePath": "staticwebassets\\fonts\\glyphicons-halflings-regular.eot"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\glyphicons-halflings-regular.svg",
+      "PackagePath": "staticwebassets\\fonts\\glyphicons-halflings-regular.svg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\glyphicons-halflings-regular.ttf",
+      "PackagePath": "staticwebassets\\fonts\\glyphicons-halflings-regular.ttf"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\glyphicons-halflings-regular.woff",
+      "PackagePath": "staticwebassets\\fonts\\glyphicons-halflings-regular.woff"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\glyphicons-halflings-regular.woff2",
+      "PackagePath": "staticwebassets\\fonts\\glyphicons-halflings-regular.woff2"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\fonts\\glyphicons-halflings-regulard41d.eot",
+      "PackagePath": "staticwebassets\\fonts\\glyphicons-halflings-regulard41d.eot"
     },
     {
       "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\10.jpg",
@@ -21,240 +149,668 @@
       "PackagePath": "staticwebassets\\images\\11.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\1.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\1.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\banner\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\banner\\1.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\10.1.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\10.1.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\banner\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\banner\\2.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\10.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\10.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\banner\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\banner\\3.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\11.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\11.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\banner\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\banner\\4.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\12.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\12.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\bg\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\1.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\2.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\2.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\bg\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\2.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\3.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\3.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\bg\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\3.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\4.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\4.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\bg\\5.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\5.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\5.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\5.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\favicon.ico",
+      "PackagePath": "staticwebassets\\images\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\6.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\6.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\footer\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\footer\\1.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\7.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\7.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\footer\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\footer\\2.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\8.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\8.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\footer\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\footer\\3.jpg"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\9.png",
-      "PackagePath": "staticwebassets\\images\\roomType\\9.png"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\footer\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\footer\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\footer\\5.jpg",
+      "PackagePath": "staticwebassets\\images\\footer\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\footer\\6.jpg",
+      "PackagePath": "staticwebassets\\images\\footer\\6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\gallery\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\gallery\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\gallery\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\gallery\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\gallery\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\gallery\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\gallery\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\gallery\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\gallery\\5.jpg",
+      "PackagePath": "staticwebassets\\images\\gallery\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\gallery\\6.jpg",
+      "PackagePath": "staticwebassets\\images\\gallery\\6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\conference-hover.png",
+      "PackagePath": "staticwebassets\\images\\icon\\conference-hover.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\conference.png",
+      "PackagePath": "staticwebassets\\images\\icon\\conference.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\link-hover.png",
+      "PackagePath": "staticwebassets\\images\\icon\\link-hover.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\link.png",
+      "PackagePath": "staticwebassets\\images\\icon\\link.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\restaurent-hover.png",
+      "PackagePath": "staticwebassets\\images\\icon\\restaurent-hover.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\restaurent.png",
+      "PackagePath": "staticwebassets\\images\\icon\\restaurent.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\search-hover.png",
+      "PackagePath": "staticwebassets\\images\\icon\\search-hover.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\search.png",
+      "PackagePath": "staticwebassets\\images\\icon\\search.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\spa-hover.png",
+      "PackagePath": "staticwebassets\\images\\icon\\spa-hover.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\spa.png",
+      "PackagePath": "staticwebassets\\images\\icon\\spa.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\swim-hover.png",
+      "PackagePath": "staticwebassets\\images\\icon\\swim-hover.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\icon\\swim.png",
+      "PackagePath": "staticwebassets\\images\\icon\\swim.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\logo\\footer-logo.png",
+      "PackagePath": "staticwebassets\\images\\logo\\footer-logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\logo\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\011b294f-b000-423c-87e8-affff20c3711.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\011b294f-b000-423c-87e8-affff20c3711.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\084b8f71-ae3f-4abe-a906-15002022941d.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\084b8f71-ae3f-4abe-a906-15002022941d.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\08f389eb-de4b-422d-9ca9-7f595e2db053.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\08f389eb-de4b-422d-9ca9-7f595e2db053.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\091c89d4-d991-4c28-9bc3-dab39b048bd2.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\091c89d4-d991-4c28-9bc3-dab39b048bd2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\0b67a027-ad67-4f5c-9fef-5fe508e9da46.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\0b67a027-ad67-4f5c-9fef-5fe508e9da46.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\0c03b895-40fc-4f90-bdf3-5c343eed2eb4.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\0c03b895-40fc-4f90-bdf3-5c343eed2eb4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\113f44ae-8df5-44ed-a3b8-42ef7f0d2933.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\113f44ae-8df5-44ed-a3b8-42ef7f0d2933.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\12d93de5-6b59-4228-8b24-09acd7c4ce16.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\12d93de5-6b59-4228-8b24-09acd7c4ce16.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\162d0024-0d09-411d-991c-482374aaaa2d.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\162d0024-0d09-411d-991c-482374aaaa2d.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\1b6593b7-e964-493e-ab86-cd7ceb5d6c58.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\1b6593b7-e964-493e-ab86-cd7ceb5d6c58.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\269f6cf3-3141-42fc-9128-dffb9fb9fcc3.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\269f6cf3-3141-42fc-9128-dffb9fb9fcc3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\28f3516a-fd03-46b5-ab89-5a0480cb9b01.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\28f3516a-fd03-46b5-ab89-5a0480cb9b01.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\2adde083-1ac2-4610-91f8-c45bb0ecb0b1.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\2adde083-1ac2-4610-91f8-c45bb0ecb0b1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\3059f0b4-4745-4eaf-8ad8-62999eab8821.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\3059f0b4-4745-4eaf-8ad8-62999eab8821.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\333ef338-3744-4bb9-89d2-25b82dd2ac68.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\333ef338-3744-4bb9-89d2-25b82dd2ac68.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\34b37a2d-003f-4bf5-b0b5-e2c9f8b3d2ca.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\34b37a2d-003f-4bf5-b0b5-e2c9f8b3d2ca.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\3c57dd4b-ee6a-4421-b4cc-bfbad47cbbe5.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\3c57dd4b-ee6a-4421-b4cc-bfbad47cbbe5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\3cacbaad-3f4d-4d51-b6f2-c8762a2927a7.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\3cacbaad-3f4d-4d51-b6f2-c8762a2927a7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\463324b4-3138-44c4-a940-de1932955560.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\463324b4-3138-44c4-a940-de1932955560.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\46f30d39-ec70-47b7-9661-3d3af9045c06.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\46f30d39-ec70-47b7-9661-3d3af9045c06.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\4fc4714f-582f-417a-a5f1-58a9bedeaf18.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\4fc4714f-582f-417a-a5f1-58a9bedeaf18.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\4fc9ad30-31e5-4525-89bb-8b7232c3a26f.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\4fc9ad30-31e5-4525-89bb-8b7232c3a26f.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\5212d6dc-84f7-443a-a502-ffedb6a33f14.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\5212d6dc-84f7-443a-a502-ffedb6a33f14.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\529e2547-a1db-4c07-b021-06c179f9a087.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\529e2547-a1db-4c07-b021-06c179f9a087.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\53dd7a04-cdb1-46c3-9e6a-e5d1845c6951.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\53dd7a04-cdb1-46c3-9e6a-e5d1845c6951.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\548fad26-30b7-4178-97a3-b2cb2c94e2be.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\548fad26-30b7-4178-97a3-b2cb2c94e2be.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\57eff37e-b448-4327-a082-a5a6c7ea269b.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\57eff37e-b448-4327-a082-a5a6c7ea269b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\5c95a75e-94f0-4314-a3a9-f78c3c161910.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\5c95a75e-94f0-4314-a3a9-f78c3c161910.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\5cc3d367-b8c4-44e7-8c80-bb057cc948a3.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\5cc3d367-b8c4-44e7-8c80-bb057cc948a3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\5e47ac9b-400c-4094-a2e3-23f849ac1447.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\5e47ac9b-400c-4094-a2e3-23f849ac1447.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\5edf6531-8471-49fc-987d-e3959b6aaed8.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\5edf6531-8471-49fc-987d-e3959b6aaed8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\62304688-ed92-4b97-817a-d6a24ec5d1c0.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\62304688-ed92-4b97-817a-d6a24ec5d1c0.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\66ed85de-095a-488a-aeda-10a39f070679.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\66ed85de-095a-488a-aeda-10a39f070679.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\6c1bad46-82ee-42da-85c3-2cc719410290.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\6c1bad46-82ee-42da-85c3-2cc719410290.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\6e4aca41-05b4-4bc7-a547-39385158cbd6.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\6e4aca41-05b4-4bc7-a547-39385158cbd6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\6e7cca7e-b5de-436a-85d0-a43c3e46318e.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\6e7cca7e-b5de-436a-85d0-a43c3e46318e.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\75446ea1-6f9a-4c2b-999b-2d34cefd8268.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\75446ea1-6f9a-4c2b-999b-2d34cefd8268.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\7cc34e26-e323-4939-a703-a0c42731c443.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\7cc34e26-e323-4939-a703-a0c42731c443.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\7d49b39d-984e-49cf-956f-39eaf9b2aa28.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\7d49b39d-984e-49cf-956f-39eaf9b2aa28.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\7e3082fe-1a0f-46dc-8fbe-0ba2c72bd70c.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\7e3082fe-1a0f-46dc-8fbe-0ba2c72bd70c.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\800e1ec3-e3ef-41a5-b965-5898be51c660.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\800e1ec3-e3ef-41a5-b965-5898be51c660.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\806df67d-8e1e-4293-b89e-9f112b3949e0.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\806df67d-8e1e-4293-b89e-9f112b3949e0.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\825dba32-6b8f-4acc-a8ba-b70442a09d4d.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\825dba32-6b8f-4acc-a8ba-b70442a09d4d.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\84c0a740-96c3-4405-a205-31c5a38b70ee.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\84c0a740-96c3-4405-a205-31c5a38b70ee.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\85558d9c-ac2e-44d5-9f75-9c9b04e10ea2.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\85558d9c-ac2e-44d5-9f75-9c9b04e10ea2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\8754ce98-c026-42f5-bf12-bdedf726576b.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\8754ce98-c026-42f5-bf12-bdedf726576b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\889ba3af-bb10-4292-9d86-9b5b7f9198ce.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\889ba3af-bb10-4292-9d86-9b5b7f9198ce.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\8b741495-05c2-433f-a1d8-236a76dbc02d.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\8b741495-05c2-433f-a1d8-236a76dbc02d.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\8ccc205f-e98f-44bc-907a-198141442a6c.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\8ccc205f-e98f-44bc-907a-198141442a6c.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\8daf775f-c35a-49e7-921c-039b77eb0f90.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\8daf775f-c35a-49e7-921c-039b77eb0f90.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\8e89bd66-01b5-4c98-891e-f5cec6f99b09.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\8e89bd66-01b5-4c98-891e-f5cec6f99b09.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\9244aec9-ccf0-4af4-b06c-8be35201f8f1.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\9244aec9-ccf0-4af4-b06c-8be35201f8f1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\92fb9978-c306-40f4-9d1d-f10e3f084161.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\92fb9978-c306-40f4-9d1d-f10e3f084161.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\9877ffe9-dd7c-4218-bb59-8dbcc415a894.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\9877ffe9-dd7c-4218-bb59-8dbcc415a894.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\993d5dba-ce1e-409b-a2be-3f53e39b6e47.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\993d5dba-ce1e-409b-a2be-3f53e39b6e47.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\a57a1a72-765e-4f59-b458-43a9606a0988.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\a57a1a72-765e-4f59-b458-43a9606a0988.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\a5b9db42-c8ca-46f9-97e6-56cec170fa5a.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\a5b9db42-c8ca-46f9-97e6-56cec170fa5a.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\a5f4b65a-5a49-4684-ae98-289912d9f0b6.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\a5f4b65a-5a49-4684-ae98-289912d9f0b6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\a5fb1177-4a3d-4ce5-8f98-e8fe915e2557.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\a5fb1177-4a3d-4ce5-8f98-e8fe915e2557.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\a86c03d6-ee47-4c90-bbc2-d1f2efd69d8c.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\a86c03d6-ee47-4c90-bbc2-d1f2efd69d8c.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\af9dfcb2-09c4-4584-8f21-39662924eedb.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\af9dfcb2-09c4-4584-8f21-39662924eedb.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\b5829cd3-c458-4938-ae54-c08b6eb23557.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\b5829cd3-c458-4938-ae54-c08b6eb23557.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\b5fe2525-cd4a-4497-80c4-0df12db8da4a.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\b5fe2525-cd4a-4497-80c4-0df12db8da4a.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\b64cc423-1745-439f-b87e-8b2d6cb734f6.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\b64cc423-1745-439f-b87e-8b2d6cb734f6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\b6ed49dd-dbb7-41fa-b9e5-7abfb885cfe4.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\b6ed49dd-dbb7-41fa-b9e5-7abfb885cfe4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\b9c0a828-5ed8-4270-a732-ef0a571aa9ef.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\b9c0a828-5ed8-4270-a732-ef0a571aa9ef.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\ba4ebe54-f05f-4a83-bee2-990952c3a6f9.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\ba4ebe54-f05f-4a83-bee2-990952c3a6f9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\bb785a2f-1e50-4553-844e-236a6c6bba73.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\bb785a2f-1e50-4553-844e-236a6c6bba73.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\c285b409-01c9-4ab5-a260-0ea96cf94298.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\c285b409-01c9-4ab5-a260-0ea96cf94298.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\c29f22e1-e889-4b44-9c14-c48d02bf66a4.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\c29f22e1-e889-4b44-9c14-c48d02bf66a4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\c53688fe-69c6-43ca-90a7-086e0352fdbf.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\c53688fe-69c6-43ca-90a7-086e0352fdbf.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\c545e2e7-bfa2-4678-9678-c0ab6dca6ee6.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\c545e2e7-bfa2-4678-9678-c0ab6dca6ee6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\c95f790a-3a13-42bc-95c1-ecc3a587dd57.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\c95f790a-3a13-42bc-95c1-ecc3a587dd57.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\cc8d690c-da6e-4f12-8cbe-945e08976005.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\cc8d690c-da6e-4f12-8cbe-945e08976005.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\d303a217-63be-4fae-9b43-d965b9154c2c.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\d303a217-63be-4fae-9b43-d965b9154c2c.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\d4a9c893-4aa4-4b09-91e0-8ab1a2ecad35.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\d4a9c893-4aa4-4b09-91e0-8ab1a2ecad35.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\dc5d1c9a-d769-4684-b59a-65b4ecb6186e.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\dc5d1c9a-d769-4684-b59a-65b4ecb6186e.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\dc60ae0d-61a9-406c-86fe-f8361cd8d4f8.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\dc60ae0d-61a9-406c-86fe-f8361cd8d4f8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\e1c19b39-f049-4645-bc95-d9a2b3366aab.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\e1c19b39-f049-4645-bc95-d9a2b3366aab.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\e352b8d9-e023-45bf-9dec-6d14af5e8edc.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\e352b8d9-e023-45bf-9dec-6d14af5e8edc.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\e6bbfd2f-bba9-40d3-a974-24be21039f0e.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\e6bbfd2f-bba9-40d3-a974-24be21039f0e.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\e74c5bcc-bd7f-44fc-9d27-1fbc3306cd0f.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\e74c5bcc-bd7f-44fc-9d27-1fbc3306cd0f.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\e8196636-ac1c-4760-b4f8-e5cc60d76967.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\e8196636-ac1c-4760-b4f8-e5cc60d76967.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\e87ead67-3639-433e-800b-b862632e549b.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\e87ead67-3639-433e-800b-b862632e549b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\edd52c14-5ed5-469a-9267-137b50fc9e84.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\edd52c14-5ed5-469a-9267-137b50fc9e84.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\eebfadcc-a2e1-479a-9c5c-eebc968d6f7b.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\eebfadcc-a2e1-479a-9c5c-eebc968d6f7b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\f4ba394d-c897-4882-915c-26816f6926be.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\f4ba394d-c897-4882-915c-26816f6926be.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\f568d2bc-a4e3-4658-8239-53b1c0d549b4.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\f568d2bc-a4e3-4658-8239-53b1c0d549b4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\roomType\\fde07c81-0a1f-4eb5-9809-a5fefb36a263.jpg",
+      "PackagePath": "staticwebassets\\images\\roomType\\fde07c81-0a1f-4eb5-9809-a5fefb36a263.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\10.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\10.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\11.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\11.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\12.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\12.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\13.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\13.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\14.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\14.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\15.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\15.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\5.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\6.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\7.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\8.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\9.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\9.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\l-1.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\l-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\l-2.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\l-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\l-3.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\l-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\l-4.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\l-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\l-5.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\l-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\s-1.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\s-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\s-2.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\s-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\s-3.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\s-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\s-4.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\s-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\room\\s-5.jpg",
+      "PackagePath": "staticwebassets\\images\\room\\s-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\slider\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\images\\slider\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\slider\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\ajax-mail.js",
+      "PackagePath": "staticwebassets\\js\\ajax-mail.js"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\imagesloaded.pkgd.min.js",
+      "PackagePath": "staticwebassets\\js\\imagesloaded.pkgd.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\isotope.pkgd.min.js",
+      "PackagePath": "staticwebassets\\js\\isotope.pkgd.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\jquery.ajaxchimp.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.ajaxchimp.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\jquery.counterup.min.js",
+      "PackagePath": "staticwebassets\\js\\jquery.counterup.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\jquery.magnific-popup.js",
+      "PackagePath": "staticwebassets\\js\\jquery.magnific-popup.js"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\jquery.meanmenu.js",
+      "PackagePath": "staticwebassets\\js\\jquery.meanmenu.js"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\js\\owl.carousel.min.js"
+    },
+    {
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\plugins.js",
+      "PackagePath": "staticwebassets\\js\\plugins.js"
     },
     {
       "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\LICENSE",
-      "PackagePath": "staticwebassets\\lib\\bootstrap"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\vendor\\jquery-1.12.4.min.js",
+      "PackagePath": "staticwebassets\\js\\vendor\\jquery-1.12.4.min.js"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\vendor\\modernizr-2.8.3.min.js",
+      "PackagePath": "staticwebassets\\js\\vendor\\modernizr-2.8.3.min.js"
     },
     {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
-    },
-    {
-      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
-      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+      "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\js\\waypoints.min.js",
+      "PackagePath": "staticwebassets\\js\\waypoints.min.js"
     },
     {
       "Id": "C:\\Users\\Администратор\\RiderProjects\\Hotel\\WebApp\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",

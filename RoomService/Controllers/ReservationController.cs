@@ -35,4 +35,14 @@ public class ReservationController : ControllerBase
             return Ok(result.Value);
         return BadRequest(result.Reasons);
     }
+    
+    [HttpGet]
+    [Route("{hotelBranchId:guid}")]
+    public async Task<IActionResult> GetAllByHotelBranchIdAsync(Guid hotelBranchId, CancellationToken ct)
+    {
+        var result = await _reservationService.GetAllByHotelBranchIdAsync(hotelBranchId, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
+    }
 }

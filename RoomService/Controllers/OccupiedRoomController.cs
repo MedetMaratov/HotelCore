@@ -33,4 +33,14 @@ public class OccupiedRoomController : ControllerBase
             return Ok(result.Value);
         return BadRequest(result.Reasons);
     }
+    
+    [HttpGet]
+    [Route("hotel-branch/{hotelBranchId:guid}/occupied")]
+    public async Task<IActionResult> GetOccupiedRoomsByHotelBranchAsync(Guid hotelBranchId, CancellationToken ct)
+    {
+        var result = await _occupiedRoomService.GetOccupiedRoomsByHotelBranchAsync(hotelBranchId, ct);
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        return BadRequest(result.Reasons);
+    }
 }

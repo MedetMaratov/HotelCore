@@ -46,7 +46,7 @@ public class OccupiedRoomService : IOccupiedRoomService
         if (room == null)
             return Result.Fail("Room not find");
 
-        room.CheckIn = DateTime.Now;
+        room.CheckIn = DateTime.Now.ToUniversalTime();
         room.Status = OccupiedRoomStatus.Reside;
 
         _dbContext.Update(room);
@@ -66,7 +66,7 @@ public class OccupiedRoomService : IOccupiedRoomService
         if (room == null)
             return Result.Fail("Room not find");
 
-        room.CheckOut = DateTime.Now;
+        room.CheckOut = DateTime.Now.ToUniversalTime();
         room.Status = OccupiedRoomStatus.Left;
 
         _dbContext.Update(room);
@@ -75,5 +75,27 @@ public class OccupiedRoomService : IOccupiedRoomService
         _logger.LogInformation($"Check-Out set for OccupiedRoom with Id: {room.Id}");
 
         return Result.Ok(room.Id);
+    }
+    
+    public async Task<Result<IEnumerable<ResponseOccupiedRoomDto>>> GetOccupiedRoomsByHotelBranchAsync(
+        Guid hotelBranchId, CancellationToken ct)
+    {
+        var rooms = await _dbContext
+            .OccupiedRooms
+            .Where(or => or.Room.HotelBranchId == hotelBranchId)
+            .OrderBy(or => or.Reservation.DateIn)
+            .Select(or => new ResponseOccupiedRoomDto()
+            {
+                Id = or.Id,
+                HotelBranchId = or.Reservation.HotelBranchId,
+                RoomId = or.Room.Id,
+                RoomNumber = or.Room.Number
+            })
+            .ToListAsync(ct);
+
+
+        _logger.LogInformation($"Retrieved {rooms.Count()} Rooms by hotel branch");
+
+        return Result.Ok<IEnumerable<ResponseOccupiedRoomDto>>(rooms);
     }
 }

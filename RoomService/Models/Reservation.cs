@@ -12,5 +12,6 @@ public class Reservation
     public Guid HotelBranchId { get; set; }
     public HotelBranch HotelBranch { get; set; }
     public Guid ReservationCreatorId { get; set; }
+    public Reservator Reservator { get; set; }
     public ICollection<OccupiedRoom> OccupiedRooms { get; set; } = new HashSet<OccupiedRoom>();
 }

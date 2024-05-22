@@ -1,8 +1,206 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model HomeViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    ViewData["Title"] = "Главная";
+    Layout = "_Layout";
+}
+<section class="slider-area" xmlns="http://www.w3.org/1999/html">
+    <div class="slider-wrapper">
+        <div class="single-slide" style="background-image: url('images/slider/1.jpg');">
+            <div class="banner-content overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="text-content-wrapper">
+                                <div class="text-content text-center">
+                                    <h1 class="pt-180">ДОБРО ПОЖАЛОВАТЬ В <br/>ОТЕЛЬ-Х</h1>
+                                    <p>Приглашаем вас на незабываемый отдых в самых красивых уголках мира. Погрузитесь в атмосферу роскоши и отдыха, наслаждаясь каждым моментом вашего пребывания в нашем отеле.</p>
+                                    <div class="banner-btn">
+                                        <a class="default-btn" href="@Url.Action("Index", "RoomType")">Изучить</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-slide" style="background-image: url('images/slider/2.jpg');">
+            <div class="banner-content overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="text-content-wrapper slide-two">
+                                <div class="text-content text-center">
+                                    <h1 class="pt-180">ДОБРО ПОЖАЛОВАТЬ В <br/>ОТЕЛЬ-Х</h1>
+                                    <p>Приглашаем вас на незабываемый отдых в самых красивых уголках мира. Погрузитесь в атмосферу роскоши и отдыха, наслаждаясь каждым моментом вашего пребывания в нашем отеле.</p>
+                                    <div class="banner-btn">
+                                        <a class="default-btn" href="@Url.Action("Index", "RoomType")">Изучить</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="about-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form asp-action="AvailableRoomTypes" method="get" class="search-form">
+                    <div class="form-container fix">
+                        <div class="box-select">
+                            <div class="select arrow">
+                                <select asp-for="SelectedHotelBranchId">
+                                    @foreach (var hotelBranch in Model.HotelBranches)
+                                    {
+                                        <option value="@hotelBranch.Id">@hotelBranch.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="select date">
+                                <input asp-for="ReservationStart" type="date"  value="@DateTime.Now.ToString("yyyy-MM-dd")" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
+                            </div>
+                            <div class="select date">
+                                <input type="date" asp-for="ReservationEnd"  value="@DateTime.Now.ToString("yyyy-MM-dd")" min="@DateTime.Now.ToString("yyyy-MM-dd")" required><br><br>
+                            </div>
+                            <div class="select arrow">
+                                <select asp-for="NumberOfGuests" required>
+                                    <option>Количество людей</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="search default-btn">Просмотреть</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-7">
+                <div class="mt-90">
+                    <img src="images/banner/4.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="about-text">
+                    <div class="section-title">
+                        <h3>О НАС</h3>
+                        <p>В наших отелях вы находите оазис уюта и роскоши в самых волнующих местах мира. Независимо от того, отправляетесь ли вы в культурный центр большого города или наслаждаетесь спокойствием побережья, мы создаем атмосферу, в которой каждый гость чувствует себя как дома.</p>
+                        <p>Наши отели - это не просто место для ночлега, но и пункт назначения, где каждая деталь заботливо продумана, чтобы сделать ваше пребывание незабываемым.</p>
+                    </div>
+                    <div class="about-links">
+                        <a href="https://www.facebook.com/">
+                            <i class="zmdi zmdi-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/">
+                            <i class="zmdi zmdi-instagram"></i>
+                        </a>
+                        <a href="https://www.rss.com/">
+                            <i class="zmdi zmdi-rss"></i>
+                        </a>
+                        <a href="https://twitter.com/">
+                            <i class="zmdi zmdi-twitter"></i>
+                        </a>
+                        <a href="https://www.pinterest.com/">
+                            <i class="zmdi zmdi-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Area Start -->
+<section class="services-area ptb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="section-title text-center">
+                    <h3>НАШИ СЕРВИСЫ</h3>
+                    <p>Наш отель предлагает широкий спектр первоклассных сервисов, включая роскошные спа-процедуры, изысканную кулинарию, и персонализированные услуги обслуживания, чтобы удовлетворить все потребности и ожидания наших гостей.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <!-- Nav tabs -->
+                <ul role="tablist" class="nav nav-tabs">
+                    <li class="active" role="presentation">
+                        <a data-toggle="tab" role="tab" aria-controls="spa" href="#spa" aria-expanded="true">
+                            <span class="image p-img">
+                                <img src="images/icon/spa.png" alt="">
+                            </span>
+                            <span class="image s-img">
+                                <img src="images/icon/spa-hover.png" alt="">
+                            </span>
+                            <span class="title">Спа - Красота и Здоровье</span>
+                            <span class="text">Наши спа-процедуры предлагают идеальное сочетание расслабления и заботы о вашем здоровье.</span>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a data-toggle="tab" role="tab" aria-controls="swim" href="#swim" aria-expanded="true">
+                            <span class="image p-img">
+                                <img src="images/icon/swim.png" alt="">
+                            </span>
+                            <span class="image s-img">
+                                <img src="images/icon/swim-hover.png" alt="">
+                            </span>
+                            <span class="title">Бассейн</span>
+                            <span class="text">Отдыхайте и ощущайте свежесть в нашем бассейне, предлагающем идеальное место для расслабления и восстановления после долгого дня.</span>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a data-toggle="tab" role="tab" aria-controls="restaurant" href="#restaurant" aria-expanded="true">
+                            <span class="image p-img">
+                                <img src="images/icon/restaurent.png" alt="">
+                            </span>
+                            <span class="image s-img">
+                                <img src="images/icon/restaurent-hover.png" alt="">
+                            </span>
+                            <span class="title">Ресторан</span>
+                            <span class="text">Погрузитесь в удовольствие от наших изысканных блюд и неповторимой атмосферы ресторана.</span>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a data-toggle="tab" role="tab" aria-controls="conference" href="#conference" aria-expanded="true">
+                            <span class="image p-img">
+                                <img src="images/icon/conference.png" alt="">
+                            </span>
+                            <span class="image s-img">
+                                <img src="images/icon/conference-hover.png" alt="">
+                            </span>
+                            <span class="title">Конференции</span>
+                            <span class="text">Наши современные конференц-залы предлагают идеальное пространство для проведения успешных деловых встреч и мероприятий/</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-7">
+                <div class="tab-content">
+                    <div id="spa" class="tab-pane active" role="tabpanel">
+                        <img src="images/banner/1.jpg" alt="">
+                    </div>
+                    <div id="swim" class="tab-pane" role="tabpanel">
+                        <img src="images/banner/2.jpg" alt="">
+                    </div>
+                    <div id="restaurant" class="tab-pane" role="tabpanel">
+                        <img src="images/banner/3.jpg" alt="">
+                    </div>
+                    <div id="conference" class="tab-pane" role="tabpanel">
+                        <img src="images/banner/1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Area End -->

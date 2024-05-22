@@ -15,6 +15,7 @@ public class RoomTypeService : IRoomTypeService
     private readonly AppDbContext _dbContext;
     private readonly IDistributedCache _distributedCache;
     private readonly ILogger<RoomTypeService> _logger;
+    private const string KeyForRedisCache = "room_types";
 
     public RoomTypeService(AppDbContext dbContext, IDistributedCache distributedCache, ILogger<RoomTypeService> logger)
     {
@@ -29,11 +30,16 @@ public class RoomTypeService : IRoomTypeService
         {
             Id = Guid.NewGuid(),
             Title = roomTypeDto.Title,
-            Images = roomTypeDto.Images,
             NightlyRate = roomTypeDto.NightlyRate,
             Description = roomTypeDto.Description,
             MaxCapacity = roomTypeDto.MaxCapacity,
         };
+        roomType.Images.AddRange(roomTypeDto.Images.Select(i => new ImageForRoomType()
+        {
+            Path = i,
+            RoomType = roomType,
+            RoomTypeId = roomType.Id
+        }));
 
         var amenitiesForRoomType = await _dbContext
             .Amenities
@@ -43,7 +49,7 @@ public class RoomTypeService : IRoomTypeService
 
         await _dbContext.AddAsync(roomType, ct);
         await _dbContext.SaveChangesAsync(ct);
-
+        await _distributedCache.RemoveAsync(KeyForRedisCache, ct);
         _logger.LogInformation($"{nameof(RoomType)} created with Id: {roomType.Id}");
 
         return Result.Ok(roomType.Id);
@@ -51,21 +57,53 @@ public class RoomTypeService : IRoomTypeService
 
     public async Task<Result<Guid>> UpdateAsync(UpdateRoomTypeDto updateDto, CancellationToken ct)
     {
-        var roomTypeForUpdate = await _dbContext
+        var roomType = await _dbContext
             .RoomsTypes
+            .Include(roomType => roomType.Amenities)
+            .Include(roomType => roomType.Images)
             .SingleOrDefaultAsync(rt => rt.Id == updateDto.Id, ct);
 
-        if (roomTypeForUpdate == null)
+        if (roomType == null)
             return Result.Fail("Room type not found");
 
-        UpdateRoomType(roomTypeForUpdate, updateDto);
+        roomType.Title = updateDto.Title;
+        roomType.Description = updateDto.Description;
+        roomType.MaxCapacity = updateDto.MaxCapacity;
 
-        _dbContext.Update(roomTypeForUpdate);
+        foreach (var existingAmenity in roomType.Amenities.ToList()
+                     .Where(existingAmenity => !updateDto.Amenities.Contains(existingAmenity.Id)))
+        {
+            roomType.Amenities.Remove(existingAmenity);
+        }
+
+        var amenitiesToAdd = await _dbContext
+            .Amenities
+            .Where(a => updateDto.Amenities.Contains(a.Id))
+            .ToListAsync(ct);
+
+        foreach (var newAmenity in amenitiesToAdd.Where(
+                     newAmenity => roomType.Amenities.All(a => a.Id != newAmenity.Id)))
+        {
+            roomType.Amenities.Add(newAmenity);
+        }
+
+        roomType.NightlyRate = updateDto.NightlyRate;
+        _dbContext.ImagesForRoomTypes.RemoveRange(roomType.Images);
+        roomType.Images = new List<ImageForRoomType>();
+        roomType.Images.AddRange(updateDto.Images.Select(i => new ImageForRoomType()
+        {
+            Path = i,
+            RoomType = roomType,
+            RoomTypeId = roomType.Id
+        }));
+
+        _dbContext.Update(roomType);
         await _dbContext.SaveChangesAsync(ct);
+        await _distributedCache.RemoveAsync(KeyForRedisCache, ct);
 
-        _logger.LogInformation($"{nameof(RoomType)} updated with Id: {roomTypeForUpdate.Id}");
+        _logger.LogInformation($"{nameof(RoomType)} updated with Id: {roomType.Id}");
 
-        return Result.Ok(roomTypeForUpdate.Id);
+        return Result.Ok(roomType.Id);
     }
 
     public async Task<Result<Guid>> DeleteAsync(Guid roomId, CancellationToken ct)
@@ -80,6 +118,7 @@ public class RoomTypeService : IRoomTypeService
 
         _dbContext.RoomsTypes.Remove(roomTypeForDelete);
         await _dbContext.SaveChangesAsync(ct);
+        await _distributedCache.RemoveAsync(KeyForRedisCache, ct);
 
         _logger.LogInformation($"{nameof(RoomType)} deleted with Id: {roomId}");
         return Result.Ok(roomTypeForDelete.Id);
@@ -87,8 +126,7 @@ public class RoomTypeService : IRoomTypeService
 
     public async Task<Result<IEnumerable<ResponseRoomTypeDto>>> GetAllRoomTypesAsync(CancellationToken ct)
     {
-        const string keyForRedisCache = "room_types";
-        var cachedRoomTypes = await _distributedCache.GetStringAsync(keyForRedisCache, ct);
+        var cachedRoomTypes = await _distributedCache.GetStringAsync(KeyForRedisCache, ct);
         IEnumerable<ResponseRoomTypeDto> roomTypes;
         if (string.IsNullOrEmpty(cachedRoomTypes))
         {
@@ -98,49 +136,49 @@ public class RoomTypeService : IRoomTypeService
                 .ToListAsync(ct);
             if (roomTypes.Any())
             {
-                await _distributedCache.SetStringAsync(keyForRedisCache, JsonConvert.SerializeObject(roomTypes), ct);
+                await _distributedCache.SetStringAsync(KeyForRedisCache, JsonConvert.SerializeObject(roomTypes), ct);
                 _logger.LogInformation($"Cached list of RoomTypes");
             }
-            
+
             return Result.Ok(roomTypes);
         }
 
         roomTypes = JsonConvert.DeserializeObject<IEnumerable<ResponseRoomTypeDto>>(cachedRoomTypes);
         return Result.Ok(roomTypes);
     }
+
+    public async Task<Result<IEnumerable<ResponseRoomTypeDto>>> GetAvailableRoomTypesAsync(
+        Guid hotelBranchId,
+        DateTime reservationStart,
+        DateTime reservationEnd,
+        int numberOfGuests,
+        CancellationToken ct)
+    {
+        if (reservationStart >= reservationEnd)
+        {
+            return Result.Fail("Check-in date must be before check-out date.");
+        }
+
+        if (reservationStart < DateTime.Today)
+        {
+            return Result.Fail("Check-in date must not be earlier than today");
+        }
+        var roomTypes = await _dbContext
+            .RoomsTypes
+            .Where(rt => rt.MaxCapacity >= numberOfGuests)
+            .Select(MapToResponseRoomTypeDto)
+            .ToListAsync(ct);
+        return roomTypes;
+    }
     
     public async Task<Result<ResponseRoomTypeDto>> GetRoomTypeByIdAsync(Guid id, CancellationToken ct)
     {
-        string keyForRedisCache = $"room_types-{id}";
-        var cachedRoomTypes = await _distributedCache.GetStringAsync(keyForRedisCache, ct);
-        ResponseRoomTypeDto? roomType;
-        if (string.IsNullOrEmpty(cachedRoomTypes))
-        {
-            roomType = await _dbContext
-                .RoomsTypes
-                .Select(MapToResponseRoomTypeDto)
-                .SingleOrDefaultAsync(rt => rt.Id == id, ct);
-            if (roomType is not null)
-            {
-                await _distributedCache.SetStringAsync(keyForRedisCache, JsonConvert.SerializeObject(roomType), ct);
-                _logger.LogInformation($"RoomTypes cached");
-            }
-            
-            return Result.Ok(roomType);
-        }
+        var roomType = await _dbContext
+            .RoomsTypes
+            .Select(MapToResponseRoomTypeDto)
+            .SingleOrDefaultAsync(rt => rt.Id == id, ct);
 
-        roomType = JsonConvert.DeserializeObject<ResponseRoomTypeDto>(cachedRoomTypes);
         return Result.Ok(roomType);
-    }
-
-    private void UpdateRoomType(RoomType roomType, UpdateRoomTypeDto updateDto)
-    {
-        roomType.Title = updateDto.Title;
-        roomType.Description = updateDto.Description;
-        roomType.MaxCapacity = updateDto.MaxCapacity;
-        roomType.Amenities = updateDto.Amenities;
-        roomType.NightlyRate = updateDto.NightlyRate;
-        roomType.Images = updateDto.Images;
     }
 
     private static readonly Expression<Func<RoomType, ResponseRoomTypeDto>> MapToResponseRoomTypeDto = rt =>
@@ -152,6 +190,6 @@ public class RoomTypeService : IRoomTypeService
             MaxCapacity = rt.MaxCapacity,
             NightlyRate = rt.NightlyRate,
             ImagePathes = rt.Images.Select(i => i.Path).ToList(),
-            Amenities = rt.Amenities
+            Amenities = rt.Amenities.Select(a => a.Title).ToList()
         };
 }

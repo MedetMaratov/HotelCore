@@ -6,4 +6,5 @@ public class HotelBranch
     public string Name { get; set; }
     public Guid LocationId { get; set; }
     public Location? Location { get; set; }
+    public string Contacts { get; set; }
 }

@@ -12,4 +12,7 @@ public interface IRoomService
     Task<Result<Guid>> DeleteAsync(Guid roomId, CancellationToken ct);
     Task<Result<IEnumerable<RoomResponseDto>>> GetAllAsync(CancellationToken ct);
     Task<Result<IEnumerable<RoomResponseDto>>> GetRoomsByTypeAsync(Guid roomTypeId, CancellationToken ct);
+    Task<Result<IEnumerable<RoomResponseDto>>> GetRoomsByHotelBranchAsync(Guid hotelBranchId, CancellationToken ct);
+    Task<Result<IEnumerable<RoomResponseDto>>> GetRoomsByHotelBranchAndNumberAsync(Guid hotelBranchId, string number, CancellationToken ct);
+    Task<Result<RoomDetailsDto>> GetRoomDetailsByIdAsync(Guid id, CancellationToken ct);
 }

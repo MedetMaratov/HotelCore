@@ -1,0 +1,46 @@
+@model List<WebApp.Models.RoomType.RoomTypeListItemViewModel>
+
+@{
+    ViewBag.Title = "Виды номеров";
+    Layout = "_Layout";
+}
+<section class="breadcrumb-area overlay-dark-2 bg-3" style="background-image: url('images/bg/3.jpg');">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-text text-center">
+                    <h2>@ViewBag.Title</h2>
+                    <p>Панель администрирования</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="room-area pt-30">
+    <div class="container">
+        <p>
+            <a class="btn btn-success" href="@Url.Action("Create", "RoomTypeAdmin")">Создать</a>
+        </p>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Операции</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>
+                        <a class="btn btn-primary edit-button" href="@Url.Action("Edit", "RoomTypeAdmin", new { id = item.Id })">Редактировать</a>
+                        <a class="btn btn-info details-button" href="@Url.Action("Details", "RoomTypeAdmin", new { id = item.Id })">Детали</a>
+                        <a class="btn btn-danger delete-button" href="@Url.Action("DeleteConfirmation", "RoomTypeAdmin", new { id = item.Id })">Удалить</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</section>

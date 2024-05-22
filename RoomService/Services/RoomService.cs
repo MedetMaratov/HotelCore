@@ -15,6 +15,7 @@ public class RoomService : IRoomService
     private readonly AppDbContext _dbContext;
     private readonly ILogger<RoomService> _logger;
     private readonly IDistributedCache _distributedCache;
+
     public RoomService(AppDbContext dbContext, IDistributedCache distributedCache, ILogger<RoomService> logger)
     {
         _dbContext = dbContext;
@@ -24,6 +25,14 @@ public class RoomService : IRoomService
 
     public async Task<Result<Guid>> CreateAsync(CreateRoomDto dto, CancellationToken ct)
     {
+        var existingRoom =
+            await _dbContext.Rooms.AsNoTracking().SingleOrDefaultAsync(
+                r => r.HotelBranchId == dto.HotelBranchId && r.Number == dto.Number, ct);
+        if (existingRoom != null)
+        {
+            return Result.Fail("Room with same number exist in this branch");
+        }
+        
         var roomForCreate = new Room
         {
             Id = Guid.NewGuid(),
@@ -32,12 +41,12 @@ public class RoomService : IRoomService
             IsDisabled = dto.IsDisabled,
             TypeId = dto.TypeId
         };
-
+        
         await _dbContext.Rooms.AddAsync(roomForCreate, ct);
         await _dbContext.SaveChangesAsync(ct);
 
         _logger.LogInformation($"{nameof(Room)} created with Id: {roomForCreate.Id}");
-
+        await _distributedCache.RemoveAsync("rooms", ct);
         return Result.Ok(roomForCreate.Id);
     }
 
@@ -51,10 +60,11 @@ public class RoomService : IRoomService
 
         roomForUpdate.Number = dto.Number;
         roomForUpdate.IsDisabled = dto.IsDisabled;
-        roomForUpdate.Type = dto.Type;
+        roomForUpdate.TypeId = dto.TypeId;
 
         _dbContext.Update(roomForUpdate);
         await _dbContext.SaveChangesAsync(ct);
+        await _distributedCache.RemoveAsync("rooms", ct);
 
         _logger.LogInformation($"{nameof(Room)} updated with Id: {roomForUpdate.Id}");
 
@@ -72,11 +82,13 @@ public class RoomService : IRoomService
 
         _dbContext.Rooms.Remove(roomForDelete);
         await _dbContext.SaveChangesAsync(ct);
+        await _distributedCache.RemoveAsync("rooms", ct);
 
         _logger.LogInformation($"{nameof(Room)} deleted with Id: {roomId}");
 
         return Result.Ok(roomForDelete.Id);
     }
+
     public async Task<Result> EnableRoomAsync(Guid roomId, CancellationToken ct)
     {
         var roomToUpdate = await _dbContext.Rooms.SingleOrDefaultAsync(r => r.Id == roomId, ct);
@@ -87,6 +99,7 @@ public class RoomService : IRoomService
 
         _dbContext.Update(roomToUpdate);
         await _dbContext.SaveChangesAsync(ct);
+        await _distributedCache.RemoveAsync("rooms", ct);
 
         _logger.LogInformation($"{nameof(Room)} with Id {roomId} has been enabled.");
 
@@ -99,10 +112,11 @@ public class RoomService : IRoomService
         if (roomToUpdate == null)
             return Result.Fail("Room not found");
 
-        roomToUpdate.Enable();
+        roomToUpdate.Disable();
 
         _dbContext.Update(roomToUpdate);
         await _dbContext.SaveChangesAsync(ct);
+        await _distributedCache.RemoveAsync("rooms", ct);
 
         _logger.LogInformation($"{nameof(Room)} with Id {roomId} has been disabled.");
 
@@ -125,6 +139,7 @@ public class RoomService : IRoomService
             .Rooms
             .Include(r => r.Type.Amenities)
             .Select(MapToRoomResponseDto)
+            .OrderBy(r => r.Number)
             .ToListAsync(ct);
 
         if (rooms.Any())
@@ -141,39 +156,79 @@ public class RoomService : IRoomService
 
     public async Task<Result<IEnumerable<RoomResponseDto>>> GetRoomsByTypeAsync(Guid roomTypeId, CancellationToken ct)
     {
-        var keyForRedisCache = $"rooms_by_type_{roomTypeId.ToString()}";
-        var cachedRooms = await _distributedCache.GetStringAsync(keyForRedisCache, ct);
-
-        if (!string.IsNullOrEmpty(cachedRooms))
-        {
-            var deserializedRooms = JsonConvert.DeserializeObject<IEnumerable<RoomResponseDto>>(cachedRooms);
-            _logger.LogInformation($"Retrieved {deserializedRooms.Count()} Rooms by Type from cache");
-            return Result.Ok(deserializedRooms);
-        }
-
         var rooms = await _dbContext
             .Rooms
             .Where(r => r.Type.Id == roomTypeId)
             .Select(MapToRoomResponseDto)
+            .OrderBy(r => r.Number)
             .ToListAsync(ct);
-
-        if (rooms.Any())
-        {
-            await _distributedCache.SetStringAsync(keyForRedisCache, JsonConvert.SerializeObject(rooms), ct);
-            _logger.LogInformation($"Cached list of Rooms by Type");
-        }
 
         _logger.LogInformation($"Retrieved {rooms.Count()} Rooms by Type");
 
         return Result.Ok<IEnumerable<RoomResponseDto>>(rooms);
     }
 
-    
+    public async Task<Result<IEnumerable<RoomResponseDto>>> GetRoomsByHotelBranchAsync(Guid hotelBranchId,
+        CancellationToken ct)
+    {
+        var rooms = await _dbContext
+            .Rooms
+            .Where(r => r.HotelBranchId == hotelBranchId)
+            .OrderBy(r => r.Number)
+            .Select(MapToRoomResponseDto)
+            .ToListAsync(ct);
+
+
+        _logger.LogInformation($"Retrieved {rooms.Count()} Rooms by hotel branch");
+
+        return Result.Ok<IEnumerable<RoomResponseDto>>(rooms);
+    }
+
+    public async Task<Result<IEnumerable<RoomResponseDto>>> GetRoomsByHotelBranchAndNumberAsync(Guid hotelBranchId, string number, CancellationToken ct)
+    {
+        var rooms = await _dbContext
+            .Rooms
+            .Where(r => r.HotelBranchId == hotelBranchId && r.Number == number)
+            .OrderBy(r => r.Number)
+            .Select(MapToRoomResponseDto)
+            .ToListAsync(ct);
+
+
+        _logger.LogInformation($"Retrieved {rooms.Count()} Rooms by hotel branch and number");
+
+        return Result.Ok<IEnumerable<RoomResponseDto>>(rooms);
+    }
+
+    public async Task<Result<RoomDetailsDto>> GetRoomDetailsByIdAsync(Guid id, CancellationToken ct)
+    {
+        var isOccupied = _dbContext.OccupiedRooms.Select(or => or.RoomId).Contains(id);
+
+        var room = await _dbContext
+            .Rooms
+            .Select(r => new RoomDetailsDto()
+            {
+                Id = r.Id,
+                Number = r.Number,
+                RoomTypeId = r.TypeId,
+                RoomTypeTitle = r.Type.Title,
+                HotelBranchId = r.HotelBranchId,
+                HotelBranchTitle = r.HotelBranch.Name,
+                IsOccupied = isOccupied,
+                IsDisabled = r.IsDisabled
+            })
+            .SingleOrDefaultAsync(r => r.Id == id, ct);
+        return room is null ? Result.Fail("Room not found") : Result.Ok(room);
+    }
+
+
     private static readonly Expression<Func<Room, RoomResponseDto>> MapToRoomResponseDto = r => new RoomResponseDto
     {
         Id = r.Id,
         Number = r.Number,
-        Type = r.Type,
+        RoomTypeId = r.TypeId,
+        RoomTypeTitle = r.Type.Title,
+        HotelBranchId = r.HotelBranchId,
+        HotelBranchTitle = r.HotelBranch.Name,
         IsDisabled = r.IsDisabled
     };
 }

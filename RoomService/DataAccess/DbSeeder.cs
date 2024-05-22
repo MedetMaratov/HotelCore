@@ -10,36 +10,6 @@ public static class DbSeeder
         {
             new Amenity
             {
-                Id = Guid.Parse("e46e84fc-9966-40a1-aa10-d3e53f58a1b8"),
-                Title = "Бесплатный Wi-Fi",
-                Description = "Наслаждайтесь бесплатным доступом к Wi-Fi во время вашего пребывания."
-            },
-            new Amenity
-            {
-                Id = Guid.Parse("6b8e1e19-37cf-4824-90ae-4d882e68f69b"),
-                Title = "Ванная комната",
-                Description = "Просторная ванная комната с удобствами."
-            },
-            new Amenity
-            {
-                Id = Guid.Parse("c52e1aa7-4d7d-43b3-8f2d-1e8a9ad58311"),
-                Title = "Кабельное телевидение",
-                Description = "Наслаждайтесь просмотром кабельного телевидения в вашем номере."
-            },
-            new Amenity
-            {
-                Id = Guid.Parse("d6174b72-6240-4266-a08d-75924b7d39c8"),
-                Title = "Беспроводной доступ в Интернет",
-                Description = "Подключайтесь к Интернету из любой точки отеля."
-            },
-            new Amenity
-            {
-                Id = Guid.Parse("61af1068-8f1b-4f64-9645-4df64f816e77"),
-                Title = "Прямая телефонная линия",
-                Description = "Пользуйтесь прямой телефонной связью из вашего номера."
-            },
-            new Amenity
-            {
                 Id = Guid.Parse("a40fe8b6-352e-4fb6-8728-3b5df13e9d15"),
                 Title = "Кондиционер",
                 Description = "Регулируйте температуру в вашем номере с помощью кондиционера."
@@ -147,6 +117,39 @@ public static class DbSeeder
                 },
                 MaxCapacity = 2,
                 NightlyRate = 45000,
+                Amenities = new List<Amenity>()
+                {
+                    new Amenity
+                    {
+                        Id = Guid.Parse("e46e84fc-9966-40a1-aa10-d3e53f58a1b8"),
+                        Title = "Бесплатный Wi-Fi",
+                        Description = "Наслаждайтесь бесплатным доступом к Wi-Fi во время вашего пребывания."
+                    },
+                    new Amenity
+                    {
+                        Id = Guid.Parse("6b8e1e19-37cf-4824-90ae-4d882e68f69b"),
+                        Title = "Ванная комната",
+                        Description = "Просторная ванная комната с удобствами."
+                    },
+                    new Amenity
+                    {
+                        Id = Guid.Parse("c52e1aa7-4d7d-43b3-8f2d-1e8a9ad58311"),
+                        Title = "Кабельное телевидение",
+                        Description = "Наслаждайтесь просмотром кабельного телевидения в вашем номере."
+                    },
+                    new Amenity
+                    {
+                        Id = Guid.Parse("d6174b72-6240-4266-a08d-75924b7d39c8"),
+                        Title = "Беспроводной доступ в Интернет",
+                        Description = "Подключайтесь к Интернету из любой точки отеля."
+                    },
+                    new Amenity
+                    {
+                        Id = Guid.Parse("61af1068-8f1b-4f64-9645-4df64f816e77"),
+                        Title = "Прямая телефонная линия",
+                        Description = "Пользуйтесь прямой телефонной связью из вашего номера."
+                    }
+                }
             },
             new RoomType()
             {
@@ -256,7 +259,20 @@ public static class DbSeeder
                 HotelBranchId = Guid.Parse("0f6eca4a-affd-4ec4-a71c-ab8d1f8e2c86"),
                 IsDisabled = false,
                 Number = i + "A",
-                TypeId = Guid.Parse("DE94604D-F0A2-47BB-940A-7200A0F2D688")
+                TypeId = Guid.Parse("2f0bac92-2604-47e8-81bf-0c05860ba36c")
+            };
+            rooms.Add(room);
+        }
+        
+        for (var i = 21; i <= 30; i++)
+        {
+            var room = new Room()
+            {
+                Id = Guid.NewGuid(),
+                HotelBranchId = Guid.Parse("0f6eca4a-affd-4ec4-a71c-ab8d1f8e2c86"),
+                IsDisabled = false,
+                Number = i + "A",
+                TypeId = Guid.Parse("da75ef9e-ccdd-4739-ac3d-292403fa4c73")
             };
             rooms.Add(room);
         }
@@ -268,7 +284,19 @@ public static class DbSeeder
                 HotelBranchId = Guid.Parse("2b2a8ce6-27d6-47e1-ad9e-556d41b44e4e"),
                 IsDisabled = false,
                 Number = i + "B",
-                TypeId = Guid.Parse("976ACB8B-A4F7-75A9-9732-79F24E7F2929")
+                TypeId = Guid.Parse("2f0bac92-2604-47e8-81bf-0c05860ba36c")
+            };
+            rooms.Add(room);
+        }
+        for (var i = 21; i <= 30; i++)
+        {
+            var room = new Room()
+            {
+                Id = Guid.NewGuid(),
+                HotelBranchId = Guid.Parse("2b2a8ce6-27d6-47e1-ad9e-556d41b44e4e"),
+                IsDisabled = false,
+                Number = i + "B",
+                TypeId = Guid.Parse("da75ef9e-ccdd-4739-ac3d-292403fa4c73")
             };
             rooms.Add(room);
         }
@@ -280,7 +308,19 @@ public static class DbSeeder
                 HotelBranchId = Guid.Parse("72013d39-673e-43e6-b2ac-5ea2189fb5b5"),
                 IsDisabled = false,
                 Number = i + "C",
-                TypeId = Guid.Parse("D2C64545-9807-4E51-85FE-EE746044BAA3")
+                TypeId = Guid.Parse("2f0bac92-2604-47e8-81bf-0c05860ba36c")
+            };
+            rooms.Add(room);
+        }
+        for (var i = 21; i <= 30; i++)
+        {
+            var room = new Room()
+            {
+                Id = Guid.NewGuid(),
+                HotelBranchId = Guid.Parse("72013d39-673e-43e6-b2ac-5ea2189fb5b5"),
+                IsDisabled = false,
+                Number = i + "C",
+                TypeId = Guid.Parse("da75ef9e-ccdd-4739-ac3d-292403fa4c73")
             };
             rooms.Add(room);
         }

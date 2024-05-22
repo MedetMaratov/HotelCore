@@ -1,52 +1,267 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - WebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/WebApp.styles.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>@ViewData["Title"] - Hotel-Core</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Favicon Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico">
+
+    <!-- All css here -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/shortcode/shortcodes.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/responsive.css">
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApp</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                </ul>
+<header class="header-area fixed header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12">
+                <div class="logo">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="~/images/logo/logo.png" alt="HotelATR">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-8 col-sm-8 hidden-xs">
+                <div class="header-top fix">
+                    <div class="header-contact">
+                        <span class="text-theme">Контакты:</span>
+                        <span>8-000-000-00-00</span>
+                    </div>
+                    <div class="header-links">
+                        <a href="https://www.facebook.com/">
+                            <i class="zmdi zmdi-facebook"></i>
+                        </a>
+                        <a href="https://twitter.com/">
+                            <i class="zmdi zmdi-twitter"></i>
+                        </a>
+                        <a href="https://plus.google.com/">
+                            <i class="zmdi zmdi-google-plus"></i>
+                        </a>
+                        <a href="https://www.instagram.com/">
+                            <i class="zmdi zmdi-instagram"></i>
+                        </a>
+                        <a href="https://www.pinterest.com/">
+                            <i class="zmdi zmdi-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Mainmenu Start -->
+                <div class="main-menu hidden-xs">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a asp-area="" asp-controller="Home" asp-action="Index">ГЛАВНАЯ</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="RoomType" asp-action="Index">НОМЕРА</a>
+                            </li>
+                            <li>
+                                <a href="#">АДМИНИСТРИРОВАНИЕ</a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a asp-area="" asp-controller="RoomTypeAdmin" asp-action="Index">Виды номеров</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="" asp-controller="RoomAdmin" asp-action="Index">Номера</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="" asp-controller="HotelBranch" asp-action="Index">Филиалы отелей</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="" asp-controller="Amenity" asp-action="Index">Удобства номеров</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="" asp-controller="ReservationAdmin" asp-action="Index">Бронирования</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="" asp-controller="OccupiedRoom" asp-action="Index">Занятые номера</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="" asp-controller="RoomService" asp-action="Index">УCЛУГИ В НОМЕР</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area="" asp-controller="OrderAdmin" asp-action="Index">ЗАКАЗЫ</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">ОБСЛУЖИВАНИЕ</a>
+                                <ul class="submenu">
+                                    <a asp-area="" asp-controller="" asp-action="">УСЛУГИ</a>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="contact.html">КОНТАКТЫ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- Mainmenu End -->
             </div>
         </div>
-    </nav>
+    </div>
 </header>
-<div class="container">
+<div>
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
 </div>
 
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2024 - WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+<footer class="footer-area border-top footer text-muted">
+    <!-- Footer Widget Start -->
+    <div class="footer-widget-area bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <div class="single-footer-widget">
+                        <div class="footer-logo">
+                            <a asp-area="" asp-controller="Home" asp-action="Index">
+                                <img src="~/images/logo/footer-logo.png" alt="HotelATR">
+                            </a>
+                        </div>
+                        <p>В наших отелях вы находите оазис уюта и роскоши в самых волнующих местах мира. Мы создаем атмосферу, в которой каждый гость чувствует себя как дома.</p>
+                        <div class="social-icons">
+                            <a href="https://www.facebook.com/">
+                                <i class="zmdi zmdi-facebook"></i>
+                            </a>
+                            <a href="https://www.instagram.com/">
+                                <i class="zmdi zmdi-instagram"></i>
+                            </a>
+                            <a href="https://www.rss.com/">
+                                <i class="zmdi zmdi-rss"></i>
+                            </a>
+                            <a href="https://twitter.com/">
+                                <i class="zmdi zmdi-twitter"></i>
+                            </a>
+                            <a href="https://www.pinterest.com/">
+                                <i class="zmdi zmdi-pinterest"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <div class="single-footer-widget">
+                        <h3>Свяжитесь с нами</h3>
+                        <div class="c-info">
+                            <span>
+                                <i class="zmdi zmdi-pin"></i>
+                            </span>
+                            <span>Улица Байтурсынұлы 126/1, Алматы</span>
+                        </div>
+                        <div class="c-info">
+                            <span>
+                                <i class="zmdi zmdi-email"></i>
+                            </span>
+                            <span>med.maratov@aues.com<br/>med.maratov@aues.kz<br/></span>
+                        </div>
+                        <div class="c-info">
+                            <span>
+                                <i class="zmdi zmdi-phone"></i>
+                            </span>
+                            <span>+7-000-000-00-00<br>+7-000-000-00-00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 hidden-md hidden-sm col-xs-12">
+                    <div class="single-footer-widget">
+                        <h3>Переходы</h3>
+                        <ul class="footer-list">
+                            <li>
+                                <a asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                            </li>
+                            <li>
+                                <a href="room-grid.html">Комнаты</a>
+                            </li>
+                            <li>
+                                <a href="event.html">Мероприятия</a>
+                            </li>
+                            <li>
+                                <a href="contact.html">Контакты</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="single-footer-widget">
+                        <h3>Коллекция</h3>
+                        <div class="instagram-image">
+                            <div class="footer-img">
+                                <a href="room-grid.html">
+                                    <img src="~/images/footer/1.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="footer-img">
+                                <a href="room-grid.html">
+                                    <img src="~/images/footer/2.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="footer-img">
+                                <a href="room-grid.html">
+                                    <img src="~/images/footer/3.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="footer-img">
+                                <a href="room-grid.html">
+                                    <img src="~/images/footer/4.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="footer-img">
+                                <a href="room-grid.html">
+                                    <img src="~/images/footer/5.jpg" alt="">
+                                </a>
+                            </div>
+                            <div class="footer-img">
+                                <a href="room-grid.html">
+                                    <img src="~/images/footer/6.jpg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- Footer Widget End -->
+    <!-- Footer Bottom Area Start -->
+    <div class="footer-bottom-area bg-black">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="footer-text text-center">
+                        <span>&copy; 2024 Hotel-X - Все права защищены.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Bottom Area End -->
 </footer>
+<!-- Footer Area End -->
+<script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/ajax-mail.js"></script>
+<script src="~/js/jquery.ajaxchimp.min.js"></script>
+<script src="~/js/jquery.meanmenu.js"></script>
+<script src="~/js/jquery.counterup.min.js"></script>
+<script src="~/js/waypoints.min.js"></script>
+<script src="~/js/isotope.pkgd.min.js"></script>
+<script src="~/js/imagesloaded.pkgd.min.js"></script>
+<script src="~/js/jquery.magnific-popup.js"></script>
+<script src="~/js/plugins.js"></script>
+<script src="~/js/main.js"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

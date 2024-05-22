@@ -1,9 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebApp.Models.HotelBranch;
 
 namespace WebApp.Controllers;
 
+[Authorize(Policy = "RequireAdminRole")]
 public class HotelBranchController : Controller
 {
     private readonly HttpClient _httpClient;
@@ -71,7 +79,8 @@ public class HotelBranchController : Controller
             Country = hotelBranchDto.Location.Country,
             City = hotelBranchDto.Location.City,
             Street = hotelBranchDto.Location.Street,
-            HouseNumber = hotelBranchDto.Location.HouseNumber
+            HouseNumber = hotelBranchDto.Location.HouseNumber,
+            Contacts = hotelBranchDto.Contacts
         };
         
         return View(hotelBranchViewModel);

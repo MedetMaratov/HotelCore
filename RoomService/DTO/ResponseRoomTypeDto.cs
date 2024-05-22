@@ -10,5 +10,5 @@ public class ResponseRoomTypeDto
     public int MaxCapacity { get; set; }
     public decimal NightlyRate { get; set; }
     public List<string> ImagePathes { get; set; }
-    public ICollection<Amenity> Amenities { get; set; } = new List<Amenity>();
+    public ICollection<string> Amenities { get; set; } = new List<string>();
 }

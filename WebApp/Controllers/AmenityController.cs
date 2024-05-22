@@ -1,9 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebApp.Models.Amenity;
 
 namespace WebApp.Controllers;
 
+[Authorize(Policy = "RequireAdminRole")]
 public class AmenityController : Controller
 {
     private readonly HttpClient _httpClient;
@@ -20,7 +28,6 @@ public class AmenityController : Controller
         if (string.IsNullOrEmpty(searchString))
         {
             response = await _httpClient.GetAsync("amenities", ct);
-
         }
         else
         {

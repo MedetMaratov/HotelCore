@@ -13,8 +13,6 @@ public class AppDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<Service> Services { get; set; }
     public DbSet<Amenity> Amenities { get; set; }
-    public DbSet<Reservation> Reservations { get; set; }
-    public DbSet<Schedule> Schedules { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

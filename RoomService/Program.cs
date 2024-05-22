@@ -21,6 +21,8 @@ builder.Services.AddScoped<IOccupiedRoomService, OccupiedRoomService>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IHotelBranchService, HotelBranchService>();
 builder.Services.AddScoped<IRoomFinderService, RoomFinderService>();
+builder.Services.AddScoped<IGuestService, GuestService>();
+builder.Services.AddScoped<IReservatorService, ReservatorService>();
 builder.Services.AddControllers();
 builder.Services.AddStackExchangeRedisCache(redisOptions =>
 {

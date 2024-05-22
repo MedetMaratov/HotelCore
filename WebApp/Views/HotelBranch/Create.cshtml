@@ -1,21 +1,23 @@
 @model WebApp.Models.HotelBranch.CreateHotelBranchViewModel
 
 @{
-    ViewBag.Title = "Создать удобство";
+    ViewBag.Title = "Создать филиал";
     Layout = "_Layout";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Создать новое удобство номера</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-<div class="container">
-    <h2>Создать новое удобство номера</h2>
+<section class="breadcrumb-area overlay-dark-2 bg-3" style="background-image: url('@Url.Content("~/images/bg/3.jpg")');">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="breadcrumb-text text-center">
+                    <h2>@ViewBag.Title</h2>
+                    <p>Панель администрирования</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container pt-30 pb-30">
     <form method="post" asp-action="Create">
         <div class="form-group">
             <label for="Title">Название:</label>
@@ -42,12 +44,13 @@
             <input asp-for="HouseNumber" class="form-control"/>
             <span asp-validation-for="HouseNumber" class="text-danger"></span>
         </div>
-        <div class="col">
-            <button type="submit" class="btn btn-success w-100">Создать</button> |
+        <div class="form-group">
+            <label for="House">Контакты:</label>
+            <input asp-for="Contacts" class="form-control"/>
+            <span asp-validation-for="Contacts" class="text-danger"></span>
         </div>
-        <div class="col">
-            <a asp-action="Index" class="btn btn-primary w-100"><i class="fas fa-sign-out-alt"></i> Назад</a>
-        </div>
+        <button type="submit" class="btn btn-primary">Создать</button>
+        <a asp-action="Index" class="btn btn-secondary">Назад</a>
     </form>
 </div>
 
@@ -61,6 +64,3 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-</body>
-</html>

@@ -13,8 +13,6 @@ builder.Logging.AddSerilog(logger);
 
 builder.Services.AddScoped<AmenityFeature, AmenityFeature>();
 builder.Services.AddScoped<OrderFeature, OrderFeature>();
-builder.Services.AddScoped<ReservationFeature, ReservationFeature>();
-builder.Services.AddScoped<ScheduleFeature, ScheduleFeature>();
 builder.Services.AddScoped<ServiceFeature, ServiceFeature>();
 
 builder.Services.AddControllers();
